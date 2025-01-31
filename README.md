@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="im-offcially-a-college-student-college.gif" alt="gif">
+  <img src="im-offcially-a-college-student-college.gif" alt="gif" width="600" height="400">
 </p>
 
 <h1 align="center">Axis</h1>
