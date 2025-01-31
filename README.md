@@ -23,20 +23,63 @@ Axis is a platform designed to streamline the college application process for st
 - **Custom Dashboards:** Personalized dashboards showing key stats like deadlines, tasks, and completed steps.
 - **Mobile App:** Create a mobile version of the platform for ease of use.
 
-## 📅 Timeline (10-Week Plan)
+# 📅 Timeline (10-Week Plan)
+
+## 🏁 Week-by-Week Tasks
 
 | 🏁 Week | 📌 Task |
-|------|------|
-| 1 | Define project scope, assign team roles, and research college application workflows. |
-| 2 | Set up repositories, design wireframes, and finalize the tech stack. |
-| 3 | Set up the backend with Spring Boot and database schema in MySQL. |
-| 4 | Develop user authentication and integrate a basic college database. |
-| 5 | Implement the application tracker with CRUD operations. |
-| 6 | Develop the resource hub and link it to relevant content. |
-| 7 | Integrate the notification system and refine the UI/UX design. |
-| 8 | Start implementing stretch goals (begin with document upload and collaboration). |
-| 9 | Conduct extensive testing and debugging. |
-| 10 | Finalize the app, prepare documentation, and deploy the app on a hosting platform. |
+|--------|--------|
+| **1**  | **Define project scope, assign team roles, and research college application workflows.**  |
+|        | - Identify the main features and functionalities required. |
+|        | - Assign roles to team members based on their expertise. |
+|        | - Research the college application process and common pain points. |
+|        | - Gather insights from students and counselors for user needs. |
+| **2**  | **Set up repositories, design wireframes, and finalize the tech stack.**  |
+|        | - Create GitHub repositories for version control. |
+|        | - Design UI wireframes for key application screens. |
+|        | - Select the tech stack (Frontend: React/Vue, Backend: Spring Boot, Database: MySQL). |
+|        | - Define API endpoints and database schema structure. |
+| **3**  | **Set up the backend with Spring Boot and database schema in MySQL.**  |
+|        | - Initialize Spring Boot backend and configure dependencies. |
+|        | - Design and implement MySQL database schema. |
+|        | - Establish backend API routes for key functionalities. |
+|        | - Set up Postman or similar tool for API testing. |
+| **4**  | **Develop user authentication and integrate a basic college database.**  |
+|        | - Implement user authentication using JWT and OAuth. |
+|        | - Create user roles (students, counselors, admins). |
+|        | - Populate a basic college database with relevant details (name, deadlines, requirements). |
+|        | - Connect frontend to backend authentication endpoints. |
+| **5**  | **Implement the application tracker with CRUD operations.**  |
+|        | - Develop UI for users to add, edit, and delete college applications. |
+|        | - Implement backend logic for CRUD operations. |
+|        | - Enable filtering and sorting of applications based on deadlines and status. |
+|        | - Store application progress updates in the database. |
+| **6**  | **Develop the resource hub and link it to relevant content.**  |
+|        | - Design a structured knowledge hub layout. |
+|        | - Add articles, guides, and FAQs about the college application process. |
+|        | - Allow users to bookmark and categorize resources. |
+|        | - Implement a search and filter system for easy navigation. |
+| **7**  | **Integrate the notification system and refine the UI/UX design.**  |
+|        | - Implement email and in-app notifications for deadlines and reminders. |
+|        | - Enhance UI/UX based on user feedback and testing. |
+|        | - Improve mobile responsiveness and accessibility. |
+|        | - Add animations and transitions for better user experience. |
+| **8**  | **Start implementing stretch goals (begin with document upload and collaboration).**  |
+|        | - Enable users to upload and store documents securely. |
+|        | - Implement document-sharing features with counselors or mentors. |
+|        | - Develop collaboration tools like commenting or suggestions on applications. |
+|        | - Begin optimizing performance for better load times. |
+| **9**  | **Conduct extensive testing and debugging.**  |
+|        | - Perform unit and integration testing for all major features. |
+|        | - Conduct user testing and gather feedback. |
+|        | - Fix identified bugs and optimize code. |
+|        | - Stress test the application under various loads. |
+| **10** | **Finalize the app, prepare documentation, and deploy the app on a hosting platform.**  |
+|        | - Write comprehensive documentation for users and developers. |
+|        | - Deploy the app on a cloud service (AWS, Firebase, or Heroku). |
+|        | - Conduct a final round of testing post-deployment. |
+|        | - Launch and collect initial user feedback for future improvements. |
+
 
 ## 💻 Tech Stack
 - **Frontend:** Thymeleaf (for dynamic HTML rendering)
