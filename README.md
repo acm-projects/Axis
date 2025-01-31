@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ftenor.com%2Fsearch%2Fcollege-gifs&psig=AOvVaw0sCcNjmzUP1U8JvJsQRzhZ&ust=1738432045598000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKijyZfCoIsDFQAAAAAdAAAAABAR" alt="gif">
+</p>
+
 <h1 align="center">Axis</h1>
 
 ## 🔍 Summary
@@ -45,18 +49,18 @@ Axis is a platform designed to streamline the college application process for st
 - **Notification Service:** Firebase Cloud Messaging or email notifications via SMTP
 
 ## 📚 Resources
+
 <details>
-  <summary><strong> Spring Boot (Backend Development)</strong></summary>
+  <summary><strong> Spring Boot (Backend Development) </strong></summary>
   <ul>
     <li><a href="https://spring.io/projects/spring-boot">Spring Boot Documentation</a></li>
     <li><a href="https://spring.io/guides">Spring Boot Guides</a></li>
     <li><a href="https://spring.io/guides/gs/securing-web/">Spring Security Guide</a></li>
-    <li><a href="https://spring.io/guides/gs/spring-boot">Spring Boot Getting Started Guide</a></li>
   </ul>
 </details>
 
 <details>
-  <summary><strong> Thymeleaf (Frontend Development)</strong></summary>
+  <summary><strong> Thymeleaf (Frontend Development) </strong></summary>
   <ul>
     <li><a href="https://www.thymeleaf.org/documentation.html">Thymeleaf Documentation</a></li>
     <li><a href="https://www.baeldung.com/thymeleaf">Thymeleaf Tutorial - Baeldung</a></li>
@@ -64,10 +68,81 @@ Axis is a platform designed to streamline the college application process for st
 </details>
 
 <details>
-  <summary><strong> MySQL (Database)</strong></summary>
+  <summary><strong> MySQL (Database) </strong></summary>
   <ul>
     <li><a href="https://dev.mysql.com/doc/">MySQL Documentation</a></li>
     <li><a href="https://www.w3schools.com/mysql/">MySQL Tutorial - W3Schools</a></li>
+  </ul>
+</details>
+
+<details>
+  <summary><strong> REST APIs </strong></summary>
+  <ul>
+    <li><a href="https://www.baeldung.com/spring-boot-rest-api">Baeldung Spring Boot REST API</a></li>
+    <li><a href="https://learning.postman.com/docs/getting-started/introduction/">Postman Documentation</a></li>
+  </ul>
+</details>
+
+<details>
+  <summary><strong> Firebase Cloud Messaging (Notifications) </strong></summary>
+  <ul>
+    <li><a href="https://firebase.google.com/docs/cloud-messaging">Firebase Cloud Messaging Docs</a></li>
+    <li><a href="https://www.freecodecamp.org/news/how-to-send-web-push-notifications-from-your-web-app-with-firebase/">Firebase Push Notification Tutorial</a></li>
+  </ul>
+</details>
+
+<details>
+  <summary><strong> JUnit (Testing) </strong></summary>
+  <ul>
+    <li><a href="https://junit.org/junit5/docs/current/user-guide/">JUnit 5 Documentation</a></li>
+    <li><a href="https://www.baeldung.com/junit-5">JUnit 5 Tutorial - Baeldung</a></li>
+  </ul>
+</details>
+
+<details>
+  <summary><strong> Hosting and Deployment </strong></summary>
+  <ul>
+    <li><a href="https://docs.aws.amazon.com/ec2/">Amazon EC2 Documentation</a></li>
+    <li><a href="https://aws.amazon.com/ec2/getting-started/">EC2 Launch Guide</a></li>
+    <li><a href="https://devcenter.heroku.com/">Heroku Documentation</a></li>
+    <li><a href="https://www.baeldung.com/spring-boot-heroku">Deploy Spring Boot to Heroku - Baeldung</a></li>
+  </ul>
+</details>
+
+<details>
+  <summary><strong> Version Control (GitHub) </strong></summary>
+  <ul>
+    <li><a href="https://docs.github.com/en">GitHub Docs</a></li>
+    <li><a href="https://git-scm.com/book/en/v2">Git Basics - Git SCM</a></li>
+    ### Git Commands
+
+| Command                        | What it does                                |
+|--------------------------------|---------------------------------------------|
+| `git branch`                   | Lists all the branches                      |
+| `git branch "branch name"`     | Creates a new branch                        |
+| `git checkout "branch name"`   | Switches to the specified branch            |
+| `git checkout -b "branch name"`| Combines branch creation and checkout       |
+| `git add .`                    | Stages all changed files                    |
+| `git commit -m "Testing123"`   | Commits with a message                      |
+| `git push origin "branch"`     | Pushes to the specified branch              |
+| `git pull origin "branch"`     | Pulls updates from the specified branch     |
+
+  </ul>
+</details>
+
+<details>
+  <summary><strong> UI/UX Design (Figma) </strong></summary>
+  <ul>
+    <li><a href="https://help.figma.com/hc/en-us">Figma Documentation</a></li>
+    <li><a href="https://www.youtube.com/c/Figma">Figma Tutorials - YouTube</a></li>
+  </ul>
+</details>
+
+<details>
+  <summary><strong> Build Automation (Maven) </strong></summary>
+  <ul>
+    <li><a href="https://maven.apache.org/guides/">Maven Documentation</a></li>
+    <li><a href="https://www.baeldung.com/maven">Maven Tutorial - Baeldung</a></li>
   </ul>
 </details>
 
@@ -94,3 +169,13 @@ Axis is a platform designed to streamline the college application process for st
 ### 4️⃣ Deployment Issues
 **⚠️ Problem:** Complications with AWS or Heroku deployment.
 **✅ Solution:** Follow detailed [Heroku Deployment Tutorial](https://www.baeldung.com/spring-boot-heroku) for a step-by-step guide.
+
+## 📈 The Graph
+
+- **X-Axis** (Project Manager): Shreya S Ramani
+- **Y-Axis** (Industry Mentor): 
+- **Quadrant 1**:  (Frontend)
+- **Quadrant 2**:  (Backend)
+- **Quadrant 3**:  (Frontend)
+- **Quadrant 4**:  (Backend)
+
