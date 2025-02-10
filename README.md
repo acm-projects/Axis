@@ -226,9 +226,9 @@ Axis is a platform designed to streamline the college application process for st
 ## 📈 The Graph
 
 - **X-Axis** (Project Manager): Shreya S Ramani
-- **Y-Axis** (Industry Mentor): 
-- **Quadrant 1**:  (Frontend)
-- **Quadrant 2**:  (Backend)
-- **Quadrant 3**:  (Frontend)
-- **Quadrant 4**:  (Backend)
+- **Y-Axis** (Industry Mentor): Bryce Duncan
+- **Quadrant 1**: Kevin Philip  
+- **Quadrant 2**: Ankit Raj
+- **Quadrant 3**: Lalith Chaitanya Reddy Vennapusa
+- **Quadrant 4**: Ajay Alluri
 
