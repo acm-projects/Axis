@@ -22,7 +22,7 @@ Axis is a platform designed to streamline the college application process for st
 - **Integration with College APIs:** Pull real-time data on deadlines and requirements from college APIs.
 - **Custom Dashboards:** Personalized dashboards showing key stats like deadlines, tasks, and completed steps.
 - **Mobile App:** Create a mobile version of the platform for ease of use.
-- **Public Chat Forum
+- **Public Chat Forum**
 
 # 📅 Timeline (10-Week Plan)
 
