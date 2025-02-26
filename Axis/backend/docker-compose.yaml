@@ -1,0 +1,13 @@
+services:
+  postgres:
+    # here we are always fetching the latest postgres image, but if working in team, we might want to specify version
+    image: 'postgres:17.2'
+    environment:
+      - 'POSTGRES_DB=axis'
+      - 'POSTGRES_PASSWORD=axispassword'
+      - 'POSTGRES_USER=acm'
+    ports:
+      # here we change it from 5432 to 5432:5432
+      # when we just have 5432, we are just specify which port to use on local machine, we dont care
+      # however, we care about the port on the container we need to map it to the port that the postgres is running on
+      - '5445:5432'
