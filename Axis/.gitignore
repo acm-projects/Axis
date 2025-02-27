@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Node ###
+frontend/axis/node_modules/
+frontend/axis/npm-debug.log
+frontend/axis/yarn-error.log
