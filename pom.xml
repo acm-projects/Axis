@@ -28,7 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-		<start-class>com.acm.Axis.AxisApplications</start-class>
+		<start-class>com.acm.Axis.AxisApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
