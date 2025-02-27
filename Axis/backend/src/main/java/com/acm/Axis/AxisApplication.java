@@ -1,4 +1,4 @@
-package com.acm.Axis.features;
+package com.acm.Axis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

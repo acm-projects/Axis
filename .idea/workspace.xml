@@ -25,7 +25,6 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/ajayalluri/Axis",
     "node.js.detected.package.eslint": "true",
@@ -58,7 +57,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1740639821542</updated>
-      <workItem from="1740639822618" duration="4881000" />
+      <workItem from="1740639822618" duration="5260000" />
     </task>
     <servers />
   </component>
