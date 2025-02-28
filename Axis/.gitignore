@@ -1,11 +1,11 @@
 backend/HELP.md
-target/
+../target/
 !backend/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 # Ignore application properties file
-src/main/resources/application.properties
+backend/src/main/resources/application.properties
 
 
 

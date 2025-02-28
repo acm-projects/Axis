@@ -9,6 +9,7 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -17,9 +18,14 @@ import java.io.IOException;
 @Service
 public class PinataService {
 
-    private static final String PINATA_API_KEY = "94472c4a413f9a539049";
-    private static final String PINATA_SECRET_API_KEY = "017a304a11dfddea1dbb17cdde9ef92c7964c26fc373838d0250a98e93fd4021";
-    private static final String PINATA_URL = "https://api.pinata.cloud/pinning/pinFileToIPFS";
+    @Value("${pinata.api.key}")
+    private String PINATA_API_KEY;
+
+    @Value("${pinata.secret.key}")
+    private String PINATA_SECRET_API_KEY;
+
+    @Value("${pinata.url}")
+    private String PINATA_URL;
 
     public String uploadFileToPinata(File file) throws IOException {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
