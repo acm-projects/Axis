@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --neutral: #FFFFFF;  /* Define the variable */
+    --accent: #9B6DCC;
+    --secondary: #000000;
+    --llgrey: #F0F0F1;
+    --dlgrey: #8A8A8E;
+    --ddgrey: #2C2C2C;
+}
+.font-inter {
+    font-family: 'Inter', sans-serif;
+}
