@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS applications (
     PRIMARY KEY (application_id),
     CONSTRAINT fk_app_student
     FOREIGN KEY (student_email)
-    REFERENCES students(email),
+    REFERENCES students(email) ON UPDATE CASCADE,
     CONSTRAINT fk_app_college
     FOREIGN KEY (college_id)
     REFERENCES colleges(college_id),
