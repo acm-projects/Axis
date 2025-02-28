@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/colleges")
@@ -23,7 +24,11 @@ public class CollegeController {
 
     @GetMapping("/{college_id}")
     College getById(@PathVariable Integer college_id) {
-        return collegeRepository.findById(college_id).orElse(null);
+        Optional<College> college = collegeRepository.findById(college_id);
+        if (college.isEmpty()) {
+            throw new IllegalArgumentException("College not found");
+        }
+        return college.get();
     }
 
     @PostMapping("")
