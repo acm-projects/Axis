@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  dropdownToggle: boolean = true;
+  dropdownToggle: boolean = false;
   loggedIn: boolean = false;
 }
