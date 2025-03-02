@@ -11,4 +11,5 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 })
 export class AppComponent {
   title = 'axis';
+  loggedIn: boolean = false;
 }
