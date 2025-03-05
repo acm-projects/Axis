@@ -5,7 +5,7 @@ backend/HELP.md
 !**/src/test/**/target/
 
 # Ignore application properties file
-backend/src/main/resources/application.properties
+Axis/backend/src/main/resources/application.properties
 
 
 
