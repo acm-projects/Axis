@@ -4,10 +4,6 @@ backend/HELP.md
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-# Ignore application properties file
-Axis/backend/src/main/resources/application.properties
-
-
 
 ### STS ###
 .apt_generated
