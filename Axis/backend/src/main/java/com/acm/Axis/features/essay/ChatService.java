@@ -1,6 +1,6 @@
 package com.acm.Axis.features.essay;
 
-public class aiService {
+public class ChatService {
     // test test test
     //dvskjfnvfdn
 }
