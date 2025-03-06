@@ -1,0 +1,48 @@
+<div class="flex flex-col justify-center w-auto max-w-52 m-4">
+    <img class="h-full object-cover aspect-square rounded-lg" 
+            src="https://wpstaq-ap-southeast-2-media.s3.amazonaws.com/irisphoto/wp-content/uploads/media/2020/09/High-res-1.jpg" alt="Resource Image"/>
+    <div class="flex flex-row justify-between px-1 py-4">
+        <div class="">
+            <div class="text-md text-[var(--ddgrey)]">
+                College Name
+            </div>
+            <div class="text-sm text-[var(--dlgrey)]">
+                Location or other Info
+            </div>
+        </div>
+        <div class="my-auto">
+            <button (click)="toggleBookmark()" >
+                <svg
+                *ngIf="bookMarked"
+                xmlns='http://www.w3.org/2000/svg' 
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+                fill="var(--accent)"
+                stroke="currentColor"
+                stroke-width="0"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                >
+                <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z" />
+                </svg>
+                <svg
+                *ngIf="!bookMarked"
+                xmlns='http://www.w3.org/2000/svg' 
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                >
+                <path d="M12 17l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v5" />
+                <path d="M16 19h6" />
+                <path d="M19 16v6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
