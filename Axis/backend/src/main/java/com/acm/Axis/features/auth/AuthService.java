@@ -27,10 +27,24 @@ public class AuthService {
     }
 
     public String authenticate(String username, String password) {
+        System.out.println("🔍 Checking credentials for username: " + username);
+
         Optional<User> userOpt = userRepository.findByUsername(username);
-        if (userOpt.isPresent() && passwordEncoder.matches(password, userOpt.get().getPassword())) {
-            return jwtUtils.generateToken(username);
+
+        if (userOpt.isEmpty()) {
+            System.out.println("❌ Username not found: " + username);
+            throw new RuntimeException("Invalid credentials!");
         }
-        throw new RuntimeException("Invalid credentials!");
+
+        User user = userOpt.get();
+        System.out.println("✅ Username found. Stored password: " + user.getPassword());
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            System.out.println("❌ Password does not match for username: " + username);
+            throw new RuntimeException("Invalid credentials!");
+        }
+
+        System.out.println("✅ Password matches! Generating JWT...");
+        return jwtUtils.generateToken(username);
     }
 }
