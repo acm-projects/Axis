@@ -2,33 +2,37 @@ package com.acm.Axis.features.auth;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 import java.util.function.Function;
 
 @Component
 public class JwtUtils {
 
-    @Value("${jwt.secret}")
-    private String secretKey;
+    private final Key secretKey;
 
-    @Value("${jwt.expiration}")
-    private long jwtExpiration;
-
-    private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(secretKey.getBytes());
+    public JwtUtils() {
+        // Decode the base64-encoded secret key and generate a secure key
+        String secret = "8lRCb0vBnmCVTDzWo2CsMMY8Fu4H9faB0goLG3Z9je4=";
+        byte[] decodedKey = Base64.getDecoder().decode(secret);
+        this.secretKey = Keys.hmacShaKeyFor(decodedKey);
     }
 
     public String generateToken(String username) {
-        return Jwts.builder()
+        System.out.println("🔑 Generating token for username: " + username);
+
+        String token = Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1 hour expiration
+                .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
+
+        System.out.println("✅ Generated Token: " + token);
+        return token;
     }
 
     public String extractUsername(String token) {
@@ -44,7 +48,7 @@ public class JwtUtils {
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        Claims claims = Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
         return claimsResolver.apply(claims);
     }
 }
