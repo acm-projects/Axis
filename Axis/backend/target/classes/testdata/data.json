@@ -1,0 +1,137 @@
+{
+  "students": [
+    {
+      "email": "alice@example.com",
+      "first_name": "Alice",
+      "last_name": "Johnson",
+      "phone_number": "123-456-7890",
+      "GPA": 3,
+      "SAT_score": 1200,
+      "ACT_score": 25
+    },
+    {
+      "email": "bob@example.com",
+      "first_name": "Bob",
+      "last_name": "Smith",
+      "phone_number": "555-123-4567",
+      "GPA": 4,
+      "SAT_score": 1300,
+      "ACT_score": 28
+    },
+    {
+      "email": "charlie@example.com",
+      "first_name": "Charlie",
+      "last_name": "Brown",
+      "phone_number": "555-555-5555",
+      "GPA": 2,
+      "SAT_score": 1100,
+      "ACT_score": 22
+    }
+  ],
+  "colleges": [
+    {
+      "college_id": 1,
+      "name": "Sample University"
+    },
+    {
+      "college_id": 2,
+      "name": "Tech Institute"
+    },
+    {
+      "college_id": 3,
+      "name": "City College"
+    }
+  ],
+  "programs": [
+    {
+      "program_id": 1,
+      "college_id": 1,
+      "program_name": "Computer Science",
+      "degree_type": "Bachelor"
+    },
+    {
+      "program_id": 2,
+      "college_id": 1,
+      "program_name": "Business Administration",
+      "degree_type": "Bachelor"
+    },
+    {
+      "program_id": 3,
+      "college_id": 2,
+      "program_name": "Software Engineering",
+      "degree_type": "Master"
+    },
+    {
+      "program_id": 4,
+      "college_id": 2,
+      "program_name": "Data Science",
+      "degree_type": "Bachelor"
+    },
+    {
+      "program_id": 5,
+      "college_id": 3,
+      "program_name": "Nursing",
+      "degree_type": "Associate"
+    }
+  ],
+  "applications": [
+    {
+      "application_id": 1,
+      "student_email": "alice@example.com",
+      "college_id": 1,
+      "program_name": "Computer Science",
+      "status": "submitted",
+      "submission_date": "2025-02-01"
+    },
+    {
+      "application_id": 2,
+      "student_email": "alice@example.com",
+      "college_id": 2,
+      "program_name": "Software Engineering",
+      "status": "in review",
+      "submission_date": "2025-02-10"
+    },
+    {
+      "application_id": 3,
+      "student_email": "bob@example.com",
+      "college_id": 1,
+      "program_name": "Business Administration",
+      "status": "accepted",
+      "submission_date": "2025-01-20"
+    },
+    {
+      "application_id": 4,
+      "student_email": "charlie@example.com",
+      "college_id": 3,
+      "program_name": "Nursing",
+      "status": "rejected",
+      "submission_date": "2025-01-15"
+    }
+  ],
+  "documents": [
+    {
+      "document_id": 1,
+      "student_email": "alice@example.com",
+      "application_id": 1,
+      "upload_date": "2025-02-02"
+    },
+    {
+      "document_id": 2,
+      "student_email": "alice@example.com",
+      "application_id": 2,
+      "upload_date": "2025-02-11"
+    },
+    {
+      "document_id": 3,
+      "student_email": "bob@example.com",
+      "application_id": 3,
+      "upload_date": "2025-01-22"
+    },
+    {
+      "document_id": 4,
+      "student_email": "charlie@example.com",
+      "application_id": 4,
+      "upload_date": "2025-01-17"
+    }
+  ]
+}
