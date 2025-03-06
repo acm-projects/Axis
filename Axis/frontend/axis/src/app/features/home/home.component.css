@@ -1,0 +1,8 @@
+.no-clear::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.w-112 {
+    min-width: 200;
+}
