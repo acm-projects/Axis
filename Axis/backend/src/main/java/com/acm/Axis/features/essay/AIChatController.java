@@ -6,10 +6,10 @@ import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/api/essay")
-public class ChatController {
+public class AIChatController {
 
     private final ChatClient chatClient;
-    public ChatController(ChatClient.Builder builder) {
+    public AIChatController(ChatClient.Builder builder) {
         this.chatClient = builder
                 .build();
     }

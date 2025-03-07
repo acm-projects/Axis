@@ -10,6 +10,7 @@ import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpEntity;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -18,20 +19,17 @@ import java.io.IOException;
 @Service
 public class PinataService {
 
-    @Value("${pinata.api.key}")
-    private String PINATA_API_KEY;
+    private final PinataConfig pinataConfig;
 
-    @Value("${pinata.secret.key}")
-    private String PINATA_SECRET_API_KEY;
-
-    @Value("${pinata.url}")
-    private String PINATA_URL;
+    public PinataService(PinataConfig pinataConfig) {
+        this.pinataConfig = pinataConfig;
+    }
 
     public String uploadFileToPinata(File file) throws IOException {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpPost uploadRequest = new HttpPost(PINATA_URL);
-            uploadRequest.setHeader("pinata_api_key", PINATA_API_KEY);
-            uploadRequest.setHeader("pinata_secret_api_key", PINATA_SECRET_API_KEY);
+            HttpPost uploadRequest = new HttpPost(pinataConfig.getUrl());
+            uploadRequest.setHeader("pinata_api_key", pinataConfig.getApiKey());
+            uploadRequest.setHeader("pinata_secret_api_key", pinataConfig.getSecretKey());
 
             HttpEntity entity = MultipartEntityBuilder.create()
                     .addPart("file", new FileBody(file))

@@ -8,14 +8,14 @@ CREATE TABLE IF NOT EXISTS students (
     SAT_score     INT,
     ACT_score     INT,
     PRIMARY KEY (email)
-    );
+);
 
 -- 2) COLLEGES TABLE
 CREATE TABLE IF NOT EXISTS colleges (
                                         college_id    BIGSERIAL,
                                         name          VARCHAR(255) NOT NULL,
     PRIMARY KEY (college_id)
-    );
+);
 
 -- 3) PROGRAMS TABLE
 CREATE TABLE IF NOT EXISTS programs (
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS programs (
     CONSTRAINT fk_program_college
     FOREIGN KEY (college_id)
     REFERENCES colleges (college_id)
-    );
+);
 
 -- 4) APPLICATIONS TABLE
 CREATE TABLE IF NOT EXISTS applications (
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS applications (
     CONSTRAINT fk_app_program
     FOREIGN KEY (college_id, program_name)
     REFERENCES programs(college_id, program_name)
-    );
+);
 
 -- 5) DOCUMENTS TABLE
 CREATE TABLE IF NOT EXISTS documents (
@@ -63,4 +63,5 @@ CREATE TABLE IF NOT EXISTS documents (
     CONSTRAINT fk_doc_application
     FOREIGN KEY (application_id)
     REFERENCES applications(application_id)
-    );
+);
+
