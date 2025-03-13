@@ -26,10 +26,11 @@ public class AuthController {
         System.out.println("🔍 Login attempt: Username -> " + username);
 
         try {
-            String token = authService.authenticate(username, password);
+            Map<Long, String> authentication = authService.authenticate(username, password);
+            Long id = authentication.keySet().iterator().next();
             System.out.println("✅ Login successful for username: " + username);
-            System.out.println("🔑 Generated Token: " + token);
-            return ResponseEntity.ok(Map.of("token", token));
+            System.out.println("🔑 Generated Token: " + authentication.get(id));
+            return ResponseEntity.ok(Map.of("id", id.toString(), "token", authentication.get(id)));
         } catch (RuntimeException e) {
             System.out.println("❌ Login failed for username: " + username + " - Reason: " + e.getMessage());
             return ResponseEntity.status(401).body(Map.of("error", "Invalid credentials!"));

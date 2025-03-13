@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
+import java.util.Map;
 
 @Service
 public class AuthService {
@@ -26,7 +27,7 @@ public class AuthService {
         return "User registered successfully!";
     }
 
-    public String authenticate(String username, String password) {
+    public Map<Long, String> authenticate(String username, String password) {
         System.out.println("🔍 Checking credentials for username: " + username);
 
         Optional<User> userOpt = userRepository.findByUsername(username);
@@ -45,6 +46,6 @@ public class AuthService {
         }
 
         System.out.println("✅ Password matches! Generating JWT...");
-        return jwtUtils.generateToken(username);
+        return Map.of(user.getId(), jwtUtils.generateToken(username));
     }
 }
