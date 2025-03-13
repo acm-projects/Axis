@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResourceCardComponent } from './resource-card.component';
+import { ResourceHeaderComponent } from './resource-header.component';
 
-describe('ResourceCardComponent', () => {
-  let component: ResourceCardComponent;
-  let fixture: ComponentFixture<ResourceCardComponent>;
+describe('ResourceHeaderComponent', () => {
+  let component: ResourceHeaderComponent;
+  let fixture: ComponentFixture<ResourceHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ResourceCardComponent]
+      imports: [ResourceHeaderComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ResourceCardComponent);
+    fixture = TestBed.createComponent(ResourceHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
