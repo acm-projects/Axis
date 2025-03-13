@@ -9,5 +9,5 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  searchQuery: string = "";
+  searchQuery: string = ""
 }

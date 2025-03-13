@@ -1,0 +1,17 @@
+<!--<div class="flex">
+    <app-filter></app-filter>
+    <app-resource-header></app-resource-header>
+</div>-->
+
+<div class="flex w-full gap-2">
+    <div class="border-r p-2">
+        <app-filter></app-filter>
+        <app-filter></app-filter>
+        <app-filter></app-filter>   
+    </div>
+    
+    
+    <div class="w-full min-w-0 flex flex-col">
+    <app-resource-header *ngFor="let resource of resources" class="w-full min-w-0"></app-resource-header>
+    </div>
+</div>

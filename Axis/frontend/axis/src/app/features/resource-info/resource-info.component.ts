@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 //import { ResourceResponse, Resource } from "../../core/models/resource.model"
-import { ResourceCardComponent } from '../../shared/components/resource-card/resource-card.component';
+import { AssetCardComponent } from '../../shared/components/asset-card/asset-card.component';
 import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-resource-info',
-  imports: [ResourceCardComponent, NgFor],
+  imports: [AssetCardComponent, NgFor],
   templateUrl: './resource-info.component.html',
   styleUrl: './resource-info.component.css'
 })
