@@ -1,5 +1,5 @@
-<div class="min-w-0 w-80 p-1 pl-3 border-r">
-    <div class="p-1 pl-2 flex flex-col gap-2">
+
+    <div class="p-1 pl-2 flex flex-col gap-2 min-w-0 w-80 p-1 pl-3">
         <div class="flex justify-between">
             <div class="">
                 {{filter1}}
@@ -15,11 +15,9 @@
             </button>
         </div>
         <div class="flex max-w-full">
-
             <div *ngFor="let query of filterQuerys" class="text-[var(--neutral)] bg-[var(--ddgrey)] py-1 px-2 mx-1 rounded-md text-sm flex items-center gap-1 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" stroke-width="3"> <path d="M5 5l3.585 3.585a4.83 4.83 0 0 0 6.83 0l3.585 -3.585"></path> <path d="M5 19l3.585 -3.585a4.83 4.83 0 0 1 6.83 0l3.585 3.584"></path> </svg> 
                 {{query}}
             </div>
         </div>
     </div>
-</div>

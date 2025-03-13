@@ -10,3 +10,11 @@
 .font-inter {
     font-family: 'Inter', sans-serif;
 }
+
+.min-w-36 {
+    min-width: 9rem;
+}
+
+.w-80 {
+    width: 20rem;
+}
