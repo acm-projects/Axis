@@ -3,13 +3,13 @@ package com.acm.Axis.features.chats;
 import java.time.LocalDateTime;
 
 public class ChatMessage {
-    private Long document_id;
+    private Integer document_id;
     private String student_email;
     private String message_text;
     private LocalDateTime timestamp;
     private String response_text;
 
-    public ChatMessage(Long document_id, String student_email, String message_text, LocalDateTime timestamp, String response_text) {
+    public ChatMessage(Integer document_id, String student_email, String message_text, LocalDateTime timestamp, String response_text) {
         this.document_id = document_id;
         this.student_email = student_email;
         this.message_text = message_text;
@@ -17,11 +17,11 @@ public class ChatMessage {
         this.response_text = response_text;
     }
 
-    public Long getDocument_id() {
+    public Integer getDocument_id() {
         return document_id;
     }
 
-    public void setDocument_id(Long document_id) {
+    public void setDocument_id(Integer document_id) {
         this.document_id = document_id;
     }
 

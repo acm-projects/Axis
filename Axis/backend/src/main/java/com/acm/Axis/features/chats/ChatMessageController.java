@@ -49,7 +49,7 @@ public class ChatMessageController {
 
 
     @PostMapping("/post/{document_id}/{user_email}")
-    public void postChat(@PathVariable Long document_id, @PathVariable String user_email, @RequestBody List<ChatMessage> chats) {
+    public void postChat(@PathVariable Integer document_id, @PathVariable String user_email, @RequestBody List<ChatMessage> chats) {
         List<ChatMessage> chatHistoryInRepo = chatRepository.getDocumentChatMessages(user_email, document_id);
 
         chats.forEach(chat -> {
