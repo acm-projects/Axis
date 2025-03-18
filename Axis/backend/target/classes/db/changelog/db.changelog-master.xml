@@ -8,4 +8,6 @@
 
     <include file="db/changelog/changes-01.xml" />
     <include file="db/changelog/002-add-response-to-chats.xml" />
+    <include file="db/changelog/003-add-password-field.xml" />
+
 </databaseChangeLog>
