@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Repository
@@ -44,13 +45,21 @@ public class StudentRepository {
             throw new IllegalStateException("Password must be hashed before saving!");
         }
 
+        List<Object> queryParams = new ArrayList<Object>();
+        queryParams.add(student.email());
+        queryParams.add(student.first_name());
+        queryParams.add(student.last_name());
+        queryParams.add(student.phone_number());
+        queryParams.add(student.gpa());
+        queryParams.add(student.sat_score());
+        queryParams.add(student.act_score());
+        queryParams.add(student.password());
+
         var created = jdbcClient.sql("""
             INSERT INTO students(email, first_name, last_name, phone_number, gpa, sat_score, act_score, password) 
             VALUES(?, ?, ?, ?, ?, ?, ?, ?)
             """)
-                .params(List.of(student.email(), student.first_name(), student.last_name(), student.phone_number(),
-                        student.gpa(), student.sat_score(), student.act_score(), student.password()))
-                .update();
+                .params(queryParams).update();
         Assert.state(created == 1, "Failed to insert student");
     }
 
