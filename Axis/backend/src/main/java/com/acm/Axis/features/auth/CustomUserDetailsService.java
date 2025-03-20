@@ -1,5 +1,7 @@
 package com.acm.Axis.features.auth;
 
+import com.acm.Axis.features.student.Student;
+import com.acm.Axis.features.student.StudentRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -7,28 +9,30 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service  // ✅ Ensure this class is registered as a Spring bean
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final StudentRepository studentRepository;
 
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CustomUserDetailsService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> userOptional = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<Student> studentOptional = studentRepository.findByEmail(email);
 
-        if (userOptional.isEmpty()) {
-            throw new UsernameNotFoundException("User not found: " + username);
+        if (studentOptional.isEmpty()) {
+            throw new UsernameNotFoundException("Student not found: " + email);
         }
 
-        User user = userOptional.get();
+        Student student = studentOptional.get();
+
         return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername())
-                .password(user.getPassword())
-                .roles(user.getRoles().toArray(new String[0])) // Convert roles to array
+                .withUsername(student.email())
+                .password(student.password())
+                .roles("STUDENT") // ✅ Future-proof by making this dynamic if needed
                 .build();
     }
+
 }
