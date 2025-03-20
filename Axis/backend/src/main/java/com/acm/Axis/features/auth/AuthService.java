@@ -1,5 +1,7 @@
 package com.acm.Axis.features.auth;
 
+import com.acm.Axis.features.student.Student;
+import com.acm.Axis.features.student.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,7 @@ import java.util.Map;
 public class AuthService {
 
     @Autowired
-    private UserRepository userRepository;
+    private StudentRepository studentRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -18,34 +20,34 @@ public class AuthService {
     @Autowired
     private JwtUtils jwtUtils;
 
-    public String register(User user) {
-        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-            throw new RuntimeException("User already exists!");
+    public String register(Student student) {
+        if (studentRepository.findByEmail(student.email()).isPresent()) {
+            throw new RuntimeException("Student already exists!");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return "User registered successfully!";
+        Student newStudent = new Student(
+                student.email(), student.first_name(), student.last_name(), student.phone_number(),
+                student.gpa(), student.sat_score(), student.act_score(),
+                passwordEncoder.encode(student.password()) // ✅ Hash password before saving
+        );
+        studentRepository.create(newStudent);
+        return "Student registered successfully!";
     }
 
-    public Map<Long, String> authenticate(String username, String password) {
-        System.out.println("🔍 Checking credentials for username: " + username);
 
-        Optional<User> userOpt = userRepository.findByUsername(username);
+    public String authenticate(String email, String password) {
+        Optional<Student> studentOpt = studentRepository.findByEmail(email);
 
-        if (userOpt.isEmpty()) {
-            System.out.println("❌ Username not found: " + username);
-            throw new RuntimeException("Invalid credentials!");
+        if (studentOpt.isEmpty()) {
+            throw new RuntimeException("Student with this email not found!");
         }
 
-        User user = userOpt.get();
-        System.out.println("✅ Username found. Stored password: " + user.getPassword());
+        Student student = studentOpt.get();
 
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            System.out.println("❌ Password does not match for username: " + username);
-            throw new RuntimeException("Invalid credentials!");
+        if (!passwordEncoder.matches(password, student.password())) {
+            throw new RuntimeException("Incorrect password!");
         }
 
-        System.out.println("✅ Password matches! Generating JWT...");
-        return Map.of(user.getId(), jwtUtils.generateToken(username));
+        return jwtUtils.generateToken(email);
     }
+
 }

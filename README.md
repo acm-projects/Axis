@@ -34,7 +34,7 @@ Axis is a platform designed to streamline the college application process for st
 |        | - Identify the main features and functionalities required. |
 |        | - Assign roles to team members based on their expertise. |
 |        | - Research the college application process and common pain points. |
-|        | - Gather insights from students and counselors for user needs. |
+|        | - Gather insights from students and counselors for student needs. |
 |--------|--------|
 | **2**  | **Set up repositories, design wireframes, and finalize the tech stack.**  |
 |        | - Create GitHub repositories for version control. |
@@ -48,9 +48,9 @@ Axis is a platform designed to streamline the college application process for st
 |        | - Establish backend API routes for key functionalities. |
 |        | - Set up Postman or similar tool for API testing. |
 |--------|--------|
-| **4**  | **Develop user authentication and integrate a basic college database.**  |
-|        | - Implement user authentication using JWT and OAuth. |
-|        | - Create user roles (students, counselors, admins). |
+| **4**  | **Develop student authentication and integrate a basic college database.**  |
+|        | - Implement student authentication using JWT and OAuth. |
+|        | - Create student roles (students, counselors, admins). |
 |        | - Populate a basic college database with relevant details (name, deadlines, requirements). |
 |        | - Connect frontend to backend authentication endpoints. |
 |--------|--------|
@@ -68,9 +68,9 @@ Axis is a platform designed to streamline the college application process for st
 |--------|--------|
 | **7**  | **Integrate the notification system and refine the UI/UX design.**  |
 |        | - Implement email and in-app notifications for deadlines and reminders. |
-|        | - Enhance UI/UX based on user feedback and testing. |
+|        | - Enhance UI/UX based on student feedback and testing. |
 |        | - Improve mobile responsiveness and accessibility. |
-|        | - Add animations and transitions for better user experience. |
+|        | - Add animations and transitions for better student experience. |
 |--------|--------|
 | **8**  | **Start implementing stretch goals (begin with document upload and collaboration).**  |
 |        | - Enable users to upload and store documents securely. |
@@ -80,7 +80,7 @@ Axis is a platform designed to streamline the college application process for st
 |--------|--------|
 | **9**  | **Conduct extensive testing and debugging.**  |
 |        | - Perform unit and integration testing for all major features. |
-|        | - Conduct user testing and gather feedback. |
+|        | - Conduct student testing and gather feedback. |
 |        | - Fix identified bugs and optimize code. |
 |        | - Stress test the application under various loads. |
 |--------|--------|
@@ -88,7 +88,7 @@ Axis is a platform designed to streamline the college application process for st
 |        | - Write comprehensive documentation for users and developers. |
 |        | - Deploy the app on a cloud service (AWS, Firebase, or Heroku). |
 |        | - Conduct a final round of testing post-deployment. |
-|        | - Launch and collect initial user feedback for future improvements. |
+|        | - Launch and collect initial student feedback for future improvements. |
 
 
 
@@ -148,7 +148,7 @@ Axis is a platform designed to streamline the college application process for st
 <details>
   <summary><strong> JUnit (Testing) </strong></summary>
   <ul>
-    <li><a href="https://junit.org/junit5/docs/current/user-guide/">JUnit 5 Documentation</a></li>
+    <li><a href="https://junit.org/junit5/docs/current/student-guide/">JUnit 5 Documentation</a></li>
     <li><a href="https://www.baeldung.com/junit-5">JUnit 5 Tutorial - Baeldung</a></li>
   </ul>
 </details>

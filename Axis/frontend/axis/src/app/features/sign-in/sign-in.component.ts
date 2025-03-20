@@ -1,9 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { SharedDataService } from '../../core/services/shared-data.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,18 +15,18 @@ import {CommonModule} from '@angular/common';
 export class SignInComponent implements OnInit {
   email: string;
   password: string;
+
   invalidCredentials: boolean;
 
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
+  constructor(private http: HttpClient, private authService: AuthService,
+              private sharedDataService: SharedDataService, private router: Router) {
     this.email = '';
     this.password = '';
     this.invalidCredentials = false;
   }
 
   ngOnInit(): void {
-
-
-
+    this.sharedDataService.setCurrentPage('sign-in');
   }
 
   signIn() : void {
@@ -33,19 +34,16 @@ export class SignInComponent implements OnInit {
       {
         email: this.email,
         password: this.password
-      },
+      }
     ).subscribe({
       next: (response: any) => {
-        console.log('Response: ' + JSON.stringify(response));
         this.authService.saveSession({
-          id: response.id,
+          email: this.email,
           token: response.token
         });
-        this.router.navigate(['/']);
+        this.router.navigate(['/']); // Redirect to home page
       },
       error: error => {
-        this.email = '';
-        this.password = '';
         this.invalidCredentials = true;
       }
     });
