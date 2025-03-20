@@ -18,3 +18,17 @@
 .w-80 {
     width: 20rem;
 }
+
+.font-custom {
+    font-weight: 450;
+}
+
+.-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.no-clear::-webkit-search-cancel-button {
+    display: none;
+}
