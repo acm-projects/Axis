@@ -7,10 +7,7 @@
 
     <changeSet id="004-add-scholarships-table" author="kevin">
         <createTable tableName="scholarships">
-<<<<<<< Updated upstream
-            <column name="name" type="VARCHAR(255)">
 
-            </column>
 <!--            <column name="message_id" type="BIGSERIAL">-->
 <!--                <constraints primaryKey="true"/>-->
 <!--            </column>-->
@@ -24,7 +21,7 @@
 <!--                <constraints nullable="false"/>-->
 <!--            </column>-->
 <!--            <column name="timestamp" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>-->
-=======
+
             <column name="id" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -64,7 +61,7 @@
             <column name="location" type="VARCHAR(100)">
                 <constraints nullable="true"/>
             </column>
->>>>>>> Stashed changes
+
         </createTable>
     </changeSet>
 

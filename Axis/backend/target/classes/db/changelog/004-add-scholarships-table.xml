@@ -7,6 +7,21 @@
 
     <changeSet id="004-add-scholarships-table" author="kevin">
         <createTable tableName="scholarships">
+            
+<!--            <column name="message_id" type="BIGSERIAL">-->
+<!--                <constraints primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="document_id" type="BIGINT">-->
+<!--                <constraints nullable="false" foreignKeyName="fk_chat_document" references="documents(document_id)"/>-->
+<!--            </column>-->
+<!--            <column name="student_email" type="VARCHAR(255)">-->
+<!--                <constraints nullable="false" foreignKeyName="fk_chat_student" references="students(email)"/>-->
+<!--            </column>-->
+<!--            <column name="message_text" type="TEXT">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="timestamp" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>-->
+
             <column name="id" type="BIGSERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -46,6 +61,7 @@
             <column name="location" type="VARCHAR(100)">
                 <constraints nullable="true"/>
             </column>
+
         </createTable>
     </changeSet>
 
