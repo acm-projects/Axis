@@ -10,11 +10,9 @@
     <include file="db/changelog/002-add-response-to-chats.xml" />
     <include file="db/changelog/003-add-password-field.xml" />
     <include file="/db/changelog/004-add-scholarships-table.xml" />
-<<<<<<< Updated upstream
-=======
+
     <include file="/db/changelog/005-add-columns-to-colleges-table.xml" />
 
->>>>>>> Stashed changes
 
 
 </databaseChangeLog>
