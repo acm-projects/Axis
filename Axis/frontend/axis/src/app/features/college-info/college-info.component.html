@@ -1,0 +1,69 @@
+<div class="flex flex-col items-center">
+    <div class="flex justify-center relative mt-[5%] mb-[120px] w-[70%]">
+        <img class="rounded-md aspect-video w-full" [src]="collegeData.imgLink">
+        <div class="absolute top-[85%] left-[4%] flex items-center gap-4 sm:w-[300px] md:w-[475px] lg:w-[725px]">
+            <div class="min-w-[22%]">
+                <img class="rounded-md aspect-square w-full h-auto" [src]="collegeData.logoLink">
+            </div>
+            <div class="text-left mt-24 container ">
+                <h1 class="font-bold text-[var(--ddgrey)] text-4xl min-w-0 whitespace-nowrap overflow-hidden truncate">
+                    {{collegeData.name}} alsdjfasldkjfalskdjfalsdfkj
+                </h1>
+                <div class="text-2xl text-[var(--dlgrey)]">
+                    {{collegeData.location}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-[80%] flex ">
+        <div class="flex flex-col gap-12 w-[300px] flex-shrink-0 border-r-2 border-[var(--secondary)] pl-4 h-[500px] truncate">
+            <div class="flex gap-6 items-center justify-left">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--ddgrey)" stroke-linecap="round" stroke-linejoin="round" width="64" height="64" stroke-width="1.5"> <path d="M7 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M5 22v-5l-1 -1v-4a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4l-1 1v5"></path> <path d="M17 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M15 22v-4h-2l2 -6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1l2 6h-2v4"></path> </svg> 
+                <div class="flex flex-col justify-center gap min-h-0">
+                    <div class="text-3xl text-[var(--ddgrey)]">
+                        {{collegeData.population}}+
+                    </div>
+                    <div class="text-lg text-[var(--dlgrey)]">
+                        Student Population
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-6 items-center justify-left">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--ddgrey)" stroke-linecap="round" stroke-linejoin="round" width="64" height="64" stroke-width="1.5"> <path d="M14 3v4a1 1 0 0 0 1 1h4"></path> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path> <path d="M9 15l2 2l4 -4"></path> </svg> 
+                <div class="flex flex-col justify-center gap min-h-0">
+                    <div class="text-3xl text-[var(--ddgrey)]">
+                        {{collegeData.acceptence}}%
+                    </div>
+                    <div class="text-lg text-[var(--dlgrey)]">
+                        Acceptance Rate
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-6 items-center justify-left">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--ddgrey)" stroke-linecap="round" stroke-linejoin="round" width="64" height="64" stroke-width="1.5"> <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path> <path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1"></path> <path d="M12 7v10"></path> </svg> 
+                <div class="flex flex-col justify-center gap min-h-0">
+                    <div class="text-3xl text-[var(--ddgrey)]">
+                        {{collegeData.tution}} 
+                    </div>
+                    <div class="text-lg text-[var(--dlgrey)]">
+                        Tution
+                    </div>
+                </div>
+            </div>
+            <div class="flex gap-6 items-center justify-left">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--ddgrey)" stroke-linecap="round" stroke-linejoin="round" width="64" height="64" stroke-width="1.5"> <path d="M22 9l-10 -4l-10 4l10 4l10 -4v6"></path> <path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4"></path> </svg> 
+                <div class="flex flex-col justify-center gap min-h-0">
+                    <div class="text-3xl text-[var(--ddgrey)]">
+                        {{collegeData.graduation}}%
+                    </div>
+                    <div class="text-lg text-[var(--dlgrey)]">
+                        Graduation Rate
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pl-12 text-xl ">
+            {{collegeData.description}}
+        </div>
+    </div>
+</div>
