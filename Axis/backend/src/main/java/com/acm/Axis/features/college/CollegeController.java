@@ -28,7 +28,7 @@ public class CollegeController {
 
     @PostMapping("")
     void create(@RequestBody College college) {
-        collegeRepository.create(college);
+        collegeRepository.insertCollege(college);
     }
 
     @PutMapping("/{college_id}")

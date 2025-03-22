@@ -6,11 +6,10 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
 
-    <include file="db/changelog/changes-01.xml" />
-    <include file="db/changelog/002-add-response-to-chats.xml" />
-    <include file="db/changelog/003-add-password-field.xml" />
+    <include file="/db/changelog/001-add-chats-table.xml" />
+    <include file="/db/changelog/002-add-response-to-chats.xml" />
+    <include file="/db/changelog/003-add-password-field.xml" />
     <include file="/db/changelog/004-add-scholarships-table.xml" />
-
     <include file="/db/changelog/005-add-columns-to-colleges-table.xml" />
 
 

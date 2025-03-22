@@ -32,11 +32,51 @@ public class CollegeRepository {
                 .optional();
     }
 
-    public void create(College college) {
-        var created = jdbcClient.sql("INSERT INTO colleges (name) VALUES(:name)")
+    public void insertCollege(College college) {
+        String sql = """
+            INSERT INTO colleges (
+                name, logo_src, undergrad_pop, location, type, avg_tuition_annually, avg_tuition_after_aid,
+                avg_aid_pack, avg_housing_cost, grad_rate, acceptance_rate, student_to_faculty_ratio,
+                retention_rate_majors_avail, SAT_range, ACT_range, required_GPA, required_rank,
+                required_ACT_SAT, address, phone_number, website, reg_app_due_date,
+                financial_aid_app_due_date, application_link
+            )
+            VALUES (
+                :name, :logo_src, :undergrad_pop, :location, :type, :avg_tuition_annually, :avg_tuition_after_aid,
+                :avg_aid_pack, :avg_housing_cost, :grad_rate, :acceptance_rate, :student_to_faculty_ratio,
+                :retention_rate_majors_avail, :SAT_range, :ACT_range, :required_GPA, :required_rank,
+                :required_ACT_SAT, :address, :phone_number, :website, :reg_app_due_date,
+                :financial_aid_app_due_date, :application_link
+            )
+        """;
+
+
+        jdbcClient.sql(sql)
                 .param("name", college.name())
+                .param("logo_src", college.logo_src())
+                .param("undergrad_pop", college.undergradPopulation())
+                .param("location", college.location())
+                .param("type", college.type())
+                .param("avg_tuition_annually", college.avgTuitionAnnually())
+                .param("avg_tuition_after_aid", (college.avgTuitionAfterAid()))
+                .param("avg_aid_pack", college.avgAidPack())
+                .param("avg_housing_cost", college.avgHousingCost())
+                .param("grad_rate", college.gradeRate())
+                .param("acceptance_rate", college.acceptanceRate())
+                .param("student_to_faculty_ratio", college.studentToFacultyRatio())
+                .param("retention_rate_majors_avail", college.retentionRateMajorsAvail())
+                .param("SAT_range", college.SATRange())
+                .param("ACT_range", college.ACTRange())
+                .param("required_GPA", college.reqGPA())
+                .param("required_rank", college.reqRank())
+                .param("required_ACT_SAT", college.reqACT_SAT())
+                .param("address", college.address())
+                .param("phone_number", college.phoneNumber())
+                .param("website", college.website())
+                .param("reg_app_due_date", college.regAppDueDate())
+                .param("financial_aid_app_due_date", college.financialAidAppDueDate())
+                .param("application_link", college.applicationLink())
                 .update();
-        Assert.state(created == 1, "Failed to insert student");
     }
 
     public void update(College college, Integer college_id) {

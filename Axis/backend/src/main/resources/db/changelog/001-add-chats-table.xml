@@ -5,6 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
 
+
     <changeSet id="001-add-chats-table" author="kevin">
         <createTable tableName="chats">
             <column name="message_id" type="BIGSERIAL">
