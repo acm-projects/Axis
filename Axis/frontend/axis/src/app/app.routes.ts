@@ -7,6 +7,7 @@ import { ResourcesPageComponent } from './features/resources-page/resources-page
 import { DiscoverPageComponent } from './features/discover-page/discover-page.component';
 import { CollegeInfoComponent } from './features/college-info/college-info.component';
 import { UserAccountComponent } from './features/user-account/user-account.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 export const routes: Routes = [
     {
@@ -40,5 +41,9 @@ export const routes: Routes = [
     {
         path: "account/:id",
         component: UserAccountComponent
+    },
+    {
+        path: "dashboard",
+        component: DashboardComponent
     }
 ];
