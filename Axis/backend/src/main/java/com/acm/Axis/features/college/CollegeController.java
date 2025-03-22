@@ -26,6 +26,11 @@ public class CollegeController {
         return collegeRepository.findById(college_id).orElse(null);
     }
 
+    @GetMapping("/{name}")
+    List<College> getByName(@PathVariable String name) {
+        return collegeRepository.findByName(name);
+    }
+
     @PostMapping("")
     void create(@RequestBody College college) {
         collegeRepository.insertCollege(college);
