@@ -8,6 +8,7 @@ import { DiscoverPageComponent } from './features/discover-page/discover-page.co
 import { CollegeInfoComponent } from './features/college-info/college-info.component';
 import { UserAccountComponent } from './features/user-account/user-account.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { EssayBotComponent } from './features/essay-bot/essay-bot.component';
 
 export const routes: Routes = [
     {
@@ -45,5 +46,9 @@ export const routes: Routes = [
     {
         path: "dashboard",
         component: DashboardComponent
+    },
+    {
+        path: "essay/:id",
+        component: EssayBotComponent
     }
 ];
