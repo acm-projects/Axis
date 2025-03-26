@@ -15,6 +15,6 @@
     <include file="/db/changelog/007-modify-location-type.xml" />
     <include file="/db/changelog/008-add-campus-life-column.xml" />
     <include file="/db/changelog/009-add-majors-available-column.xml" />
-<!--    <include file="/db/changelog/.xml" />-->
+    <include file="/db/changelog/010-modify-numeric-to-varchar-colleges-table.xml" />
 
 </databaseChangeLog>
