@@ -21,8 +21,8 @@ public class CollegeController {
         return collegeRepository.getAll();
     }
 
-    @GetMapping("/{college_id}")
-    College getById(@PathVariable Integer college_id) {
+    @GetMapping("/searchByID/{college_id}")
+    College getById(@PathVariable Long college_id) {
         return collegeRepository.findById(college_id).orElse(null);
     }
 
