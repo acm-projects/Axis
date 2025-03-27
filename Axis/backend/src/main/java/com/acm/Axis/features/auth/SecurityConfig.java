@@ -27,7 +27,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register", "/auth/login").permitAll()  // ✅ Allow login & register without authentication
+                        .requestMatchers("/auth/register", "/auth/login", "/api/**").permitAll()  // ✅ Allow login & register without authentication
                         .anyRequest().authenticated()  // ✅ Secure other endpoints
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // ✅ Disable session-based auth

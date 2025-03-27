@@ -64,4 +64,3 @@ CREATE TABLE IF NOT EXISTS documents (
     FOREIGN KEY (application_id)
     REFERENCES applications(application_id)
 );
-
