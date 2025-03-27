@@ -56,7 +56,7 @@ public class CollegeRepository {
         return jdbcClient.sql(SELECT_COLUMNS).query(College.class).list();
     }
 
-    public Optional<College> findById(Integer id) {
+    public Optional<College> findById(Long id) {
         return jdbcClient.sql(SELECT_COLUMNS + " WHERE college_id = :id")
                 .param("id", id)
                 .query(College.class)
