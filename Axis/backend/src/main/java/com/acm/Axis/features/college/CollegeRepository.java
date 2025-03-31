@@ -23,7 +23,7 @@ public class CollegeRepository {
 
     // Using column aliases to match the College record's component names
     private static final String SELECT_COLUMNS = """
-        SELECT 
+        SELECT
             college_id,
             name,
             logo_src,
@@ -48,7 +48,10 @@ public class CollegeRepository {
             website,
             reg_app_due_date AS regAppDueDate,
             financial_aid_app_due_date AS financialAidAppDueDate,
-            application_link AS applicationLink
+            application_link AS applicationLink,
+            campus_life AS campusLife,
+            majors_available AS majorsAvailable,
+            description
         FROM colleges
         """;
 
@@ -56,7 +59,8 @@ public class CollegeRepository {
         return jdbcClient.sql(SELECT_COLUMNS).query(College.class).list();
     }
 
-    public Optional<College> findById(Long id) {
+    public Optional<College> findById(Integer id) {
+        log.info("Finding college by ID {}", id);
         return jdbcClient.sql(SELECT_COLUMNS + " WHERE college_id = :id")
                 .param("id", id)
                 .query(College.class)
@@ -65,8 +69,17 @@ public class CollegeRepository {
 
     public List<College> findByName(String name) {
         log.info("Finding college by name {}", name);
-        return jdbcClient.sql(SELECT_COLUMNS + " WHERE name ILIKE :name")
+        return jdbcClient.sql(SELECT_COLUMNS + " WHERE name LIKE :name")
                 .param("name", "%" + name + "%")
+                .query(College.class)
+                .list();
+    }
+
+    public List<College> findByPage(Integer page, Integer collegesPerPage) {
+        log.info("Finding {} colleges by page {}", collegesPerPage, page);
+        return jdbcClient.sql(SELECT_COLUMNS + " WHERE college_id BETWEEN :start_id AND :end_id")
+                .param("start_id", (page - 1) * collegesPerPage + 1)
+                .param("end_id", page * collegesPerPage)
                 .query(College.class)
                 .list();
     }
@@ -131,10 +144,9 @@ public class CollegeRepository {
         Assert.state(deleted == 1, "Failed to delete college");
     }
 
-    public int count() {
+    public Integer count() {
         // A more typical approach would be to extract the count from the result.
         return jdbcClient.sql("SELECT COUNT(*) FROM colleges")
-                .query(Integer.class)
-                .single();
+                .query(Integer.class).single();
     }
 }

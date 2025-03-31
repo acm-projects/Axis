@@ -1,0 +1,30 @@
+export interface College {
+    college_id: number;
+    name: string;
+    logo_src: string;
+    undergradPopulation: string;
+    location: string;
+    type: string;
+    avgTuitionAnnually: string;
+    avgTuitionAfterAid: string;
+    avgAidPack: string;
+    avgHousingCost: string;
+    gradeRate: string;
+    acceptanceRate: string;
+    studentToFacultyRatio: string;
+    retentionRateMajorsAvail: string;
+    SATRange: string;
+    ACTRange: string;
+    reqGPA: string;
+    reqRank: string;
+    reqACT_SAT: string;
+    address: string;
+    phoneNumber: string;
+    website: string;
+    regAppDueDate: string;
+    financialAidAppDueDate: string;
+    applicationLink: string;
+    campusLife: string;
+    majorsAvailable: string;
+    description: string;
+}

@@ -1,20 +1,15 @@
-<div class="flex flex-col justify-center w-auto max-w-52 m-4">
-    <img class="h-full object-cover aspect-square rounded-lg" 
-            src="https://wpstaq-ap-southeast-2-media.s3.amazonaws.com/irisphoto/wp-content/uploads/media/2020/09/High-res-1.jpg" alt="Resource Image"/>
+<div class="flex flex-col justify-center w-56 px-2 m-4 border-2 border-gray-500 rounded-xl">
+    <img class="object-contain aspect-square" src="{{imgLink}}" alt="{{name}}"/>
     <div class="flex flex-row justify-between px-1 py-4">
-        <div class="">
-            <div class="text-md text-[var(--ddgrey)]">
-                College Name
-            </div>
-            <div class="text-sm text-[var(--dlgrey)]">
-                Location or other Info
-            </div>
+        <div class="flex flex-col hover:underline">
+            <a class="text-md text-[var(--ddgrey)]" [routerLink]="['/discover', id]" routerLinkActive="active">{{name}}</a>
+            <a class="text-sm text-[var(--dlgrey)]" [routerLink]="['/discover', id]" routerLinkActive="active">{{info}}</a>
         </div>
-        <div class="my-auto">
-            <button (click)="toggleBookmark()" >
+        <div class="my-1">
+            <button (click)="bookMarked = !bookMarked">
                 <svg
                 *ngIf="bookMarked"
-                xmlns='http://www.w3.org/2000/svg' 
+                xmlns='http://www.w3.org/2000/svg'
                 width="30"
                 height="30"
                 viewBox="0 0 24 24"
@@ -28,7 +23,7 @@
                 </svg>
                 <svg
                 *ngIf="!bookMarked"
-                xmlns='http://www.w3.org/2000/svg' 
+                xmlns='http://www.w3.org/2000/svg'
                 width="28"
                 height="28"
                 viewBox="0 0 24 24"

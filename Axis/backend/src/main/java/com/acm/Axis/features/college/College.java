@@ -3,31 +3,34 @@ package com.acm.Axis.features.college;
 import java.util.Date;
 
 public record College(
-        Long college_id,
+        Integer college_id,
         String name,
         String logo_src,
-        Integer undergradPopulation,
+        String undergradPopulation,
         String location,
         String type,
-        Float avgTuitionAnnually,
-        Float avgTuitionAfterAid,
-        Float avgAidPack,
-        Float avgHousingCost,
-        Float gradeRate,
-        Float acceptanceRate,
-        Float studentToFacultyRatio,
+        String avgTuitionAnnually,
+        String avgTuitionAfterAid,
+        String avgAidPack,
+        String avgHousingCost,
+        String gradeRate,
+        String acceptanceRate,
+        String studentToFacultyRatio,
         String retentionRateMajorsAvail,
         String SATRange,
         String ACTRange,
-        Float reqGPA,
+        String reqGPA,
         String reqRank,
         String reqACT_SAT,
         String address,
         String phoneNumber,
         String website,
-        Date regAppDueDate,
-        Date financialAidAppDueDate,
-        String applicationLink
+        String regAppDueDate,
+        String financialAidAppDueDate,
+        String applicationLink,
+        String campusLife,
+        String majorsAvailable,
+        String description
 ) {
 
     public College {

@@ -13,4 +13,4 @@ services:
       - '5445:5432'
     volumes:
       # - "C:\\Users\\Kevin Philip\\Desktop\\data:/csvfiles"
-      - "/Users/kevinphilip/Documents/Development/Projects/Axis/data:/csvfiles"
+      - "C:\\Users\\robin\\Desktop\\Axis\\data:/csvfiles"
