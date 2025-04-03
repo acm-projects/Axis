@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-user-account',
@@ -20,5 +20,15 @@ export class UserAccountComponent {
   }
 
   documents: any[] = ["Resume", "Transcript", "Transfer Credits", "AP Scores", "Recommendation Letter 1", "Recommendation Letter 2", "Personal Essay"]
+
+  @Output() closeMyAccountEvent = new EventEmitter<void>();
+
+  outerDivClick(): void {
+    this.closeMyAccountEvent.emit()
+  }
+
+  innerDivClick(event: MouseEvent) {
+    event.stopPropagation()
+  }
 }
 

@@ -12,5 +12,4 @@ services:
       # however, we care about the port on the container we need to map it to the port that the postgres is running on
       - '5445:5432'
     volumes:
-      # - "C:\\Users\\Kevin Philip\\Desktop\\data:/csvfiles"
-      - "C:\\Users\\robin\\Desktop\\Axis\\data:/csvfiles"
+      - "C:\\College UTD\\Spring 2025\\Projects\\V1\\data:/csvfiles"

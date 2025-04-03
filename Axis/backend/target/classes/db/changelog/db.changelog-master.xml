@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <include file="/db/changelog/001-add-chats-table.xml" />
+    <include file="/db/changelog/002-add-response-to-chats.xml" />
+    <include file="/db/changelog/003-add-password-field.xml" />
+    <include file="/db/changelog/004-add-scholarships-table.xml" />
+    <include file="/db/changelog/005-add-columns-to-colleges-table.xml" />
+    <include file="/db/changelog/006-change-award-amount-to-varchar.xml" />
+    <include file="/db/changelog/007-modify-location-type.xml" />
+    <include file="/db/changelog/008-add-campus-life-column.xml" />
+    <include file="/db/changelog/009-add-majors-available-column.xml" />
+    <include file="/db/changelog/010-modify-numeric-to-varchar-colleges-table.xml" />
+    <include file="/db/changelog/011-add-desc-in-colleges-table.xml" />
+    <include file="/db/changelog/012-modify-cap-columns-in-colleges-table.xml" />
+
+
+
+</databaseChangeLog>

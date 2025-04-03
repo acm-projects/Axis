@@ -4,6 +4,7 @@
     --accent: #9B6DCC;
     --secondary: #000000;
     --llgrey: #F0F0F1;
+    --ldgrey: #cccccc;
     --dlgrey: #8A8A8E;
     --ddgrey: #2C2C2C;
 }
@@ -32,3 +33,7 @@
 .no-clear::-webkit-search-cancel-button {
     display: none;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }

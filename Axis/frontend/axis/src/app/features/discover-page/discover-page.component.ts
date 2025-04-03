@@ -44,7 +44,7 @@ export class DiscoverPageComponent {
         this.updatePageButtons(page);
       },
       error: error => {
-        console.log('Failed to retrieve colleges');
+        console.log('Failed to retrieve colleges: ' + String(error));
       }
     });
   }

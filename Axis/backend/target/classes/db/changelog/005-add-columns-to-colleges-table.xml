@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="005-add-columns-to-college-table" author="kevin">
+        <addColumn tableName="colleges">
+            <column name="logo_src" type="VARCHAR(255)"/>
+            <column name="location" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(100)"/>
+            <column name="avg_tuition_annually" type="DECIMAL(10,2)"/>
+            <column name="avg_tuition_after_aid" type="DECIMAL(10,2)"/>
+            <column name="avg_aid_pack" type="DECIMAL(10,2)"/>
+            <column name="grad_rate" type="DECIMAL(5,2)"/>
+            <column name="address" type="TEXT"/>
+            <column name="phone_number" type="VARCHAR(20)"/>
+            <column name="website" type="VARCHAR(255)"/>
+            <column name="application_link" type="VARCHAR(255)"/>
+            <column name="acceptance_rate" type="DECIMAL(5,2)"/>
+            <column name="reg_app_due_date" type="DATE"/>
+            <column name="SAT_range" type="VARCHAR(50)"/>
+            <column name="ACT_range" type="VARCHAR(50)"/>
+            <column name="required_GPA" type="DECIMAL(3,2)"/>
+            <column name="required_rank" type="VARCHAR(100)"/>
+            <column name="required_ACT_SAT" type="BOOLEAN"/>
+            <column name="student_to_faculty_ratio" type="DECIMAL(5,2)"/>
+            <column name="retention_rate_majors_avail" type="TEXT"/>
+            <column name="financial_aid_app_due_date" type="DATE"/>
+            <column name="avg_housing_cost" type="DECIMAL(10,2)"/>
+            <column name="undergrad_pop" type="INTEGER"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

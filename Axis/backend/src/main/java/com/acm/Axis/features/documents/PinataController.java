@@ -38,4 +38,31 @@ public class PinataController {
             return ResponseEntity.status(500).body("Error uploading file: " + e.getMessage());
         }
     }
+
+    @GetMapping("")
+    public ResponseEntity<String> getAllFiles(
+            @RequestParam(required = false, defaultValue = "ipfs") String network,
+            @RequestParam(required = false) Integer limit,
+            @RequestParam(required = false) Integer offset) {
+        try {
+            String files = pinataService.getAllFiles(network, limit, offset);
+            System.out.println("Something is happening: " + files);
+            return ResponseEntity.ok(files);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body("Error retrieving files: " + e.getMessage());
+        }
+    }
+    /*
+    @GetMapping("")
+    public ResponseEntity<String> authTest () {
+        try {
+            String res = pinataService.testAuth();
+            System.out.println(res);
+            return ResponseEntity.ok(res);
+        } catch (IOException e) {
+            return ResponseEntity.status(500).body("Error retrieving files: " + e.getMessage());
+        }
+    }
+    */
+
 }
