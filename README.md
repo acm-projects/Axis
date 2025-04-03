@@ -233,3 +233,5 @@ Axis is a platform designed to streamline the college application process for st
 - **Quadrant 3**: Lalith Chaitanya Reddy Vennapusa
 - **Quadrant 4**: Ajay Alluri
 
+![image](https://drive.google.com/uc?export=view&id=1HvPI4ZWqTkwkhlVwJCx028G2EpTajGNT)
+
