@@ -43,7 +43,7 @@ public class ApplicationController {
         return application.get();
     }
 
-    @PostMapping("")
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     void create(@RequestBody Application application) {
         applicationRepository.create(application);
