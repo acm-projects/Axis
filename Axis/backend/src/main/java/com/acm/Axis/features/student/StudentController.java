@@ -30,7 +30,7 @@ public class StudentController {
         return student.get();
     }
 
-    @PostMapping("")
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     void create(@RequestBody Student student) {
         studentRepository.create(student);

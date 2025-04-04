@@ -18,6 +18,7 @@
     <include file="/db/changelog/010-modify-numeric-to-varchar-colleges-table.xml" />
     <include file="/db/changelog/011-add-desc-in-colleges-table.xml" />
     <include file="/db/changelog/012-modify-cap-columns-in-colleges-table.xml" />
+    <include file="/db/changelog/013-modify-documents-table.xml" />
 
 
 

@@ -3,7 +3,6 @@ package com.acm.Axis.features.applications;
 import java.util.Date;
 
 public record Application(
-        Integer application_id,
         String student_email,
         Integer college_id,
         String program_name,
