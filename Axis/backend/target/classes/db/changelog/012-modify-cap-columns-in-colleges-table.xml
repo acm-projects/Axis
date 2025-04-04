@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="012-modify-cap-columns-in-colleges-table" author="kevin">
+        <!-- Precondition to check if the columns already exist -->
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="colleges" columnName="SAT_range"/>
+                <columnExists tableName="colleges" columnName="ACT_range"/>
+                <columnExists tableName="colleges" columnName="required_GPA"/>
+                <columnExists tableName="colleges" columnName="required_ACT_SAT"/>
+            </not>
+        </preConditions>
+
+        <renameColumn tableName="colleges" oldColumnName="SAT_range" newColumnName="sat_range"/>
+        <renameColumn tableName="colleges" oldColumnName="ACT_range" newColumnName="act_range"/>
+        <renameColumn tableName="colleges" oldColumnName="required_GPA" newColumnName="required_gpa"/>
+        <renameColumn tableName="colleges" oldColumnName="required_ACT_SAT" newColumnName="required_act_sat"/>
+    </changeSet>
+
+</databaseChangeLog>

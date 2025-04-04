@@ -6,36 +6,20 @@
 
         </div>
         <div class="flex flex-col my-auto gap-4">
-            <div class="text-4xl font-semibold sm:mx-18 md:mx-36">
-                Resource Title
-            </div>
-            <button class="bg-[var(--secondary)] text-[white] min-w-200 w-auto items-center rounded py-2 text-sm p-1">
-                Link to source
-            </button>
+            <div class="text-4xl font-semibold sm:mx-18 md:mx-36">{{scholarship?.name}}</div>
+            <button class="bg-[var(--secondary)] text-[white] min-w-200 w-auto items-center rounded py-2 text-sm p-1">{{scholarship?.website}}</button>
         </div>
         <div class="my-auto flex flex-col text-[var(--dlgrey)] gap-2">
-            <p>When it was posted</p>
-            <p>Location Info</p>
-            <p>Deadline</p>
-            <p>Organization Data</p>
+            <p>Opens: {{scholarship?.openDate}}</p>
+            <p>Location: {{scholarship?.location}}</p>
+            <p>Deadline: {{scholarship?.closeDate}}</p>
+            <p>Organization: {{scholarship?.organization}}</p>
         </div>
     </div>
     <div class="text-md">
-        <p>
-        He share of first to worse. Weddings and any opinions suitable smallest nay. My he houses or months settle remove ladies appear. Engrossed suffering supposing he recommend do eagerness. Commanded no of depending extremity recommend attention tolerably. Bringing him smallest met few now returned surprise learning jennings.
-        <br><br>
-        Objection delivered eagerness he exquisite at do in. Warmly up he nearer mr merely me.Building mr concerns servants in he outlived am breeding. He so lain good miss when sell some at if. Told hand so an rich gave next. How doubt yet again see son smart. While mirth large of on front. Ye he greater related adapted proceed entered an.
-        <br><br>
-        Through it examine express promise no. Past add size game cold girl off how old.To they four in love. Settling you has separate supplied bed. Concluded resembled suspected his resources curiosity joy. Led all cottage met enabled attempt through talking delight. Dare he feet my tell busy.
-        <br><br>
-        Considered imprudence of he friendship boisterous. Months on ye at by esteem desire warmth former. Sure that that way gave any fond now. His boy middleton sir nor engrossed affection excellent. Dissimilar compliment cultivated preference eat sufficient may. Well next door soon we mr he four. Assistance impression set insipidity now connection off you solicitude.
-        <br><br>
-        Under as seems we me stuff those style at. Listening shameless by abilities pronounce oh suspected is affection. Next it draw in draw much bred.At every tiled on ye defer do. No attention suspected oh difficult. Fond his say old meet cold find come whom. The sir park sake bred. Wonder matter now can estate esteem assure fat roused. Am performed on existence as discourse is.
-        <br><br>
-        Pleasure friendly at marriage blessing or.Improved own provided blessing may peculiar domestic. Sight house has sex never. No visited raising gravity outward subject my cottage mr be. Hold do at tore in park feet near my case. Invitation at understood occasional sentiments insipidity inhabiting in. Off melancholy alteration principles old. Is do speedily kindness properly oh. Respect article painted cottage he is offices parlors.
-        </p>
+        <p>{{scholarship?.description}}</p>
     </div>
-    <h1 class="text-[var(--secondary)] text-2xl font-bold">Simiar Resources</h1>
+    <h1 class="text-[var(--secondary)] text-2xl font-bold">Similar Resources</h1>
     <!-- <div class="flex flex-row justify-center gap-4">
         <app-resource-card *ngFor="let i of l"></app-resource-card>
     </div> -->

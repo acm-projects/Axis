@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="001-add-chats-table" author="kevin">
+        <!-- Precondition to check if the table already exists -->
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="chats"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="chats">
+            <column name="message_id" type="BIGSERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="document_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_chat_document" references="documents(document_id)"/>
+            </column>
+            <column name="student_email" type="VARCHAR(255)">
+                <constraints nullable="false" foreignKeyName="fk_chat_student" references="students(email)"/>
+            </column>
+            <column name="message_text" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="response_text" type="TEXT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="timestamp" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

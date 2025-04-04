@@ -1,15 +1,20 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-resource-header',
-  imports: [NgIf],
+  imports: [NgIf, RouterLink, RouterLinkActive],
   templateUrl: './resource-header.component.html',
   styleUrl: './resource-header.component.css'
 })
 export class ResourceHeaderComponent {
-  bookMarked:boolean = false;
-  toggleBookmark():void {
-    this.bookMarked = !this.bookMarked
-  }
+  @Input() id: number = 0;
+  @Input() name: string = '';
+  @Input() info: string = '';
+  @Input() org: string = '';
+  @Input() imgLink: string = '';
+  @Input() content: string = '';
+  bookMarked: boolean = false;
+
 }

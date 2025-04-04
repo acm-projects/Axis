@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="010-modify-numeric-to-varchar-colleges-table" author="kevin">
+        <modifyDataType tableName="colleges" columnName="avg_tuition_annually" newDataType="VARCHAR(20)"/>
+        <modifyDataType tableName="colleges" columnName="avg_tuition_after_aid" newDataType="VARCHAR(20)"/>
+        <modifyDataType tableName="colleges" columnName="avg_aid_pack" newDataType="VARCHAR(20)"/>
+        <modifyDataType tableName="colleges" columnName="grad_rate" newDataType="VARCHAR(20)"/>
+        <modifyDataType tableName="colleges" columnName="address" newDataType="VARCHAR(255)"/>
+        <modifyDataType tableName="colleges" columnName="phone_number" newDataType="VARCHAR(30)"/>
+        <modifyDataType tableName="colleges" columnName="acceptance_rate" newDataType="VARCHAR(30)"/>
+        <modifyDataType tableName="colleges" columnName="reg_app_due_date" newDataType="VARCHAR(30)"/>
+        <modifyDataType tableName="colleges" columnName="required_rank" newDataType="VARCHAR(50)"/>
+        <modifyDataType tableName="colleges" columnName="required_GPA" newDataType="VARCHAR(50)"/>
+        <modifyDataType tableName="colleges" columnName="required_ACT_SAT" newDataType="VARCHAR(50)"/>
+        <modifyDataType tableName="colleges" columnName="student_to_faculty_ratio" newDataType="VARCHAR(30)"/>
+        <modifyDataType tableName="colleges" columnName="retention_rate_majors_avail" newDataType="VARCHAR(20)"/>
+        <modifyDataType tableName="colleges" columnName="financial_aid_app_due_date" newDataType="VARCHAR(20)"/>
+        <modifyDataType tableName="colleges" columnName="avg_housing_cost" newDataType="VARCHAR(20)"/>
+        <modifyDataType tableName="colleges" columnName="undergrad_pop" newDataType="VARCHAR(20)"/>
+        <modifyDataType tableName="colleges" columnName="campus_life" newDataType="VARCHAR(30)"/>
+        <modifyDataType tableName="colleges" columnName="majors_available" newDataType="VARCHAR(30)"/>
+        <modifyDataType tableName="colleges" columnName="application_link" newDataType="TEXT"/>
+
+    </changeSet>
+
+</databaseChangeLog>
