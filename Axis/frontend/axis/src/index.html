@@ -1,15 +1,36 @@
 <!doctype html>
-  <html lang="en">
+<html lang="en">
   <head>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
     <meta charset="utf-8">
     <title>Axis</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
   </head>
-  <body class="font-inter">
+  <body class="font-inter bg-[var(--neutral)] relative">
     <app-root></app-root>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Background Container (iframe + purple overlay) -->
+    <div class="absolute inset-0 pointer-events-none z-[-1]">
+      <!-- Interactive Background -->
+      <iframe 
+        src="https://earth.nullschool.net/#current/particulates/surface/currents/annot=fires/overlay=pm2.5/orthographic=-93.72,25.21,31892" 
+        frameborder="0" 
+        class="w-full h-full">
+      </iframe>
+      <!-- Purple Overlay -->
+      <div class="absolute inset-0 bg-purple-600 opacity-40"></div>
+    </div>
+    
+    <!-- Your Website Content -->
+    <div class="relative z-10">
+      <!-- Place your header and other content here -->
+    </div>
   </body>
 </html>

@@ -1,72 +1,82 @@
-<div>
-    <div class="flex flex-col justify-center gap-1 items-center py-32">
-        <div class="flex flex-col items-center mb-2">
-            <div class="font-bold text-8xl">
-                Axis
-            </div>
-            <div class="text-[var(--dlgrey)] text-2xl">
-                Redefining college success, one application at a time.
-            </div>
+<!-- Keep your header code as is (not shown here). Don't touch the header. -->
+
+<div class="flex flex-col w-full">
+    <!-- Hero Section (full screen) -->
+    <div class="relative h-screen">
+      <div class="flex flex-col md:flex-row items-center justify-center px-8 py-32 bg-transparent relative z-10 h-full">
+        <!-- Left side: Hero text -->
+        <div class="flex-1 flex flex-col gap-4">
+            <h1 class="text-[12rem] font-bold leading-[0.6]" style="font-family: 'Honk', sans-serif;">
+                REDEFINE<br />
+            </h1>
+          <h1 class="text-[4rem] font-bold leading-[1.2]">
+            COLLEGE<br />
+            SUCCESS
+          </h1>
+          <button
+            routerLink="sign-up"
+            class="mt-6 bg-transparent border border-gray-100 text-gray-100 py-3 px-8 rounded-full text-lg hover:transition-colors"
+          >
+            Sign up
+          </button>
         </div>
-        <div class="flex gap-1 bg-[var(--llgrey)] p-2 rounded-full w-112">
-            <input type="search" [(ngModel)]="searchQuery" placeholder="Find a college" class="bg-transparent border-0 outline-none px-4 no-clear w-full text-2xl text-[var(--ddgrey)]">
-            <button><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="pr-2"
-                >
-                <path d="M20 11v-2a2 2 0 0 0 -2 -2h-12a2 2 0 0 0 -2 2v5a2 2 0 0 0 2 2h5" />
-                <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                <path d="M20.2 20.2l1.8 1.8" />
-                </svg>
-            </button>
+    
+        <!-- Right side: Hovering image -->
+        <div class="flex-1 flex justify-center mt-10 md:mt-0">
+          <img
+            src="assets/home.png"
+            alt="College success"
+            class="w-full max-w-[700px] transition-transform duration-300 transform"
+          />
         </div>
-        <div class="text-[var(--ddgrey)] decoration-2 decoration-[var(--dlgrey)] text-2xl py-2">
-            <a routerLink="sign-up" routerLinkActive="active" class="underline">Create an account</a> to get started!
-        </div>
+      </div>
     </div>
-    <div class="flex justify-center gap-12 m-16">
+    
+    <!-- Next-level Axis-ability Section with Purple Overlay -->
+    <div class="relative">
+      <!-- Purple Overlay for Next-level section -->
+      <div class="absolute inset-0 bg-purple-600 opacity-40 z-0"></div>
+      
+      <!-- Next-level Content -->
+      <div class="flex justify-center gap-12 m-16 relative z-10">
         <div class="flex flex-col gap-10 flex-1">
-            <div class="text-5xl font-bold">
-                Next-level Axis-ability
+          <div class="text-5xl font-bold">
+            Next-level Axis-ability
+          </div>
+          <div class="text-2xl flex flex-col gap-3">
+            <div>
+              Intuitive application tracking
             </div>
-            <div class="text-2xl flex flex-col gap-3">
-                <div class="">
-                    Intuitive application tracking
-                </div>
-                <div class="text-[var(--dlgrey)]">
-                    Manage your applications across platforms in ways that simply make sense.
-                </div>
+            <div class="text-[var(--dlgrey)]">
+              Manage your applications across platforms in ways that simply make sense.
             </div>
-            <div class="text-2xl flex flex-col gap-3">
-                <div class="">
-                    AI powered essay feedback
-                </div>
-                <div class="text-[var(--dlgrey)]">
-                    Craft elegant college essays using tailored feedback from the best AI writers.
-                </div>
+          </div>
+          <div class="text-2xl flex flex-col gap-3">
+            <div>
+              AI powered essay feedback
             </div>
-            <div class="text-2xl flex flex-col gap-3">
-                <div class="">
-                    Access to personalized resources
-                </div>
-                <div class="text-[var(--dlgrey)]">
-                    Instantly find information on any public or private institution, scholarship program, or standardized test.
-                </div>
+            <div class="text-[var(--dlgrey)]">
+              Craft elegant college essays using tailored feedback from the best AI writers.
             </div>
+          </div>
+          <div class="text-2xl flex flex-col gap-3">
+            <div>
+              Access to personalized resources
+            </div>
+            <div class="text-[var(--dlgrey)]">
+              Instantly find information on any public or private institution, scholarship program, or standardized test.
+            </div>
+          </div>
         </div>
         <div class="flex-1">
-            <div>
-                <img class="h-full object-cover aspect-square rounded-lg"
-                    src="https://wpstaq-ap-southeast-2-media.s3.amazonaws.com/irisphoto/wp-content/uploads/media/2020/09/High-res-1.jpg" alt="Resource Image"/>
-            </div>
+          <div>
+            <img
+              class="h-full object-cover aspect-square rounded-lg"
+              src="https://wpstaq-ap-southeast-2-media.s3.amazonaws.com/irisphoto/wp-content/uploads/media/2020/09/High-res-1.jpg"
+              alt="Resource Image"
+            />
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>

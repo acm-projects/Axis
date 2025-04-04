@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --neutral: #FFFFFF;  /* Define the variable */
+    --neutral: #edceff;  /* Define the variable */
     --accent: #9B6DCC;
-    --secondary: #000000;
+    --secondary: #fff5e2;
     --llgrey: #F0F0F1;
     --ldgrey: #cccccc;
     --dlgrey: #8A8A8E;
@@ -12,6 +12,9 @@
     font-family: 'Inter', sans-serif;
 }
 
+body {
+    color: white;
+}
 .min-w-36 {
     min-width: 9rem;
 }
