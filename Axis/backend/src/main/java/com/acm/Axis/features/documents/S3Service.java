@@ -4,18 +4,16 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.UUID;
 
 @Service
 public class S3Service {
@@ -35,43 +33,31 @@ public class S3Service {
                 .build();
     }
 
-    // Upload a file to S3 without setting ACLs in the request
+    // Upload file to S3
     public String uploadFile(MultipartFile multipartFile, String studentEmail, String collegeID) throws IOException {
-        // Generate a unique file key organized as studentEmail/collegeID/UUID_filename
         String fileKey = studentEmail + "/" + collegeID + "/" + multipartFile.getOriginalFilename();
+        System.out.println("UPLOADED KEY: " + fileKey);
 
-        // Option: Save file temporarily then upload
         File tempFile = File.createTempFile("upload-", multipartFile.getOriginalFilename());
         multipartFile.transferTo(tempFile);
 
-        // Upload file without using ACL settings
         s3Client.putObject(new PutObjectRequest(bucketName, fileKey, tempFile));
-
         tempFile.delete();
 
-        // Return the public URL for the file (bucket policy must allow public read)
         return s3Client.getUrl(bucketName, fileKey).toExternalForm();
     }
 
-    public String getFileUrl(String studentEmail, int collegeID, String fileName) {
-        String fileKey = studentEmail + "/" + collegeID + "/" + fileName;
+    // Get public file URL
+    public String getFileUrl(String studentEmail, int collegeID, String documentName) {
+        String fileKey = studentEmail + "/" + collegeID + "/" + documentName;
         return s3Client.getUrl(bucketName, fileKey).toExternalForm();
     }
 
-    public String downloadFileText(String fileUrl) throws IOException {
-        String fileKey = extractKeyFromUrl(fileUrl);
+    // ✅ New: Download file text using components instead of URL
+    public InputStream getFileInputStream(String studentEmail, int collegeID, String documentName) throws IOException {
+        String fileKey = studentEmail + "/" + collegeID + "/" + documentName;
         S3Object s3Object = s3Client.getObject(bucketName, fileKey);
-        try (InputStream is = s3Object.getObjectContent()) {
-            return new String(is.readAllBytes(), StandardCharsets.UTF_8);
-        }
-    }
-
-    private String extractKeyFromUrl(String fileUrl) {
-        String baseUrl = "https://" + bucketName + ".s3.amazonaws.com/";
-        if (!fileUrl.startsWith(baseUrl)) {
-            throw new IllegalArgumentException("URL does not match bucket base URL.");
-        }
-        return fileUrl.substring(baseUrl.length());
+        return s3Object.getObjectContent();
     }
 
 
