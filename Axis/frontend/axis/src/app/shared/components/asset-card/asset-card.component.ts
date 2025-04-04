@@ -1,16 +1,17 @@
+import { Component, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-asset-card',
-  imports: [NgIf],
+  imports: [NgIf, RouterLink, RouterLinkActive],
   templateUrl: './asset-card.component.html',
   styleUrl: './asset-card.component.css'
 })
 export class AssetCardComponent {
-
-  bookMarked:boolean = false;
-  toggleBookmark():void {
-    this.bookMarked = !this.bookMarked
-  }
+  @Input() name: string = '';
+  @Input() info: string = '';
+  @Input() id: number = 0;
+  @Input() imgLink: string = '';
+  bookMarked: boolean = false;
 }

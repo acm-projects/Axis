@@ -22,5 +22,10 @@ export class ResourcesPageComponent {
       });
     }
   }
- 
+  handleSearch(event:any) {
+    event.preventDefault(); // Prevents page reload
+    //const searchValue = document.getElementById('searchInput').value;
+    //console.log('Search submitted:', searchValue);
+  }
+
 }

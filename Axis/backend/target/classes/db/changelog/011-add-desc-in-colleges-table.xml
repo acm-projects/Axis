@@ -7,7 +7,7 @@
 
     <changeSet id="011-add-desc-in-colleges-table" author="kevin">
         <addColumn tableName="colleges">
-            <column name="desc" type="text">
+            <column name="description" type="text">
                 <constraints nullable="true"/>
             </column>
         </addColumn>

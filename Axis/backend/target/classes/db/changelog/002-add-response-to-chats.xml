@@ -6,6 +6,13 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
 
     <changeSet id="002-add-response-to-chats" author="kevin">
+        <!-- Precondition to check if the column already exists -->
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="chats" columnName="response_text"/>
+            </not>
+        </preConditions>
+
         <addColumn tableName="chats">
             <column name="response_text" type="TEXT">
                 <constraints nullable="true"/>

@@ -1,0 +1,51 @@
+<div class="flex flex-col px-8 py-2 gap-6">
+    <div class="flex justify-between mx-12">
+        <div class="text-4xl font-semibold">Essay 1</div>
+        <div class="flex justify-center gap-4">
+            <button class="flex justify-center items-center w-12 h-12 bg-[var(--llgrey)] rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="32" height="32" stroke-width="1.5"> <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path> <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M14 4l0 4l-6 0l0 -4"></path> </svg>
+            </button>
+            <button class="flex justify-center items-center w-12 h-12 bg-[var(--llgrey)] rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M14 3v4a1 1 0 0 0 1 1h4"></path> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path> <path d="M12 17v-6"></path> <path d="M9.5 14.5l2.5 2.5l2.5 -2.5"></path> </svg>
+            </button>
+            <button class="flex justify-center items-center w-12 h-12 bg-[var(--llgrey)] rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M19 18a3.5 3.5 0 0 0 0 -7h-1a5 4.5 0 0 0 -11 -2a4.6 4.4 0 0 0 -2.1 8.4"></path> <path d="M12 13l0 9"></path> <path d="M9 19l3 3l3 -3"></path> </svg>
+            </button>
+            <button class="flex justify-center items-center w-12 h-12 bg-[var(--llgrey)] rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M12 5l0 14"></path> <path d="M5 12l14 0"></path> </svg>
+            </button>
+        </div>
+    </div>
+    <div class="flex gap-8">
+        <div class="w-[70%] bg-[var(--llgrey)] min-h-[1000px] rounded-md">
+            <div class="text-md py-12 px-16">
+                &nbsp;&nbsp;&nbsp;&nbsp;Every Saturday morning, I’d awaken to the smell of crushed garlic and piquant pepper. I would stumble into the kitchen to find my grandma squatting over a large silver bowl, mixing fat lips of fresh cabbages with garlic, salt, and red pepper. That was how the delectable Korean dish, kimchi, was born every weekend at my home. <br><br> My grandma’s specialty always dominated the dinner table as kimchi filled every plate. And like my grandma who had always been living with us, it seemed as though the luscious smell of garlic would never leave our home. But even the prided recipe was defenseless against the ravages of Alzheimer’s that inflicted my grandma’s mind. <br><br>Dementia slowly fed on her memories until she became as blank as a brand-new notebook. The ritualistic rigor of Saturday mornings came to a pause, and during dinner, the artificial taste of vacuum-packaged factory kimchi only emphasized the absence of the family tradition. I would look at her and ask, “Grandma, what’s my name?” But she would stare back at me with a clueless expression. Within a year of diagnosis, she lived with us like a total stranger. <br><br> One day, my mom brought home fresh cabbages and red pepper sauce. She brought out the old silver bowl and poured out the cabbages, smothering them with garlic and salt and pepper. The familiar tangy smell tingled my nose. Gingerly, my grandma stood up from the couch in the living room, and as if lured by the smell, sat by the silver bowl and dug her hands into the spiced cabbages. As her bony hands shredded the green lips, a look of determination grew on her face. Though her withered hands no longer displayed the swiftness and precision they once did, her face showed the aged rigor of a professional. For the first time in years, the smell of garlic filled the air and the rattling of the silver bowl resonated throughout the house. <br><br> That night, we ate kimchi. It wasn’t perfect; the cabbages were clumsily cut and the garlic was a little too strong. But kimchi had never tasted better. I still remember my grandma putting a piece in my mouth and saying, “Here, Dong Jin. Try it, my boy.” <br><br> Seeing grandma again this summer, that moment of clarity seemed ephemeral. Her disheveled hair and expressionless face told of the aggressive development of her illness. <br><br> But holding her hands, looking into her eyes, I could still smell that garlic. The moments of Saturday mornings remain ingrained in my mind. Grandma was an artist who painted the cabbages with strokes of red pepper. Like the sweet taste of kimchi, I hope to capture those memories in my keystrokes as I type away these words. <br><br> A piece of writing is more than just a piece of writing. It evokes. It inspires. It captures what time takes away. My grandma used to say: “Tigers leave furs when they die, humans leave their names.” Her legacy was the smell of garlic that lingered around my house. Mine will be these words.
+            </div>
+        </div>
+        <div class="flex w-[30%] flex-col justify-between bg-[var(--llgrey)] self-start h-[700px]">
+            <div class="bg-[var(--secondary)] text-[var(--neutral)] w-full py-3 px-8 text-2xl rounded-md shadow-md shadow-[var(--ddgrey)] mb-2">
+                Essay Bot
+            </div>
+            
+            <div id="tobechanged" class="min-h-0 overflow-y-auto scrollbar-hide p-2 flex flex-col flex-grow gap-2 my-2 mx-2">
+                <div *ngFor="let log of chatLog; let i = index">
+                    @if(log=="Loading...") {
+                    } @else {
+                        <div *ngIf="i%2 == 0" class="w-fit bg-[var(--ldgrey)] shadow-md shadow-[var(--accent)] px-3 py-1 m-1 mr-4 rounded-md">{{log}}</div>
+                        <div *ngIf="i%2 == 1" class="justify-self-end w-fit bg-[var(--ldgrey)] shadow-sm shadow-[var(--accent)] px-3 py-1 m-1 ml-4 rounded-md">{{log}}</div>
+                    }
+                </div>
+            </div>
+            <div>
+                <form name="searchForm" (ngSubmit)="submitMessage()">
+                    <input type="search" name="message" [(ngModel)]="message" placeholder="Type a message..." class="border-0 outline-none py-2 px-4 no-clear w-full text-[var(--ddgrey)] text-lg shadow rounded-b-md" >
+                    <input type="submit" style="display: none;">
+                </form>     
+            </div>
+        </div>
+    </div>
+</div>
+<button (click)="submitMessage()">Start Listening</button>
+<div *ngFor="let log of chatLog" class="p-2">
+    {{ log }}
+</div>

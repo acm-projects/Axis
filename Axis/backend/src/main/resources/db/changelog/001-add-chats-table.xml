@@ -5,8 +5,14 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
 
-
     <changeSet id="001-add-chats-table" author="kevin">
+        <!-- Precondition to check if the table already exists -->
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="chats"/>
+            </not>
+        </preConditions>
+
         <createTable tableName="chats">
             <column name="message_id" type="BIGSERIAL">
                 <constraints primaryKey="true"/>
@@ -19,6 +25,9 @@
             </column>
             <column name="message_text" type="TEXT">
                 <constraints nullable="false"/>
+            </column>
+            <column name="response_text" type="TEXT">
+                <constraints nullable="true"/>
             </column>
             <column name="timestamp" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
         </createTable>

@@ -34,7 +34,7 @@ public class AuthService {
     }
 
 
-    public Map<String, String> authenticate(String email, String password) {
+    public String authenticate(String email, String password) {
         Optional<Student> studentOpt = studentRepository.findByEmail(email);
 
         if (studentOpt.isEmpty()) {
@@ -47,7 +47,7 @@ public class AuthService {
             throw new RuntimeException("Incorrect password!");
         }
 
-        return Map.of("email", student.email(), "token", jwtUtils.generateToken(email));
+        return jwtUtils.generateToken(email);
     }
 
 }

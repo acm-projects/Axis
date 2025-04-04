@@ -16,19 +16,27 @@ public class CollegeController {
         this.collegeRepository = collegeRepository;
     }
 
+    @GetMapping("/total")
+    Integer getTotal() { return collegeRepository.count(); }
+
     @GetMapping("")
     List<College> getAll() {
         return collegeRepository.getAll();
     }
 
     @GetMapping("/searchByID/{college_id}")
-    College getById(@PathVariable Long college_id) {
+    College getById(@PathVariable Integer college_id) {
         return collegeRepository.findById(college_id).orElse(null);
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/searchByName/{name}")
     List<College> getByName(@PathVariable String name) {
         return collegeRepository.findByName(name);
+    }
+
+    @GetMapping("/searchByPage/{page}/{colleges_per_page}")
+    List<College> getByPage(@PathVariable Integer page, @PathVariable Integer colleges_per_page) {
+        return collegeRepository.findByPage(page, colleges_per_page);
     }
 
     @PostMapping("")
