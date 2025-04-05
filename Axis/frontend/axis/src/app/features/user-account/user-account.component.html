@@ -1,27 +1,27 @@
 
 
-<div class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 "> 
-    <div class="fixed w-[55%] min-w-[400px] h-[90%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white items-center justify-center z-50 rounded-lg shadow-lg">
+<div (click)="outerDivClick()" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 "> 
+    <div (click)="innerDivClick($event)" class="fixed w-[55%] min-w-[400px] h-[90%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white items-center justify-center z-50 rounded-lg shadow-lg">
         <div class="flex flex-col m-10 gap-4">
             <div class="text-4xl font-bold text-[var(--ddgrey)]">
                 My Account
             </div>
-            <div class="flex justify-between items-center">
-                <div class="flex gap-2 items-center">
+            <div class="flex justify-center items-center w-full">
+                <div class="flex flex-grow flex-shrink basis-0 gap-2 items-center justify-self-center">
                     <div class="px-2 py-2 bg-[var(--llgrey)] rounded-full aspect-square">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path> <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path> </svg> 
                     </div>
-                    <div>Username</div>
+                    <div class="truncate">{{currentUser.getUsername()}}</div>
                 </div>
                 
-                <div class="flex items-center whitespace-nowrap">
-                    <div class="text-[var(--dlgrey)] flex-shrink-0">First name:</div>
-                    <div class="ml-2 min-w-0 overflow-hidden text-ellipsis">{{userInfo.firstName}}</div>
+                <div class="flex flex-1 basis-0 items-center gap-2">
+                    <div class="text-[var(--dlgrey)] flex-shrink-0 whitespace-nowrap">First name:</div>
+                    <input type="text" class="ml-2 flex-grow min-w-0 w-full overflow-hidden text-ellipsis" [(ngModel)]="currentUser.studentInfo['first_name']" />
                 </div>
                 
-                <div class="flex items-center whitespace-nowrap">
-                    <div class="text-[var(--dlgrey)] flex-shrink-0">Last name:</div>
-                    <div class="ml-2 min-w-0 overflow-hidden text-ellipsis">{{userInfo.lastName}}</div>
+                <div class="flex flex-1 basis-0 items-center gap-2">
+                    <div class="text-[var(--dlgrey)] flex-shrink-0 whitespace-nowrap">Last name:</div>
+                    <input class="ml-2 flex-grow min-w-0 w-full overflow-hidden text-ellipsis" />
                 </div>
             </div>
             
@@ -33,12 +33,12 @@
                     
                     <div class="flex gap-2 flex-1 items-center whitespace-nowrap">
                         <div class="text-[var(--dlgrey)] flex-shrink-0">Email:</div>
-                        <div class="ml-2 min-w-0 overflow-hidden text-ellipsis">{{userInfo.email}}</div>
+                        <input class="ml-2 min-w-0 overflow-hidden text-ellipsis"  />
                     </div>
                     
                     <div class="flex gap-2 flex-1 items-center whitespace-nowrap">
                         <div class="text-[var(--dlgrey)] flex-shrink-0">Phone Number:</div>
-                        <div class="ml-2 min-w-0 overflow-hidden text-ellipsis">{{userInfo.phoneNumber}}</div>
+                        <input class="ml-2 min-w-0 overflow-hidden text-ellipsis"  />
                     </div>
                 </div>
             </div>
@@ -50,12 +50,12 @@
                     
                     <div class="flex flex-1 gap-2 items-center whitespace-nowrap">
                         <div class="text-[var(--dlgrey)] flex-shrink-0">GPA:</div>
-                        <div class="ml-2 min-w-0 overflow-hidden text-ellipsis">{{userInfo.GPA}}</div>
+                        <input class="ml-2 min-w-0 overflow-hidden text-ellipsis" />
                     </div>
                     
                     <div class="flex flex-1 gap-2 items-center whitespace-nowrap">
                         <div class="text-[var(--dlgrey)] flex-shrink-0">SAT:</div>
-                        <div class="ml-2 min-w-0 overflow-hidden text-ellipsis">{{userInfo.satScore}}</div>
+                        <input class="ml-2 min-w-0 overflow-hidden text-ellipsis"  />
                     </div>
                 </div>
             </div>

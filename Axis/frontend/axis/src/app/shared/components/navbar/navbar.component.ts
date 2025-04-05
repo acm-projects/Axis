@@ -61,6 +61,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @Output() openMyAccountEvent = new EventEmitter<void>();
 
   openMyAccount() {
-    this.openMyAccountEvent.emit(); // Emit an event to parent
+    this.openMyAccountEvent.emit();
   }
 }
