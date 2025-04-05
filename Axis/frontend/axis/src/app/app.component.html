@@ -1,4 +1,4 @@
-
-<app-navbar></app-navbar>
+<app-navbar (openMyAccountEvent)="openMyAccount()"></app-navbar>
 <router-outlet></router-outlet>
+<app-user-account *ngIf="showMyAccountPage" (closeMyAccountEvent)="closeMyAccount()"></app-user-account>
 <app-footer></app-footer>

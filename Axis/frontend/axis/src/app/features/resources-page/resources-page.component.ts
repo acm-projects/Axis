@@ -6,12 +6,10 @@ import {Scholarship} from '../../core/models/scholarship.model';
 import {HttpClient} from '@angular/common/http';
 import {SharedDataService} from '../../core/services/shared-data.service';
 import {ActivatedRoute, RouterLink, RouterLinkActive} from '@angular/router';
-import {College} from '../../core/models/college.model';
-import {AssetCardComponent} from '../../shared/components/asset-card/asset-card.component';
 
 @Component({
   selector: 'app-resources-page',
-  imports: [ResourceHeaderComponent, FilterComponent, NgFor, AssetCardComponent, RouterLink, RouterLinkActive, NgClass],
+  imports: [ResourceHeaderComponent, FilterComponent, NgFor, RouterLink, RouterLinkActive, NgClass],
   templateUrl: './resources-page.component.html',
   styleUrl: './resources-page.component.css'
 })

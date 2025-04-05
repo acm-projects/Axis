@@ -33,7 +33,7 @@ export class SignUpComponent {
   }
 
   signUp() : void {
-    this.http.post('http://localhost:8080/auth/register',
+    this.http.post('http://localhost:8080/api/auth/register',
       {
         first_name: this.firstName,
         last_name: this.lastName,
@@ -44,7 +44,7 @@ export class SignUpComponent {
     ).subscribe({
       next: (signUpResponse: any) => {
 
-        this.http.post('http://localhost:8080/auth/login',
+        this.http.post('http://localhost:8080/api/auth/login',
           {
             email: this.email,
             password: this.password
