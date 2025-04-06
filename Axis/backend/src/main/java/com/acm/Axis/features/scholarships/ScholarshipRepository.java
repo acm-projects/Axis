@@ -21,15 +21,17 @@ public class ScholarshipRepository {
 
     // used to map the retrieved SQL objects to Java objects withtin the below methods
     private final RowMapper<Scholarship> scholarshipRowMapper = (rs, rowNum) -> new Scholarship(
+            rs.getInt("id"),
             rs.getString("name"),
+            rs.getString("logo_src"),
             rs.getString("organization"),
-            rs.getDate("open_date") != null ? rs.getDate("open_date") : null,
-            rs.getDate("close_date") != null ? rs.getDate("close_date") : null,
+            rs.getString("open_date"),
+            rs.getString("close_date"),
             rs.getString("description"),
-            rs.getFloat("amount"),
-            rs.getBoolean("is_essay_required"),
-            rs.getBoolean("is_need_based"),
-            rs.getBoolean("is_merit_based"),
+            rs.getString("amount"),
+            rs.getString("is_essay_required"),
+            rs.getString("is_need_based"),
+            rs.getString("is_merit_based"),
             rs.getString("website"),
             rs.getString("requirements"),
             rs.getString("location")
@@ -59,7 +61,18 @@ public class ScholarshipRepository {
                 .list();
     }
 
+    public List<Scholarship> findByPage(Integer page, Integer scholarshipsPerPage) {
+        log.info("Finding {} scholarships by page {}", scholarshipsPerPage, page);
+        return jdbcClient.sql("SELECT * FROM scholarships WHERE id BETWEEN :start_id AND :end_id")
+                .param("start_id", (page - 1) * scholarshipsPerPage + 1)
+                .param("end_id", page * scholarshipsPerPage)
+                .query(Scholarship.class)
+                .list();
+    }
 
-
-
+    public Integer count() {
+        // A more typical approach would be to extract the count from the result.
+        return jdbcClient.sql("SELECT COUNT(*) FROM scholarships")
+                .query(Integer.class).single();
+    }
 }

@@ -3,15 +3,17 @@ package com.acm.Axis.features.scholarships;
 import java.util.Date;
 
 public record Scholarship(
+        Integer id,
         String name,
+        String logo_src,
         String organization,
-        Date openDate,
-        Date closeDate,
+        String openDate,
+        String closeDate,
         String description,
-        Float amount,
-        Boolean essayRequired,
-        Boolean needBased,
-        Boolean meritBased,
+        String amount,
+        String is_essay_required,
+        String is_need_based,
+        String is_merit_based,
         String website,
         String requirements,
         String location

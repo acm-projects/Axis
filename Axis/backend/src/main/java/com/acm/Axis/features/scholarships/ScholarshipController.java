@@ -1,5 +1,6 @@
 package com.acm.Axis.features.scholarships;
 
+import com.acm.Axis.features.college.College;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +16,12 @@ public class ScholarshipController {
         this.scholarshipRepository = scholarshipRepository;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Scholarship> getScholarshipById(@PathVariable int id) {
-        Scholarship scholarship = scholarshipRepository.getByID(id);
-        return ResponseEntity.ok(scholarship);
+    @GetMapping("/total")
+    public Integer getTotal() { return scholarshipRepository.count(); }
+
+    @GetMapping("/searchByID/{id}")
+    public ResponseEntity<Scholarship> getById(@PathVariable Integer id) {
+        return ResponseEntity.ok(scholarshipRepository.getByID(id));
     }
 
     @GetMapping("/search")
@@ -36,5 +39,10 @@ public class ScholarshipController {
             // Return a 400 Bad Request if no search parameter is provided.
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping("/searchByPage/{page}/{scholarships_per_page}")
+    public ResponseEntity<List<Scholarship>> getByPage(@PathVariable Integer page, @PathVariable Integer scholarships_per_page) {
+        return ResponseEntity.ok(scholarshipRepository.findByPage(page, scholarships_per_page));
     }
 }
