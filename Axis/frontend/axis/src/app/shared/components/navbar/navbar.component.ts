@@ -9,7 +9,8 @@ import { SharedDataService } from '../../../core/services/shared-data.service';
   selector: 'app-navbar',
   imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
+  standalone: true,
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   accountButtonText: string = 'Sign In';

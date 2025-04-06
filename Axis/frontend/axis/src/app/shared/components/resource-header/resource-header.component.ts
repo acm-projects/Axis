@@ -5,7 +5,8 @@ import { Component } from '@angular/core';
   selector: 'app-resource-header',
   imports: [NgIf],
   templateUrl: './resource-header.component.html',
-  styleUrl: './resource-header.component.css'
+  styleUrl: './resource-header.component.css',
+  standalone: true,
 })
 export class ResourceHeaderComponent {
   bookMarked:boolean = false;

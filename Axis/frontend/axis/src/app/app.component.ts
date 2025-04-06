@@ -10,7 +10,8 @@ import { NgIf } from '@angular/common';
   selector: 'app-root',
   imports: [NavbarComponent, FooterComponent, RouterOutlet, UserAccountComponent, NgIf],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  standalone: true,
 })
 export class AppComponent {
   title = 'axis';
@@ -23,5 +24,5 @@ export class AppComponent {
   }
   closeMyAccount(): void {
     this.showMyAccountPage = false;
-  }  
+  }
 }

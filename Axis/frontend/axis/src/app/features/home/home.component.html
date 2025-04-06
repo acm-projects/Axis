@@ -1,12 +1,16 @@
 
 <div class="flex flex-col w-full">
 
-    <div class="relative h-screen px-64 pt-40">
+  <canvas id="canvas3d" class="opacity-[20%] fixed top-0 left-0 w-full h-full z-0"></canvas>
+
+
+  <div class="z-10">
+    <div class="relative h-screen px-64 pt-36">
 
       <div class="text-center text-[var(--mainText)] text-mainHeading font-bold font-satoshi leading-tight mb-6">
         {{mainTitle}}
       </div>
-      <div class="text-center text-[var(--secondaryText)] text-subHeading mb-16">
+      <div class="text-center text-[var(--secondaryText)] text-subHeading mb-24">
         {{subTitle}}
       </div>
 
@@ -31,27 +35,31 @@
 
     </div>
 
-    <div class="relative h-screen flex px-16">
-      <!--      The left text-->
-      <div>
-        <h1 class="text-3xl font-[500] mb-6">Next-level Axis-ability</h1>
+    <div class="text-[var(--mainText)] relative h-full grid grid-cols-2 items-center px-24 mb-32">
+      <!-- left info text -->
+      <div class="pr-28 flex flex-col justify-center">
+        <h1 class="text-4xl font-[500] mb-10">Next-level Axis-ability</h1>
         <div>
           <div class="mb-6">
             <h2 class="mb-1">Intuitive application tracking</h2>
             <p class="text-[var(--secondaryText)]">Manage your applications across platforms in ways that simply make sense</p>
           </div>
           <div class="mb-6">
-            <h2 class="mb-1">Intuitive application tracking</h2>
-            <p class="text-[var(--secondaryText)]">Manage your applications across platforms in ways that simply make sense</p>
+            <h2 class="mb-1">AI-powered essay feedback</h2>
+            <p class="text-[var(--secondaryText)]">Craft elegant college essays using tailored feedback from the best AI writers</p>
           </div>
           <div class="mb-6">
-            <h2 class="mb-1">Intuitive application tracking</h2>
-            <p class="text-[var(--secondaryText)]">Manage your applications across platforms in ways that simply make sense</p>
+            <h2 class="mb-1">Access to personalized resources</h2>
+            <p class="text-[var(--secondaryText)]">Instantly find information on any public or private institution, scholarship program, or standardized test</p>
           </div>
         </div>
       </div>
 
-      <!--     The right image-->
-      <div></div>
+      <!-- Image -->
+      <div>
+        <img src="/assets/colleges_home.png" />
+      </div>
     </div>
+
+  </div>
 </div>
