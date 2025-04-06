@@ -15,22 +15,32 @@
   <body class="font-inter bg-[var(--neutral)] relative">
     <app-root></app-root>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Background Container (iframe + purple overlay) -->
-    <div class="absolute inset-0 pointer-events-none z-[-1]">
-      <!-- Interactive Background -->
-      <iframe 
-        src="https://earth.nullschool.net/#current/particulates/surface/currents/annot=fires/overlay=pm2.5/orthographic=-93.72,25.21,31892" 
-        frameborder="0" 
-        class="w-full h-full">
-      </iframe>
-      <!-- Purple Overlay -->
-      <div class="absolute inset-0 bg-purple-600 opacity-40"></div>
-    </div>
-    
-    <!-- Your Website Content -->
-    <div class="relative z-10">
-      <!-- Place your header and other content here -->
-    </div>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              satoshi: ['Satoshi', 'sans-serif'],
+              inter: ['Inter', 'sans-serif'],
+            },
+            fontSize: {
+              mainHeading: '4.5rem',
+              subHeading: '1.25rem',
+              body: '1rem',
+            },
+            lineHeight: {
+              tight: '.95',
+              normal: '1.5',
+              loose: '1.8',
+              snug: '1.375',
+            }
+          }
+        }
+      }
+    </script>
+
+
+
+
   </body>
 </html>

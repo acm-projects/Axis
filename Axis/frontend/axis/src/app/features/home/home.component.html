@@ -1,82 +1,57 @@
-<!-- Keep your header code as is (not shown here). Don't touch the header. -->
 
 <div class="flex flex-col w-full">
-    <!-- Hero Section (full screen) -->
-    <div class="relative h-screen">
-      <div class="flex flex-col md:flex-row items-center justify-center px-8 py-32 bg-transparent relative z-10 h-full">
-        <!-- Left side: Hero text -->
-        <div class="flex-1 flex flex-col gap-4">
-            <h1 class="text-[12rem] font-bold leading-[0.6]" style="font-family: 'Honk', sans-serif;">
-                REDEFINE<br />
-            </h1>
-          <h1 class="text-[4rem] font-bold leading-[1.2]">
-            COLLEGE<br />
-            SUCCESS
-          </h1>
-          <button
-            routerLink="sign-up"
-            class="mt-6 bg-transparent border border-gray-100 text-gray-100 py-3 px-8 rounded-full text-lg hover:transition-colors"
-          >
-            Sign up
-          </button>
-        </div>
-    
-        <!-- Right side: Hovering image -->
-        <div class="flex-1 flex justify-center mt-10 md:mt-0">
-          <img
-            src="assets/home.png"
-            alt="College success"
-            class="w-full max-w-[700px] transition-transform duration-300 transform"
-          />
-        </div>
+
+    <div class="relative h-screen px-64 pt-40">
+
+      <div class="text-center text-[var(--mainText)] text-mainHeading font-bold font-satoshi leading-tight mb-6">
+        {{mainTitle}}
       </div>
+      <div class="text-center text-[var(--secondaryText)] text-subHeading mb-16">
+        {{subTitle}}
+      </div>
+
+      <div class="flex items-center bg-[var(--inputBox)]  rounded-lg px-5 py-2 w-full max-w-lg mx-auto shadow-lg">
+        <input
+          type="text"
+          placeholder="Search for a college"
+          class="bg-transparent text-white placeholder-[var(--placeholderText)] outline-none flex-grow"
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5 text-[var(--placeholderText)]"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18a7.5 7.5 0 006.15-3.35z" />
+        </svg>
+      </div>
+
+
     </div>
-    
-    <!-- Next-level Axis-ability Section with Purple Overlay -->
-    <div class="relative">
-      <!-- Purple Overlay for Next-level section -->
-      <div class="absolute inset-0 bg-purple-600 opacity-40 z-0"></div>
-      
-      <!-- Next-level Content -->
-      <div class="flex justify-center gap-12 m-16 relative z-10">
-        <div class="flex flex-col gap-10 flex-1">
-          <div class="text-5xl font-bold">
-            Next-level Axis-ability
+
+    <div class="relative h-screen flex px-16">
+      <!--      The left text-->
+      <div>
+        <h1 class="text-3xl font-[500] mb-6">Next-level Axis-ability</h1>
+        <div>
+          <div class="mb-6">
+            <h2 class="mb-1">Intuitive application tracking</h2>
+            <p class="text-[var(--secondaryText)]">Manage your applications across platforms in ways that simply make sense</p>
           </div>
-          <div class="text-2xl flex flex-col gap-3">
-            <div>
-              Intuitive application tracking
-            </div>
-            <div class="text-[var(--dlgrey)]">
-              Manage your applications across platforms in ways that simply make sense.
-            </div>
+          <div class="mb-6">
+            <h2 class="mb-1">Intuitive application tracking</h2>
+            <p class="text-[var(--secondaryText)]">Manage your applications across platforms in ways that simply make sense</p>
           </div>
-          <div class="text-2xl flex flex-col gap-3">
-            <div>
-              AI powered essay feedback
-            </div>
-            <div class="text-[var(--dlgrey)]">
-              Craft elegant college essays using tailored feedback from the best AI writers.
-            </div>
-          </div>
-          <div class="text-2xl flex flex-col gap-3">
-            <div>
-              Access to personalized resources
-            </div>
-            <div class="text-[var(--dlgrey)]">
-              Instantly find information on any public or private institution, scholarship program, or standardized test.
-            </div>
-          </div>
-        </div>
-        <div class="flex-1">
-          <div>
-            <img
-              class="h-full object-cover aspect-square rounded-lg"
-              src="https://wpstaq-ap-southeast-2-media.s3.amazonaws.com/irisphoto/wp-content/uploads/media/2020/09/High-res-1.jpg"
-              alt="Resource Image"
-            />
+          <div class="mb-6">
+            <h2 class="mb-1">Intuitive application tracking</h2>
+            <p class="text-[var(--secondaryText)]">Manage your applications across platforms in ways that simply make sense</p>
           </div>
         </div>
       </div>
+
+      <!--     The right image-->
+      <div></div>
     </div>
-  </div>
+</div>
