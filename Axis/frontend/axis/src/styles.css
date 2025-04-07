@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     --neutral: #000000;  /* Define the variable */
-    --accent: #9B6DCC;
+    --accent: #5f3f81;
     --secondary: #fff5e2;
     --llgrey: #F0F0F1;
     --ldgrey: #cccccc;
@@ -105,6 +105,11 @@
 
 
 
+
+html {
+  scroll-behavior: smooth;
+}
+
 .font-inter {
     font-family: 'Inter', sans-serif;
 }
@@ -137,3 +142,19 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  background-color: var(--inputBox) !important;
+  -webkit-text-fill-color: white !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+

@@ -1,12 +1,18 @@
 
     <div class="flex flex-col gap-2 w-48 mb-6" [ngClass]="dropDown ? 'text-[var(--ddgrey)]' : 'text-[var(--dlgrey)]'">
-        <div class="flex justify-between cursor-pointer" (click)="toggleDropDown()" >
-            <div class="text-lg ">
+        <div class="hover:text-[var(--buttonTextHover)] flex justify-between cursor-pointer" (click)="toggleDropDown()" >
+            <div class="text-lg">
                 {{filter1}}
             </div>
             <button>
-                <svg *ngIf="dropDown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path> <path d="M8 12l4 4"></path> <path d="M12 8v8"></path> <path d="M16 12l-4 4"></path> </svg>
-                <svg *ngIf="!dropDown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0 -18"></path> <path d="M16 12l-4 -4"></path> <path d="M16 12h-8"></path> <path d="M12 16l4 -4"></path> </svg>
+              <svg *ngIf="dropDown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="5 12 12 19 19 12"></polyline>
+              </svg>
+              <svg *ngIf="!dropDown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="13 6 19 12 13 18"></polyline>
+              </svg>
             </button>
         </div>
         <div *ngIf="dropDown" class="flex flex-col justify-between gap-2 mt-2">

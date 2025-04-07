@@ -1,25 +1,40 @@
-<nav class="bg-transparent absolute top-0 left-0 right-0">
+<nav class="bg-transparent absolute top-0 left-0 right-0 z-10">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-20 items-center justify-between" (click)="updateAccountButtonText()">
             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div class="flex shrink-0 items-center">
                     <a routerLink="" routerLinkActive="active">
-                        <img class="size-8 rounded-full"
-                            src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500">
+                        <img class="size-8 rounded-full" src="assets/logo.png">
                     </a>
                 </div>
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div class="flex space-x-2">
-                        <a routerLink="discover" routerLinkActive="active" [queryParams]="{page: 1}"
-                            class="rounded-md px-3 py-2 text-base font-medium text-[var(--mainText)]  transition-transform duration-500 hover:-translate-y-1">Discover</a>
-                        <a routerLink="resources" routerLinkActive="active" [queryParams]="{page: 1}"
-                            class="rounded-md px-3 py-2 text-base font-medium text-[var(--mainText)]  transition-transform duration-500 hover:-translate-y-1">Resources</a>
+                  <a [@linkHover]="hoverStateDiscover"
+                     (mouseenter)="hoverStateDiscover = 'yes'"
+                     (mouseleave)="hoverStateDiscover = 'no'"
+                     routerLink="discover" routerLinkActive="active" [queryParams]="{page: 1}"
+                     class="rounded-md px-3 py-2 text-base font-medium text-[var(--mainText)]">
+                    Discover
+                  </a>
+
+                  <a [@linkHover]="hoverStateResources"
+                     (mouseenter)="hoverStateResources = 'yes'"
+                     (mouseleave)="hoverStateResources = 'no'"
+                     routerLink="resources" routerLinkActive="active" [queryParams]="{page: 1}"
+                     class="rounded-md px-3 py-2 text-base font-medium text-[var(--mainText)]">
+                    Resources
+                  </a>
                 </div>
                 <div class="flex ml-4">
                   @if (userLoggedIn) {
-                    <div class="relative ml-3" (click)="dropdownToggle = !dropdownToggle">
-                      <button class="flex space-x-2 rounded-md bg-[var(--navbarAccountButton)] px-3 py-2">
+                    <div
+
+                    class="relative ml-3" (click)="dropdownToggle = !dropdownToggle">
+                      <button [@linkHover]="hoverStateMyAccount"
+                     (mouseenter)="hoverStateMyAccount = 'yes'"
+                     (mouseleave)="hoverStateMyAccount = 'no'"
+                     class="flex space-x-2 rounded-md bg-[var(--navbarAccountButton)] px-3 pl-4 py-2">
                         <p class="text-base font-medium text-white"
                            aria-current="page">My Account</p>
                         <img class="size-3 my-auto"
@@ -28,19 +43,27 @@
                       <div id="dropdown-menu"
                            class="absolute right-0 z-10 mt-2 w-auto origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5"
                            [ngClass]="{'hidden': !dropdownToggle}">
-                        <a href="#" class="block px-5 py-2 text-base text-gray-700 hover:bg-gray-500 hover:text-white">Profile</a>
-                        <a href="#" class="block px-5 py-2 text-base text-gray-700 hover:bg-gray-500 hover:text-white">Settings</a>
+                        <a href="#" class="block px-5 py-2 text-base text-gray-700 hover:bg-[var(--buttonHover)] hover:text-white">Profile</a>
+                        <a href="#" class="block px-5 py-2 text-base text-gray-700 hover:bg-[var(--buttonHover)] hover:text-white">Settings</a>
                         <a routerLink="" routerLinkActive="active" (click)="logout()"
-                           class="block px-5 py-2 text-base text-gray-700 hover:bg-gray-500 hover:text-white">Sign Out</a>
+                           class="block px-5 py-2 text-base text-gray-700 hover:bg-[var(--buttonHover)] hover:text-white">Sign Out</a>
                       </div>
                     </div>
                   }
                   @else if (accountButtonText === 'Sign In') {
-                      <a routerLink="sign-in" routerLinkActive="active" (click)="accountButtonText='Sign Up'"
+                      <a
+                      [@linkHover]="hoverStateMyAccount"
+                     (mouseenter)="hoverStateMyAccount = 'yes'"
+                     (mouseleave)="hoverStateMyAccount = 'no'"
+                      routerLink="sign-in" routerLinkActive="active" (click)="accountButtonText='Sign Up'"
                          class="rounded-md bg-[var(--navbarAccountButton)] px-3 py-2 text-base font-medium text-white" aria-current="page">{{accountButtonText}}</a>
                   }
                   @else {
-                      <a routerLink="sign-up" routerLinkActive="active" (click)="accountButtonText='Sign In'"
+                      <a
+                      [@linkHover]="hoverStateMyAccount"
+                     (mouseenter)="hoverStateMyAccount = 'yes'"
+                     (mouseleave)="hoverStateMyAccount = 'no'"
+                      routerLink="sign-up" routerLinkActive="active" (click)="accountButtonText='Sign In'"
                          class="rounded-md bg-[var(--navbarAccountButton)] px-3 py-2 text-base font-medium text-white" aria-current="page">{{accountButtonText}}</a>
                   }
                 </div>
