@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   selector: 'app-sign-up',
   imports: [FormsModule, NgxMaskDirective, CommonModule],
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css'
+  styleUrl: './sign-up.component.css',
+  standalone: true
 })
 export class SignUpComponent {
   firstName: string;
@@ -33,33 +34,33 @@ export class SignUpComponent {
   }
 
   signUp() : void {
-    this.http.post('http://localhost:8080/auth/register',
-      {
-        first_name: this.firstName,
-        last_name: this.lastName,
-        phone_number: this.phoneNumber,
-        email: this.email,
-        password: this.password
-      }
-    ).subscribe({
+    this.http.post('http://localhost:8080/api/auth/register', {
+      first_name: this.firstName,
+      last_name: this.lastName,
+      phone_number: this.phoneNumber,
+      email: this.email,
+      password: this.password
+    }).subscribe({
       next: (signUpResponse: any) => {
-
-        this.http.post('http://localhost:8080/auth/login',
-          {
-            email: this.email,
-            password: this.password
-          }
-        ).subscribe((loginResponse: any) => {
+        this.http.post('http://localhost:8080/api/auth/login', {
+          email: this.email,
+          password: this.password
+        }).subscribe({
+          next: (loginResponse: any) => {
             this.authService.saveSession({
               email: this.email,
               token: loginResponse.token
             });
-            this.router.navigate(['/']); // Redirect to home page
-          });
-
-
+            this.router.navigate(['/']); // ✅ Redirect after login
+          },
+          error: err => {
+            console.error("🚫 Login failed after registration", err);
+            this.invalidDetails = true;
+          }
+        });
       },
       error: error => {
+        console.error("🚫 Registration failed", error);
         this.invalidDetails = true;
       }
     });

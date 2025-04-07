@@ -5,7 +5,11 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
 
-    <changeSet id="014-modify-documents-table" author="yourname">
+    <changeSet id="014-modify-documents-table" author="kevin">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="documents" columnName="application_id"/>
+        </preConditions>
+
         <dropColumn tableName="documents" columnName="application_id"/>
         <dropColumn tableName="documents" columnName="upload_date"/>
 

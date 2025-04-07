@@ -1,20 +1,24 @@
 
 <div class="flex flex-col w-full">
 
-  <canvas id="canvas3d" class="opacity-[20%] fixed top-0 left-0 w-full h-full z-0"></canvas>
+  <canvas id="canvas3d" class="opacity-[20%] fixed top-0 left-0 w-full h-full z-[-1]"></canvas>
 
 
-  <div class="z-10">
+  <div class="my-24 mb-80">
     <div class="relative h-screen px-64 pt-36">
 
-      <div class="text-center text-[var(--mainText)] text-mainHeading font-bold font-satoshi leading-tight mb-6">
+      <div class="text-center text-[var(--mainText)] text-mainHeading font-bold font-satoshi leading-tight mb-6"
+           [@fadeIn]="titleVisible ? 'visible' : 'hidden'">
         {{mainTitle}}
       </div>
-      <div class="text-center text-[var(--secondaryText)] text-subHeading mb-24">
+      <div class="text-center text-[var(--secondaryText)] text-subHeading mb-24"
+           [@fadeIn]="{ value: titleVisible ? 'visible' : 'hidden', params: { timing: '1s', delay: '0.25s' } }"
+      >
         {{subTitle}}
       </div>
 
-      <div class="flex items-center bg-[var(--inputBox)]  rounded-lg px-5 py-2 w-full max-w-lg mx-auto shadow-lg">
+      <div class="flex items-center bg-[var(--inputBox)]  rounded-lg px-5 py-2 w-full max-w-lg mx-auto shadow-lg"
+           [@fadeIn]="{ value: titleVisible ? 'visible' : 'hidden', params: { timing: '1s', delay: '.5s' } }">
         <input
           type="text"
           placeholder="Search for a college"
@@ -35,7 +39,7 @@
 
     </div>
 
-    <div class="text-[var(--mainText)] relative h-full grid grid-cols-2 items-center px-24 mb-32">
+    <div class="text-[var(--mainText)] relative h-max grid grid-cols-2 items-center px-24">
       <!-- left info text -->
       <div class="pr-28 flex flex-col justify-center">
         <h1 class="text-4xl font-[500] mb-10">Next-level Axis-ability</h1>

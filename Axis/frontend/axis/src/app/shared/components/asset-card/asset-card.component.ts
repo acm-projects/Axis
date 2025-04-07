@@ -6,7 +6,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   selector: 'app-asset-card',
   imports: [NgIf, RouterLink, RouterLinkActive],
   templateUrl: './asset-card.component.html',
-  styleUrl: './asset-card.component.css'
+  styleUrl: './asset-card.component.css',
+  standalone: true
+
 })
 export class AssetCardComponent {
   @Input() id: number = 0;
@@ -14,4 +16,10 @@ export class AssetCardComponent {
   @Input() info: string = '';
   @Input() imgLink: string = '';
   bookMarked: boolean = false;
+
+  isFallbackCollegeLogo(link: string): boolean {
+    return link.includes('Default-bf-illus-school')
+  }
+
+
 }
