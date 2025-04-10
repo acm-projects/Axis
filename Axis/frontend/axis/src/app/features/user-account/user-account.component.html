@@ -6,39 +6,48 @@
             <div class="text-4xl font-bold text-[var(--ddgrey)]">
                 My Account
             </div>
-            <div class="flex justify-center items-center w-full">
-                <div class="flex flex-grow flex-shrink basis-0 gap-2 items-center justify-self-center">
+            
+            <div class="flex w-full justify-center gap-4">
+                <div class="flex flex-1 basis-0 min-w-0 justify-start">
+                  <div class="flex gap-2 items-center">
                     <div class="px-2 py-2 bg-[var(--llgrey)] rounded-full aspect-square">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path> <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path> </svg> 
                     </div>
                     <div class="truncate">{{currentUser.getUsername()}}</div>
+                  </div>
                 </div>
-                
-                <div class="flex flex-1 basis-0 items-center gap-2">
-                    <div class="text-[var(--dlgrey)] flex-shrink-0 whitespace-nowrap">First name:</div>
-                    <input type="text" class="ml-2 flex-grow min-w-0 w-full overflow-hidden text-ellipsis" [(ngModel)]="currentUser.studentInfo['first_name']" />
+              
+                <div class="flex flex-1 basis-0 min-w-0 justify-start">
+                  <div class="flex gap-2 items-center min-w-0 w-full">
+                    
+                    <div class="text-[var(--dlgrey)] whitespace-nowrap">First name:</div>
+                    <input type="text" class="min-w-0 w-full flex-shrink py-1 px-2 border rounded-md" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['first_name']"/>
+
+                  </div>
                 </div>
-                
-                <div class="flex flex-1 basis-0 items-center gap-2">
-                    <div class="text-[var(--dlgrey)] flex-shrink-0 whitespace-nowrap">Last name:</div>
-                    <input class="ml-2 flex-grow min-w-0 w-full overflow-hidden text-ellipsis" />
+              
+                <div class="flex flex-1 basis-0 min-w-0 justify-start">
+                  <div class="flex gap-2 items-center">
+                    <div class="text-[var(--dlgrey)] whitespace-nowrap">Last name:</div>
+                    <input type="text" class="min-w-0 w-full flex-shrink py-1 px-2 border rounded-md" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['last_name']"/>
+                  </div>
                 </div>
             </div>
-            
+              
             <div class="flex flex-col justify-center gap-2">
                 <div class="text-2xl font-semibold">
                     Contact Info
                 </div>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center gap-10 mr-8">
                     
                     <div class="flex gap-2 flex-1 items-center whitespace-nowrap">
                         <div class="text-[var(--dlgrey)] flex-shrink-0">Email:</div>
-                        <input class="ml-2 min-w-0 overflow-hidden text-ellipsis"  />
+                        <input class="min-w-0 w-full flex-shrink py-1 px-2 border rounded-md" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['email']"/>
                     </div>
                     
                     <div class="flex gap-2 flex-1 items-center whitespace-nowrap">
                         <div class="text-[var(--dlgrey)] flex-shrink-0">Phone Number:</div>
-                        <input class="ml-2 min-w-0 overflow-hidden text-ellipsis"  />
+                        <input class="min-w-0 w-full flex-shrink py-1 px-2 border rounded-md" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['phone_number']"/>
                     </div>
                 </div>
             </div>
@@ -50,18 +59,23 @@
                     
                     <div class="flex flex-1 gap-2 items-center whitespace-nowrap">
                         <div class="text-[var(--dlgrey)] flex-shrink-0">GPA:</div>
-                        <input class="ml-2 min-w-0 overflow-hidden text-ellipsis" />
+                        <input type="number" class="min-w-0 w-full flex-shrink py-1 px-2 border rounded-md w-[100px]" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['gpa']"/>
                     </div>
                     
                     <div class="flex flex-1 gap-2 items-center whitespace-nowrap">
                         <div class="text-[var(--dlgrey)] flex-shrink-0">SAT:</div>
-                        <input class="ml-2 min-w-0 overflow-hidden text-ellipsis"  />
+                        <input type="number" class="min-w-0 w-full flex-shrink py-1 px-2 border rounded-md w-[100px]" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['sat_score']"/>
                     </div>
                 </div>
             </div>
-            <button class="bg-[var(--secondary)] self-start w-auto text-[var(--neutral)] px-4 py-2 text-md my-2 rounded-md ">
-                Edit Information
-            </button>
+            <div class="flex items-center gap-4">
+                <div class="">
+                    <button class="bg-[var(--secondary)] self-start w-auto text-[var(--neutral)] px-4 py-2 text-md my-2 rounded-md" (click)="toggleEdit()"> 
+                        {{editing ? "Save" : "Edit Information"}}
+                    </button>
+                </div>
+                <span class="text-[var(--accent)] font-bold" [ngClass]="!editing && saved ? 'fade' : 'hidden'">Saved!</span>
+            </div>
             <div>
                 <div class="text-2xl font-semibold">
                     Documents

@@ -42,32 +42,24 @@ public class DocumentController {
     }
 
 
-
-
-
-
-
-
-
-
-    //    GET THE INFORMATION FROM THE LOCAL DATABASE
-    @GetMapping("/get/{document_id}")
-    public ResponseEntity<Document> getDocumentById(@PathVariable int document_id) {
-        Document document = documentRepository.getByID(document_id);
-        return ResponseEntity.ok(document);
-    }
+//    //    GET THE INFORMATION FROM THE LOCAL DATABASE
+//    @GetMapping("/get/{document_id}")
+//    public ResponseEntity<Document> getDocumentById(@PathVariable int document_id) {
+//        Document document = documentRepository.getByID(document_id);
+//        return ResponseEntity.ok(document);
+//    }
 
 
     @GetMapping("/get/{student_email}")
-    public ResponseEntity<List<Document>> getDocumentByEmailAndCollegeID(@PathVariable String student_email) {
+    public ResponseEntity<List<Document>> getDocumentByEmail(@PathVariable String student_email) {
         List<Document> documents = documentRepository.getByEmail(student_email);
         return ResponseEntity.ok(documents);
     }
 
-    @GetMapping("/get/{student_email}/{college_id}")
-    public ResponseEntity<List<Document>> getDocumentByEmailAndCollegeID(@PathVariable String student_email, @PathVariable int college_id) {
-        List<Document> documents = documentRepository.getByEmailAndCollegeID(student_email, college_id);
-        return ResponseEntity.ok(documents);
-    }
+//    @GetMapping("/get/{student_email}/{college_id}")
+//    public ResponseEntity<List<Document>> getDocumentByEmailAndCollegeID(@PathVariable String student_email, @PathVariable int college_id) {
+//        List<Document> documents = documentRepository.getByEmailAndCollegeID(student_email, college_id);
+//        return ResponseEntity.ok(documents);
+//    }
 
 }
