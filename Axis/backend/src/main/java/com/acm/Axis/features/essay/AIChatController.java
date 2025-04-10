@@ -34,6 +34,7 @@ public class AIChatController {
                                    @RequestParam String documentName) {
         // 1. Get file URL from DB or reconstruct S3 path
         String s3Url = s3Service.getFileUrl(studentEmail, collegeId, documentName);
+        System.out.println(s3Url);
 
         try {
             // 2. Download file content from S3
@@ -47,12 +48,34 @@ public class AIChatController {
                     .call()
                     .content();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             return "Error reading essay: " + e.getMessage();
         }
     }
 
 
+    @GetMapping("/getResponseFlux")
+    public Flux<String> getResponseFlux(@RequestParam String studentEmail,
+                                        @RequestParam int collegeId,
+                                        @RequestParam String documentName,
+                                        @RequestParam String message) {
+        String s3Url = s3Service.getFileUrl(studentEmail, collegeId, documentName);
+        System.out.println(s3Url);
+
+        try {
+            String essayText = s3Service.downloadFileText(s3Url);
+
+            String prompt = essayText + message;
+
+            return chatClient.prompt()
+                    .user(prompt)
+                    .stream()
+                    .content();
+
+        } catch (IOException e) {
+            return Flux.just("Error reading essay: " + e.getMessage());
+        }
+    }
 
     @GetMapping("/getFlux")
     public Flux<String> chatWithStream(@RequestParam String message) {

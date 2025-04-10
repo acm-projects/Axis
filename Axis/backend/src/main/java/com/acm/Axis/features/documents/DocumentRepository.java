@@ -27,7 +27,7 @@ public class DocumentRepository {
     }
 
     public List<Document> getByEmail(String email) {
-        return jdbcClient.sql("SELECT * FROM applications WHERE student_email = ?")
+        return jdbcClient.sql("SELECT * FROM documents WHERE student_email = ?")
                 .params(List.of(email))
                 .query(Document.class)
                 .list();

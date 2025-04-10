@@ -4,6 +4,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { Student, StudentInfo } from '../../core/models/student.model';
 import { FormsModule } from '@angular/forms';
+import { DocumentInfo } from '../../core/models/document.model';
 
 @Component({
   selector: 'app-user-account',
@@ -19,6 +20,7 @@ export class UserAccountComponent {
   saved: boolean = false
 
   baseUrl : string = "http://localhost:8080/api/students"
+  docUrl : string = "http://localhost:8080/api/documents/get"
   constructor (private http: HttpClient, private authService: AuthService) {}
 
   @Output() closeMyAccountEvent = new EventEmitter<void>();
@@ -33,6 +35,7 @@ export class UserAccountComponent {
   
   ngOnInit() {
     this.getStudentInfo()
+    this.getStudentDocumentInfo()
   }
 
   getStudentInfo() : void {
@@ -41,6 +44,19 @@ export class UserAccountComponent {
         this.currentUser = new Student(response)
       },
       error: (err) => console.error('Error fetching student:', err)
+    })
+  }
+
+  getStudentDocumentInfo() : void {
+    //${this.authService.getSession()?.email}
+    this.http.get<DocumentInfo[]>(`${this.docUrl}/kevinphilip2004@gmail.com`).subscribe({
+      next: (response: DocumentInfo[]) => {
+       this.studentDocumentInfo = response
+       console.log(this.studentDocumentInfo)
+      },
+      error: (error) => {
+        console.log("Error retreving documents " + error)
+      }
     })
   }
 
@@ -63,8 +79,7 @@ export class UserAccountComponent {
     } 
     this.editing = !this.editing
   }
-  documents: any[] = ["Resume", "Transcript", "Transfer Credits", "AP Scores", "Recommendation Letter 1", "Recommendation Letter 2", "Personal Essay"]
-
+  studentDocumentInfo: DocumentInfo[] = []
   
 }
 
