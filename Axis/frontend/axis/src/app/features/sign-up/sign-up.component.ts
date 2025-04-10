@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   selector: 'app-sign-up',
   imports: [FormsModule, NgxMaskDirective, CommonModule],
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css'
+  styleUrl: './sign-up.component.css',
+  standalone: true
 })
 export class SignUpComponent {
   firstName: string;
@@ -54,12 +55,16 @@ export class SignUpComponent {
               email: this.email,
               token: loginResponse.token
             });
-            this.router.navigate(['/']); // Redirect to home page
-          });
-
-
+            this.router.navigate(['/']); // ✅ Redirect after login
+          },
+          error: err => {
+            console.error("🚫 Login failed after registration", err);
+            this.invalidDetails = true;
+          }
+        });
       },
       error: error => {
+        console.error("🚫 Registration failed", error);
         this.invalidDetails = true;
       }
     });

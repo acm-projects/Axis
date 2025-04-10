@@ -21,6 +21,10 @@ public class AuthService {
     private JwtUtils jwtUtils;
 
     public String register(Student student) {
+        System.out.println("📥 Register attempt with email: " + student.email());
+        System.out.println("🔍 Existing user: " + studentRepository.findByEmail(student.email()));
+
+
         if (studentRepository.findByEmail(student.email()).isPresent()) {
             throw new RuntimeException("Student already exists!");
         }

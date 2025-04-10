@@ -5,7 +5,13 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
 
-    <changeSet id="013-add-logo-in-scholarships-table" author="kevin">
+    <changeSet id="013-add-logo-in-scholarships-table" author="ankit">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="scholarships" columnName="logo_src"/>
+            </not>
+        </preConditions>
+
         <addColumn tableName="scholarships">
             <column name="logo_src" type="VARCHAR(255)">
                 <constraints nullable="true"/>

@@ -4,6 +4,7 @@ backend/HELP.md
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+!**/frontend/axis/src/assets/home_background.mov
 
 ### STS ###
 .apt_generated

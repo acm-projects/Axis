@@ -10,7 +10,8 @@ import { SharedDataService } from '../../core/services/shared-data.service';
   selector: 'app-sign-in',
   imports: [FormsModule, CommonModule],
   templateUrl: './sign-in.component.html',
-  styleUrl: './sign-in.component.css'
+  styleUrl: './sign-in.component.css',
+  standalone: true
 })
 export class SignInComponent implements OnInit {
   email: string;

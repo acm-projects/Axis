@@ -10,7 +10,8 @@ import { UserAccountComponent } from './features/user-account/user-account.compo
   selector: 'app-root',
   imports: [NavbarComponent, FooterComponent, RouterOutlet, NgIf, UserAccountComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  standalone: true,
 })
 export class AppComponent {
   title = 'axis';

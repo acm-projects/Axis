@@ -11,7 +11,8 @@ import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
   selector: 'app-discover-page',
   imports: [FilterComponent, NgFor, AssetCardComponent, NgClass, RouterLink, RouterLinkActive],
   templateUrl: './discover-page.component.html',
-  styleUrl: './discover-page.component.css'
+  styleUrl: './discover-page.component.css',
+  standalone: true
 })
 export class DiscoverPageComponent {
   page: number;
@@ -35,8 +36,12 @@ export class DiscoverPageComponent {
   }
 
   loadPage(page: number): void {
+
+
     this.http.get<College>(`${this.baseURL}/searchByPage/${page}/${this.collegesPerPage}`).subscribe({
       next: (response: any) => {
+        console.log("KJDBJSHB")
+        console.log("✅ Colleges received:", response);
         this.colleges = response;
         for (let college of this.colleges) {
           this.sharedDataService.saveCollege(college);
@@ -44,7 +49,7 @@ export class DiscoverPageComponent {
         this.updatePageButtons(page);
       },
       error: error => {
-        console.log('Failed to retrieve colleges');
+        console.log('Failed to retrieve colleges: ' + String(error));
       }
     });
   }

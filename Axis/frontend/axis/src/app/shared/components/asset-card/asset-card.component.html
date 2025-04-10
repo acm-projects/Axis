@@ -1,43 +1,67 @@
-<div class="flex flex-col justify-center w-56 px-2 m-4 border-2 border-gray-500 rounded-xl">
-    <img class="object-contain aspect-square" src="{{imgLink}}" alt="{{name}}"/>
-    <div class="flex flex-row justify-between px-1 py-4">
-        <div class="flex flex-col">
-            <a class="text-md text-[var(--ddgrey)] hover:underline" [routerLink]="['/discover', id]" routerLinkActive="active">{{name}}</a>
-            <div class="text-sm text-[var(--dlgrey)]">{{info}}</div>
+
+<a  [routerLink]="['/discover', id]" routerLinkActive="active">
+  <div [@cardHover]="hoverState"
+       (mouseenter)="hoverState = 'yes'"
+       (mouseleave)="hoverState = 'no'"
+    class="rounded-md flex flex-row justify-start bg-[var(--cardBackground)]  min-h-24 font-satoshi">
+
+
+      <ng-container *ngIf="!isFallbackCollegeLogo(imgLink); else box">
+
+        <div class="rounded-l-md flex items-center justify-center h-[100px] min-w-[150px] bg-white">
+
+        <img class=" size-28 object-contain rounded-l-md" [src]="imgLink" [alt]="name" />
+
         </div>
-        <div class="my-1">
-            <button (click)="bookMarked = !bookMarked">
-                <svg
-                *ngIf="bookMarked"
-                xmlns='http://www.w3.org/2000/svg'
-                width="30"
-                height="30"
-                viewBox="0 0 24 24"
-                fill="var(--accent)"
-                stroke="currentColor"
-                stroke-width="0"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                >
-                <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z" />
-                </svg>
-                <svg
-                *ngIf="!bookMarked"
-                xmlns='http://www.w3.org/2000/svg'
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                >
-                <path d="M12 17l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v5" />
-                <path d="M16 19h6" />
-                <path d="M19 16v6" />
-                </svg>
-            </button>
+      </ng-container>
+      <ng-template #box>
+        <div class="h-[100px] min-w-[150px] bg-[var(--button)]  flex items-center justify-center text-white font-bold rounded-l-md">
+          No Image
         </div>
-    </div>
-</div>
+      </ng-template>
+
+
+
+      <div class="relative flex flex-row flex-grow justify-between px-4 py-3 ">
+          <div class="flex flex-col flex-1/2 ">
+              <p class="leading-5 font-bold text-lg text-[var(--mainText)]">{{name}}</p>
+              <div class="mt-1 text-sm text-[var(--mainText)]">{{info}}</div>
+          </div>
+          <div class="relative right-0 bottom-0">
+              <button (click)="bookMarked = !bookMarked" class="absolute bottom-0 right-0">
+                  <svg
+                  *ngIf="bookMarked"
+                  xmlns='http://www.w3.org/2000/svg'
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="var(--accent)"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  >
+                  <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z" />
+                  </svg>
+                  <svg
+                  *ngIf="!bookMarked"
+                  xmlns='http://www.w3.org/2000/svg'
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  >
+                  <path d="M12 17l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v5" />
+                  <path d="M16 19h6" />
+                  <path d="M19 16v6" />
+                  </svg>
+              </button>
+          </div>
+      </div>
+  </div>
+</a>
+

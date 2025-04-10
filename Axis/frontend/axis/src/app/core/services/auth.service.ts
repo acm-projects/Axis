@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   private userKey: string = 'user'; // Key for storing user data in localStorage
-
+  
   // BehaviorSubject to track auth state
   private authState = new BehaviorSubject<boolean>(this.checkSession());
   isLoggedIn = this.authState.asObservable();

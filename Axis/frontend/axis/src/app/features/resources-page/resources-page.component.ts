@@ -11,7 +11,8 @@ import {ActivatedRoute, RouterLink, RouterLinkActive} from '@angular/router';
   selector: 'app-resources-page',
   imports: [ResourceHeaderComponent, FilterComponent, NgFor, RouterLink, RouterLinkActive, NgClass],
   templateUrl: './resources-page.component.html',
-  styleUrl: './resources-page.component.css'
+  styleUrl: './resources-page.component.css',
+  standalone: true
 })
 export class ResourcesPageComponent {
   page: number;
@@ -23,7 +24,7 @@ export class ResourcesPageComponent {
 
   constructor(private http: HttpClient, private sharedDataService: SharedDataService, private route: ActivatedRoute) {
     this.page = parseInt(<string>this.route.snapshot.queryParamMap.get('page'));
-    this.scholarshipsPerPage = 8;
+    this.scholarshipsPerPage = 12;
     this.loadPage(this.page);   // Load first page
 
     // Store last page

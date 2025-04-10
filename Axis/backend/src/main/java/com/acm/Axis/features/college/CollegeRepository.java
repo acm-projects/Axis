@@ -77,12 +77,16 @@ public class CollegeRepository {
 
     public List<College> findByPage(Integer page, Integer collegesPerPage) {
         log.info("Finding {} colleges by page {}", collegesPerPage, page);
-        return jdbcClient.sql(SELECT_COLUMNS + " WHERE college_id BETWEEN :start_id AND :end_id")
-                .param("start_id", (page - 1) * collegesPerPage + 1)
-                .param("end_id", page * collegesPerPage)
+
+        int offset = (page - 1) * collegesPerPage;
+
+        return jdbcClient.sql(SELECT_COLUMNS + " LIMIT :limit OFFSET :offset")
+                .param("limit", collegesPerPage)
+                .param("offset", offset)
                 .query(College.class)
                 .list();
     }
+
 
     public void insertCollege(College college) {
         String sql = """

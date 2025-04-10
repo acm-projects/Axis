@@ -1,61 +1,77 @@
-<!--
-  This example requires updating your template:
+<div class="flex min-h-screen flex-col justify-center max-w-2xl mx-auto lg:px-8 bg-transparent pb-10">
+  <h2 class="mt-8 text-center text-5xl font-bold tracking-tight text-[var(--mainText)] font-satoshi">Sign In</h2>
 
-  ```
-  <html class="h-full bg-white">
-  <body class="h-full">
-  ```
--->
-<div class="flex min-h-full flex-col justify-center max-w-sm mx-auto lg:px-8 border-2 rounded-xl">
-    <h2 class="mt-8 text-center text-3xl font-bold tracking-tight text-gray-900">Sign In</h2>
-
-    <div class="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form class="space-y-6" #signInForm="ngForm" (ngSubmit)="signIn()">
-            <div>
-                <label for="email" class="block text-sm/6 font-medium text-gray-900">Email</label>
-                <div class="mt-2">
-                    <input type="text" name="email" id="email" #emailField="ngModel" [(ngModel)]="email" required pattern="[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z0-9]+"
-                           class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border border-[var(--secondary)]
-                           placeholder:text-gray-400 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
-                </div>
-                @if (emailField.dirty && emailField.invalid) {
-                    <div class="mt-2">
-                        <strong class="text-red-500 text-sm text-center">Please enter a valid email address.</strong>
-                    </div>
-                }
-            </div>
-
-            <div>
-                <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
-                <div class="mt-2">
-                    <input type="password" name="password" id="password" #passwordField="ngModel"  [(ngModel)]="password" required minlength="8"
-                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 border border-[var(--secondary)]
-                        placeholder:text-gray-400 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
-                </div>
-                @if (passwordField.dirty && passwordField.invalid) {
-                    <div class="mt-2">
-                        <strong class="text-red-500 text-sm text-center">Please enter a valid password.</strong>
-                    </div>
-                }
-            </div>
-
-            <div>
-                <button type="submit" [disabled]="signInForm.invalid"
-                    class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5
-                    text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500
-                    disabled:bg-gray-400 disabled:cursor-not-allowed focus-visible:outline-2
-                    focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign In</button>
-            </div>
-        </form>
-
-        <div class="mt-5 mb-4 text-center">
-            <strong *ngIf="invalidCredentials" class="text-red-500 text-sm">
-                Invalid credentials! Please try again.
-            </strong>
+  <div class="mt-10 mx-auto w-full max-w-2xl">
+    <form class="space-y-6 mb-4" #signInForm="ngForm" (ngSubmit)="signIn()">
+      <div>
+        <label for="email" class="block text-sm/6 font-medium text-[var(--mainText)]">Email address</label>
+        <div class="mt-2">
+          <input
+            type="text"
+            name="email"
+            id="email"
+            #emailField="ngModel"
+            [(ngModel)]="email"
+            required
+            pattern="[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z0-9]+"
+            placeholder="Enter your email"
+            class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-white placeholder:text-white
+                   focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm"
+          />
         </div>
+        @if (emailField.dirty && emailField.invalid) {
+        <div class="mt-2">
+          <strong class="text-red-500 text-sm text-center">Please enter a valid email address.</strong>
+        </div>
+        }
+      </div>
 
-        <p class="mb-8 text-center text-base text-[var(--ddgrey)]">
-            <a href="#" class="underline">Forgot password?</a>
-        </p>
+      <div>
+        <label for="password" class="block text-sm/6 font-medium text-[var(--mainText)]">Password</label>
+        <div class="mt-2">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            #passwordField="ngModel"
+            [(ngModel)]="password"
+            required
+            minlength="8"
+            placeholder="Enter your password"
+            class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-white placeholder:text-white
+                   focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm"
+          />
+        </div>
+        @if (passwordField.dirty && passwordField.invalid) {
+        <div class="mt-2">
+          <strong class="text-red-500 text-sm text-center">Please enter a valid password.</strong>
+        </div>
+        }
+      </div>
+
+      <div class="w-1/3 mx-auto mb-6 mt-16">
+        <button
+          type="submit"
+          [disabled]="signInForm.invalid"
+          class="flex w-full justify-center rounded-md bg-[var(--button)] px-3 py-1.5
+                 text-sm/6 font-semibold text-white shadow-xs hover:bg-[var(--buttonHover)]
+                 hover:text-[var(--buttonTextHover)] disabled:bg-[var(--buttonDisabled)]
+                 disabled:text-[var(--buttonDisabledText)] disabled:cursor-not-allowed
+                 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-10"
+        >
+          Sign In
+        </button>
+      </div>
+    </form>
+
+    <div class="mt-5 mb-4 text-center">
+      <strong *ngIf="invalidCredentials" class="text-red-500 text-sm">
+        Invalid credentials! Please try again.
+      </strong>
     </div>
+
+    <p class="mb-8 text-center text-base text-[var(--ddgrey)]">
+      <a href="#" class="underline">Forgot password?</a>
+    </p>
+  </div>
 </div>

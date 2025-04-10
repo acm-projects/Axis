@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideNgxMask } from 'ngx-mask';
@@ -14,5 +14,6 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([])  // Interceptors
     ),
     provideNgxMask(),       // Masking
+    provideAnimations()
   ]
 };

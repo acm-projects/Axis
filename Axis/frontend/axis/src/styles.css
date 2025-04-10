@@ -1,16 +1,122 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --neutral: #FFFFFF;  /* Define the variable */
-    --accent: #9B6DCC;
-    --secondary: #000000;
+    --neutral: #000000;  /* Define the variable */
+    --accent: #5f3f81;
+    --secondary: #fff5e2;
     --llgrey: #F0F0F1;
+    --ldgrey: #cccccc;
     --dlgrey: #8A8A8E;
     --ddgrey: #2C2C2C;
+
+    --mainBg: #0a0a0a;
+    --mainText: #e7e7e7;
+    --secondaryText: #7a7a7a;
+
+    --inputBox: #181818;
+    --placeholderText: #4d4d4d;
+
+    --button: #42275b;
+    --buttonHover: #5f3f81;
+    --buttonDisabled: #313131;
+    --buttonDisabledText: #606060;
+    --buttonTextHover: #cccccc;
+    --buttonText: #ffffff;
+
+    /*navbar*/
+    --navbarAccountButton: #131313;
+
+    /*discover page*/
+    --cardBackground: #1f1f1f;
+    --paginationActive: #545454;
+    --pagination: #313131;
+
 }
+
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/satoshi/Satoshi-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/satoshi/Satoshi-BlackItalic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/satoshi/Satoshi-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/satoshi/Satoshi-BoldItalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/satoshi/Satoshi-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/satoshi/Satoshi-MediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/satoshi/Satoshi-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/satoshi/Satoshi-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/satoshi/Satoshi-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/assets/fonts/satoshi/Satoshi-LightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+
+
+
+html {
+  scroll-behavior: smooth;
+}
+
 .font-inter {
     font-family: 'Inter', sans-serif;
 }
 
+body {
+    color: white;
+}
 .min-w-36 {
     min-width: 9rem;
 }
@@ -32,3 +138,23 @@
 .no-clear::-webkit-search-cancel-button {
     display: none;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  background-color: var(--inputBox) !important;
+  -webkit-text-fill-color: white !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+

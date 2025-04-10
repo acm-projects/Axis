@@ -6,7 +6,8 @@ import { FormsModule, NgModel } from '@angular/forms';
   selector: 'app-filter',
   imports: [FormsModule, NgFor, NgIf, CommonModule],
   templateUrl: './filter.component.html',
-  styleUrl: './filter.component.css'
+  styleUrl: './filter.component.css',
+  standalone: true,
 })
 export class FilterComponent {
   filter1:string = "Filter"
@@ -21,5 +22,5 @@ export class FilterComponent {
     this.filterQuerys.splice(index, 1)
   }
 
-  
+
 }
