@@ -50,36 +50,63 @@
                 </div>
             </div>
         </div>
-        <div class="pl-12 text-xl w-full bg-[var(--buttonDisabled)]  p-4 text-white">{{college?.description}}</div>
+        <div class=" text-lg w-full bg-[var(--resourceBackground)] p-6 px-7 rounded-xl text-white">{{college?.description}}</div>
     </div>
-  <div class="w-full px-[2%] pt-10">
-    <div class="font-bold text-2xl">More Information</div>
-    <div>
-      <div class="font-bold text-2xl">Academics</div>
-      <div>Required Rank: {{college?.reqRank}}</div>
-      <div>Required GPA: {{college?.reqGPA}}</div>
-    </div>
-    <div>
-      <div class="font-bold text-2xl">Avg Finance Metrics</div>
-      <div>Tuition Annually: {{college?.avgTuitionAnnually}}</div>
-      <div>Tuition After Aid: {{college?.avgTuitionAfterAid}}</div>
-      <div>Aid pack: {{college?.avgAidPack}}</div>
-      <div>Housing Cost: {{college?.avgHousingCost}}</div>
-    </div>
-    <div>
-      <div class="font-bold text-2xl">General Information</div>
-      <div>Phone Number: {{college?.phoneNumber}}</div>
-      <div>Address: {{college?.address}}</div>
-      <div>Majors Available: {{college?.majorsAvailable}}</div>
-    </div>
-    <div>
-      <div class="font-bold text-2xl">Deadlines</div>
-      <div>Phone Number: {{college?.regAppDueDate}}</div>
-      <div>Address: {{college?.financialAidAppDueDate}}</div>
-      <div></div>
-    </div>
+  <div class="w-full px-[2%] pt-16 font-satoshi text-white">
+    <div class="font-bold text-3xl mb-6 text-white">More Information</div>
 
-    <a class="text-white">Application Link: {{college?.applicationLink}}</a>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-lg">
 
+      <!-- General Info -->
+
+      <div class="bg-[var(--resourceBackground)] p-5 px-6 rounded-xl shadow">
+        <div class="font-bold text-2xl mb-2">Campus Info</div>
+        <div>Majors Available: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.majorsAvailable === 'Not available'}">{{college?.majorsAvailable}}</span></div>
+        <div>College Type: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.type === 'Not available'}">{{college?.type}}</span></div>
+        <div>Campus: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.campusLife === 'Not available'}">{{college?.campusLife}}</span></div>
+        <div>Student to Faculty Ratio: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.studentToFacultyRatio === 'Not available'}">{{college?.studentToFacultyRatio}}</span></div>
+        <div>Retention Rate Majors Avail: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.retentionRateMajorsAvail === 'Not available'}">{{college?.retentionRateMajorsAvail}}</span></div>
+      </div>
+
+      <div class="bg-[var(--resourceBackground)] p-5 px-6 rounded-xl shadow">
+        <div class="font-bold text-2xl mb-2">Contact Info</div>
+        <div>Phone: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.phoneNumber === 'Phone number not available'}">{{college?.phoneNumber}}</span></div>
+        <div>Address: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.address === 'Not available'}">{{college?.address}}</span></div>
+      </div>
+
+      <!-- Academics -->
+      <div class="bg-[var(--resourceBackground)] p-5 px-6 rounded-xl shadow">
+        <div class="font-bold text-2xl mb-2">Academics</div>
+        <div>Required Rank: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.reqRank === 'Not available'}">{{college?.reqRank}}</span></div>
+        <div>Required GPA: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.reqGPA === 'Not available'}">{{college?.reqGPA}}</span></div>
+        <div>Required ACT/SAT: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.reqACT_SAT === 'Not available'}">{{college?.reqACT_SAT}}</span></div>
+      </div>
+
+      <!-- Financial Metrics -->
+      <div class="bg-[var(--resourceBackground)] p-5 px-6 rounded-xl shadow">
+        <div class="font-bold text-2xl mb-2">Avg Finance Metrics</div>
+        <div>Tuition Annually: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.avgTuitionAnnually === 'Not available'}">{{college?.avgTuitionAnnually}}</span></div>
+        <div>Tuition After Aid: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.avgTuitionAfterAid === 'Not available'}">{{college?.avgTuitionAfterAid}}</span></div>
+        <div>Aid Pack: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.avgAidPack === 'Not available'}">{{college?.avgAidPack}}</span></div>
+        <div>Housing Cost: <span class="font-medium"[ngClass]="{'text-[var(--secondaryText)]': college?.avgHousingCost === 'Not available'}" >{{college?.avgHousingCost}}</span></div>
+      </div>
+
+      <!-- Deadlines -->
+      <div class="bg-[var(--resourceBackground)] p-5 px-6 rounded-xl shadow md:col-span-2">
+        <div class="font-bold text-2xl mb-2">Deadlines</div>
+        <div>Application Due: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.regAppDueDate === 'Not available'}">{{college?.regAppDueDate}}</span></div>
+        <div>Financial Aid Due: <span class="font-medium" [ngClass]="{'text-[var(--secondaryText)]': college?.financialAidAppDueDate === 'Not available'}">{{college?.financialAidAppDueDate}}</span></div>
+      </div>
+
+      <!-- Application Link -->
+      <div class="bg-[var(--resourceBackground)] p-4 rounded-2xl shadow flex items-center justify-center hover:bg-[var(--accent)]">
+        <a [href]="college?.applicationLink" target="_blank" class="text-lg font-semibold transition">
+          Apply Here
+        </a>
+      </div>
+
+
+    </div>
   </div>
+
 </div>

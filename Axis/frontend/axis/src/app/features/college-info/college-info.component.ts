@@ -3,11 +3,11 @@ import { College } from '../../core/models/college.model';
 import { ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '../../core/services/shared-data.service';
 import {HttpClient} from '@angular/common/http';
-import {Location} from '@angular/common';
+import {Location, NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-college-info',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './college-info.component.html',
   styleUrl: './college-info.component.css',
   standalone: true
