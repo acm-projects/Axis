@@ -49,7 +49,7 @@ public class AIChatController {
             pdfDocument.close();
 
             // Build the prompt text including the extracted essay content
-            String promptText = "Please analyze the following college essay and give detailed feedback:\n" + essayText;
+            String promptText = "Please analyze the following college essay, first, give me a sentence telling me what it's about, then give detailed feedback:\n" + essayText;
 
             // Send the prompt text to the chat API
             String content = chatClient.prompt()

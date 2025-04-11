@@ -3,17 +3,23 @@ import { College } from '../../core/models/college.model';
 import { ActivatedRoute } from '@angular/router';
 import { SharedDataService } from '../../core/services/shared-data.service';
 import {HttpClient} from '@angular/common/http';
+import {Location, NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-college-info',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './college-info.component.html',
-  styleUrl: './college-info.component.css'
+  styleUrl: './college-info.component.css',
+  standalone: true
 })
 export class CollegeInfoComponent {
   college: College | undefined;
 
-  constructor(private http: HttpClient, private sharedDataService: SharedDataService, private route: ActivatedRoute) {
+  constructor(private http: HttpClient,
+              private sharedDataService: SharedDataService,
+              private route: ActivatedRoute,
+              private location: Location
+  ) {
     let storedCollege = this.sharedDataService.getCollege(parseInt(<string>this.route.snapshot.paramMap.get('id')));
     if (storedCollege) {
       this.college = storedCollege;
@@ -32,5 +38,9 @@ export class CollegeInfoComponent {
         }
       });
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
