@@ -30,6 +30,12 @@
     --paginationActive: #545454;
     --pagination: #313131;
 
+    /*resources page*/
+    --resourceBackground: #1f1f1f;
+    --scholarshipStatus: #4b4b4b;
+    --scholarshipDates: #4b4b4b;
+    --resourceText: #e7e7e7;
+
 }
 
 

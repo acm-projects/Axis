@@ -51,7 +51,7 @@ public class CollegeRepository {
             application_link AS applicationLink,
             campus_life AS campusLife,
             majors_available AS majorsAvailable,
-            description
+            "desc" AS description
         FROM colleges
         """;
 
@@ -103,14 +103,14 @@ public class CollegeRepository {
                 avg_aid_pack, avg_housing_cost, grad_rate, acceptance_rate, student_to_faculty_ratio,
                 retention_rate_majors_avail, SAT_range, ACT_range, required_GPA, required_rank,
                 required_ACT_SAT, address, phone_number, website, reg_app_due_date,
-                financial_aid_app_due_date, application_link
+                financial_aid_app_due_date, application_link, desc
             )
             VALUES (
                 :name, :logo_src, :undergrad_pop, :location, :type, :avg_tuition_annually, :avg_tuition_after_aid,
                 :avg_aid_pack, :avg_housing_cost, :grad_rate, :acceptance_rate, :student_to_faculty_ratio,
                 :retention_rate_majors_avail, :SAT_range, :ACT_range, :required_GPA, :required_rank,
                 :required_ACT_SAT, :address, :phone_number, :website, :reg_app_due_date,
-                :financial_aid_app_due_date, :application_link
+                :financial_aid_app_due_date, :application_link, :description
             )
         """;
 
@@ -139,6 +139,7 @@ public class CollegeRepository {
                 .param("reg_app_due_date", college.regAppDueDate())
                 .param("financial_aid_app_due_date", college.financialAidAppDueDate())
                 .param("application_link", college.applicationLink())
+                .param("description", college.description())
                 .update();
     }
 
