@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@splinetool/runtime": "^1.9.82",
+    "ngx-spinner": "^19.0.0"
+  }
+}

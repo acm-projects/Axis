@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from "@angular/forms";
-import { NgxMaskDirective } from 'ngx-mask'
+import { NgxMaskDirective } from 'ngx-mask';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../core/services/auth.service';
@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
+  standalone: true,
   imports: [FormsModule, NgxMaskDirective, CommonModule],
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css',
-  standalone: true
+  styleUrls: ['./sign-up.component.css'] // Fixed "styleUrl" to "styleUrls"
 })
 export class SignUpComponent {
   firstName: string;
@@ -33,37 +33,35 @@ export class SignUpComponent {
     this.invalidDetails = false;
   }
 
-  signUp() : void {
-    this.http.post('http://localhost:8080/api/auth/register',
-      {
-        first_name: this.firstName,
-        last_name: this.lastName,
-        phone_number: this.phoneNumber,
-        email: this.email,
-        password: this.password
-      }
-    ).subscribe({
+  signUp(): void {
+    this.http.post('http://localhost:8080/api/auth/register', {
+      first_name: this.firstName,
+      last_name: this.lastName,
+      phone_number: this.phoneNumber,
+      email: this.email,
+      password: this.password
+    }).subscribe({
       next: (signUpResponse: any) => {
-
-        this.http.post('http://localhost:8080/api/auth/login',
-          {
-            email: this.email,
-            password: this.password
-          }
-        ).subscribe((loginResponse: any) => {
+        // After successful signup, attempt login
+        this.http.post('http://localhost:8080/api/auth/login', {
+          email: this.email,
+          password: this.password
+        }).subscribe({
+          next: (loginResponse: any) => {
+            // Save session and navigate to home page
             this.authService.saveSession({
               email: this.email,
               token: loginResponse.token
             });
-            this.router.navigate(['/']); // ✅ Redirect after login
+            this.router.navigate(['/']);
           },
-          error: err => {
+          error: (err) => {
             console.error("🚫 Login failed after registration", err);
             this.invalidDetails = true;
           }
         });
       },
-      error: error => {
+      error: (error) => {
         console.error("🚫 Registration failed", error);
         this.invalidDetails = true;
       }

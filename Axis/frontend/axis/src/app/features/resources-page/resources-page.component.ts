@@ -9,7 +9,7 @@ import {ActivatedRoute, RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-resources-page',
-  imports: [ResourceHeaderComponent, FilterComponent, NgFor, RouterLink, RouterLinkActive, NgClass],
+  imports: [ResourceHeaderComponent, FilterComponent, NgFor, RouterLink, NgClass],
   templateUrl: './resources-page.component.html',
   styleUrl: './resources-page.component.css',
   standalone: true

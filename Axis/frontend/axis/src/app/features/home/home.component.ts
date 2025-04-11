@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Application } from '@splinetool/runtime';
 import {
   trigger,
@@ -14,7 +13,7 @@ import {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, FormsModule],
+  imports: [FormsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   animations: [

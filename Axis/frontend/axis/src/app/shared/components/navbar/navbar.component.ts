@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
@@ -46,6 +45,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   dropdownToggle: boolean = false;
   hoverStateDiscover: string = 'no';
   hoverStateResources: string = 'no';
+  hoverStateDocuments: string = 'no';
   hoverStateMyAccount: string = 'no';
 
   userLoggedIn: boolean = false;

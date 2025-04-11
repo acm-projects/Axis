@@ -25,6 +25,13 @@
                      class="rounded-md px-3 py-2 text-base font-medium text-[var(--mainText)]">
                     Resources
                   </a>
+                  <a [@linkHover]="hoverStateDocuments"
+                     (mouseenter)="hoverStateDocuments = 'yes'"
+                     (mouseleave)="hoverStateDocuments = 'no'"
+                     routerLink="essay/1234" routerLinkActive="active" [queryParams]="{page: 1}"
+                     class="rounded-md px-3 py-2 text-base font-medium text-[var(--mainText)]">
+                    Documents
+                  </a>
                 </div>
                 <div class="flex ml-4">
                   @if (userLoggedIn) {
