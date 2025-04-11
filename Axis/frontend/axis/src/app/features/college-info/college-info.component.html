@@ -1,5 +1,11 @@
 <div class="flex flex-col items-center py-12 px-[10%] pb-[18%] text-[var(--mainText)]">
     <div class="flex flex-col justify-center relative mt-[5%] w-full">
+        <button
+          (click)="goBack()"
+          class="mb-6 px-4 py-2 bg-[var(--resourceBackground)] text-white rounded-lg hover:bg-gray-600 transition self-start"
+        >
+          ← Back
+        </button>
         <img class="rounded-lg h-80 w-full object-cover" src="/assets/college_main.png" alt="{{college?.name}}">
         <div class="flex items-center gap-4 mt-[-5%] ml-[4%] font-satoshi">
             <div class="bg-white rounded-lg w-48">
@@ -46,4 +52,24 @@
         </div>
         <div class="pl-12 text-xl w-full bg-[var(--buttonDisabled)]  p-4">{{college?.description}}</div>
     </div>
+  <div class="w-full px-[2%]">
+    <div>{{college?.reqRank}}</div>
+    <div>{{college?.reqGPA}}</div>
+    <div>{{college?.regAppDueDate}}</div>
+    <div>{{college?.phoneNumber}}</div>
+    <div>{{college?.majorsAvailable}}</div>
+    <div>{{college?.financialAidAppDueDate}}</div>
+    <div>{{college?.gradeRate}}</div>
+    <div>{{college?.}}</div>
+    <div>{{college?.majorsAvailable}}</div>
+    <div>{{college?.phoneNumber}}</div>
+    <div>{{college?.regAppDueDate}}</div>
+    <div>{{college?.reqGPA}}</div>
+    <div>{{college?.reqRank}}</div>
+    <div>{{college?.applicationLink}}</div>
+    <div>{{college?.avgAidPack}}</div>
+    <div>{{college?.avgHousingCost}}</div>
+    <div>{{college?.avgTuitionAfterAid}}</div>
+    <div>{{college?.avgTuitionAnnually}}</div>
+  </div>
 </div>
