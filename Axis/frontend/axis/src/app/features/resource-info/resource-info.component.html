@@ -1,12 +1,19 @@
-<div class="h-screen w-screen">
+<div class="h-screen w-screen font-satoshi">
 
-  <div class="flex flex-col items-center py-12 px-[20%] pt-[16%] rounded-xl h-full">
+  <div class="flex flex-col items-center py-12 px-[20%] pt-[13%] rounded-xl h-full">
+    <button
+      (click)="goBack()"
+      class="mb-6 px-4 py-2 bg-[var(--resourceBackground)] text-white rounded-lg hover:bg-gray-600 transition self-start"
+    >
+      ← Back
+    </button>
 
     <div class="flex flex-row w-full gap-4">
 
       <div class="flex flex-col gap-4 bg-[var(--resourceBackground)] rounded-xl h-full p-8 flex-[20%]">
-        <div class="w-full p-1 [var(--scholarshipStatus]] w-full text-center text-xl">
-          {{this.isOpen ? "Open" : "Closed"}}
+        <div class="w-full text-center py-3 rounded-lg text-white font-semibold text-lg"
+             [ngClass]="{ 'bg-green-800': isOpen, 'bg-red-800': !isOpen }">
+          {{ isOpen ? "Open" : "Closed" }}
         </div>
 
         <div class="flex flex-row self-center gap-4">
@@ -19,7 +26,6 @@
             <div class="text-xl font-bold">{{this.formattedCloseDate?.day}}</div>
             <div>{{this.formattedCloseDate?.year}}</div>
           </div>
-
         </div>
 
         <div class="font-bold">
@@ -29,25 +35,38 @@
         <a
           [href]="scholarship?.website"
           target="_blank"
-          class="inline-block w-full text-center px-4 py-2 bg-white text-black font-bold rounded-lg shadow-sm hover:bg-gray-300 transition"
+          class="mt-auto inline-block w-full text-center px-4 py-2 bg-white text-black font-bold rounded-lg shadow-sm hover:bg-gray-300 transition"
         >
           Visit Website
         </a>
 
       </div>
-      <div class="flex flex-col gap-5 bg-[var(--resourceBackground)] rounded-xl h-max p-8 flex-[80%]">
+      <div class="flex flex-col gap-2 bg-[var(--resourceBackground)] rounded-xl h-max p-8 flex-[80%]">
         <div class="text-3xl font-bold">
           {{scholarship?.name}}
 
         </div>
-        <div class="text-xl text-[var(--secondaryText)]">
+        <div class="text-xl text-[var(--secondaryText)] pb-3">
           {{scholarship?.organization}}
 
         </div>
         <div class="">
           {{scholarship?.description}}
-
         </div>
+
+
+        <div class="flex flex-row w-full h-max gap-3 py-5">
+          <div *ngIf="scholarship?.is_essay_required === 't'" class="p-3 px-4 bg-[var(--accent)] rounded-lg">Essay Required</div>
+          <div *ngIf="scholarship?.is_merit_based === 't'" class="p-3 px-4 bg-[var(--accent)] rounded-lg">Merit Based</div>
+          <div *ngIf="scholarship?.is_need_based === 't'" class="p-3 px-4 bg-[var(--accent)] rounded-lg">Need Based</div>
+        </div>
+
+
+        <ul class="space-y-1">
+          <li *ngFor="let req of scholarship?.requirements?.split('\n')">
+            <span class="text-green-600 font-bold pr-2">✓</span> {{ req }}
+          </li>
+        </ul>
       </div>
 
     </div>

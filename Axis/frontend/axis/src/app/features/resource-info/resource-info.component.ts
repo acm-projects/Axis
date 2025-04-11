@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { SharedDataService } from '../../core/services/shared-data.service';
 import { ActivatedRoute } from '@angular/router';
@@ -37,7 +37,8 @@ export class ResourceInfoComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private sharedDataService: SharedDataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam) {
@@ -86,5 +87,9 @@ export class ResourceInfoComponent implements OnInit {
         year: date.getFullYear().toString(),
       };
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
