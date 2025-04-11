@@ -35,7 +35,7 @@
                      (mouseenter)="hoverStateMyAccount = 'yes'"
                      (mouseleave)="hoverStateMyAccount = 'no'"
                      class="flex space-x-2 rounded-md bg-[var(--navbarAccountButton)] px-3 pl-4 py-2">
-                        <p class="text-base font-medium text-white"
+                        <p class="text-base font-medium text-[var(--navbarAccountButtonText)]"
                            aria-current="page">My Account</p>
                         <img class="size-3 my-auto"
                              src="assets/navbar-dropdown-down-arrow.png">
@@ -67,6 +67,9 @@
                          class="rounded-md bg-[var(--navbarAccountButton)] px-3 py-2 text-base font-medium text-white" aria-current="page">{{accountButtonText}}</a>
                   }
                 </div>
+              <button (click)="toggleTheme()" class="p-2 rounded bg-[var(--button)] text-white">
+                {{ isLight ? 'Dark' : 'Light' }} Mode
+              </button>
             </div>
         </div>
     </div>

@@ -31,7 +31,7 @@ export class SignInComponent implements OnInit {
   }
 
   signIn() : void {
-    this.http.post('http://localhost:8080/auth/login',
+    this.http.post('http://localhost:8080/api/auth/login',
       {
         email: this.email,
         password: this.password

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
 import { SharedDataService } from '../../../core/services/shared-data.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {ThemeService} from '../../../theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -46,12 +47,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
   hoverStateDiscover: string = 'no';
   hoverStateResources: string = 'no';
   hoverStateMyAccount: string = 'no';
+  isLight = false;
 
   userLoggedIn: boolean = false;
   private authSubscription!: Subscription;
   private pageSubscription!: Subscription;
 
-  constructor(private authService: AuthService, private sharedDataService: SharedDataService, private router: Router) {}
+  constructor(private authService: AuthService,
+              private sharedDataService: SharedDataService,
+              private router: Router,
+              private themeService: ThemeService) {}
 
   ngOnInit(): void {
     // Subscribe to auth state changes
@@ -72,6 +77,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
         }
       }
     );
+
+    this.themeService.isLight$.subscribe(value => this.isLight = value);
   }
 
   updateAccountButtonText(): void {
@@ -94,5 +101,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   openMyAccount() {
     this.openMyAccountEvent.emit(); // Emit an event to parent
+  }
+
+  toggleTheme() {
+    this.themeService.toggle();
   }
 }

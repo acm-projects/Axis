@@ -51,7 +51,7 @@ public class CollegeRepository {
             application_link AS applicationLink,
             campus_life AS campusLife,
             majors_available AS majorsAvailable,
-            "desc" AS description
+            description
         FROM colleges
         """;
 
