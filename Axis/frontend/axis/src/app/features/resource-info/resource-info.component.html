@@ -1,26 +1,59 @@
-<div class="h-auto w-auto mx-20 flex flex-col gap-8">
-    <div class="flex flex-row justify-center mx-20 sm:gap-8 md:gap-12">
-        <div >
-            <img class="h-auto w-auto object-cover aspect-square max-w-36 rounded-xl"
-            src="https://wpstaq-ap-southeast-2-media.s3.amazonaws.com/irisphoto/wp-content/uploads/media/2020/09/High-res-1.jpg" alt="asdf"/>
+<div class="h-screen w-screen">
+
+  <div class="flex flex-col items-center py-12 px-[20%] pt-[16%] rounded-xl h-full">
+
+    <div class="flex flex-row w-full gap-4">
+
+      <div class="flex flex-col gap-4 bg-[var(--resourceBackground)] rounded-xl h-full p-8 flex-[20%]">
+        <div class="w-full p-1 [var(--scholarshipStatus]] w-full text-center text-xl">
+          {{this.isOpen ? "Open" : "Closed"}}
+        </div>
+
+        <div class="flex flex-row self-center gap-4">
+          <div class="flex-col text-center bg-[var(--scholarshipDates)] rounded-lg p-3">
+            <div>{{this.formattedOpenDate?.month}}</div>
+            <div class="text-xl font-bold">{{this.formattedOpenDate?.day}}</div>
+            <div>{{this.formattedOpenDate?.year}}</div>
+          </div><div class="flex-col text-center bg-[var(--scholarshipDates)] rounded-lg p-3">
+            <div>{{this.formattedCloseDate?.month}}</div>
+            <div class="text-xl font-bold">{{this.formattedCloseDate?.day}}</div>
+            <div>{{this.formattedCloseDate?.year}}</div>
+          </div>
 
         </div>
-        <div class="flex flex-col my-auto gap-4">
-            <div class="text-4xl font-semibold sm:mx-18 md:mx-36">{{scholarship?.name}}</div>
-            <button class="bg-[var(--secondary)] text-[white] min-w-200 w-auto items-center rounded py-2 text-sm p-1">{{scholarship?.website}}</button>
+
+        <div class="font-bold">
+          {{scholarship?.location}}
         </div>
-        <div class="my-auto flex flex-col text-[var(--dlgrey)] gap-2">
-            <p>Opens: {{scholarship?.openDate}}</p>
-            <p>Location: {{scholarship?.location}}</p>
-            <p>Deadline: {{scholarship?.closeDate}}</p>
-            <p>Organization: {{scholarship?.organization}}</p>
+
+        <a
+          [href]="scholarship?.website"
+          target="_blank"
+          class="inline-block w-full text-center px-4 py-2 bg-white text-black font-bold rounded-lg shadow-sm hover:bg-gray-300 transition"
+        >
+          Visit Website
+        </a>
+
+      </div>
+      <div class="flex flex-col gap-5 bg-[var(--resourceBackground)] rounded-xl h-max p-8 flex-[80%]">
+        <div class="text-3xl font-bold">
+          {{scholarship?.name}}
+
         </div>
+        <div class="text-xl text-[var(--secondaryText)]">
+          {{scholarship?.organization}}
+
+        </div>
+        <div class="">
+          {{scholarship?.description}}
+
+        </div>
+      </div>
+
     </div>
-    <div class="text-md">
-        <p>{{scholarship?.description}}</p>
-    </div>
-    <h1 class="text-[var(--secondary)] text-2xl font-bold">Similar Resources</h1>
-    <!-- <div class="flex flex-row justify-center gap-4">
-        <app-resource-card *ngFor="let i of l"></app-resource-card>
-    </div> -->
+
+
+
+  </div>
+
 </div>
