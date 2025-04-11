@@ -75,6 +75,14 @@ public class CollegeRepository {
                 .list();
     }
 
+    public List<College> findByLocation(String location) {
+        log.info("Finding college by location {}", location);
+        return jdbcClient.sql(SELECT_COLUMNS + " WHERE location LIKE :location")
+                .param("location", "%" + location + "%")
+                .query(College.class)
+                .list();
+    }
+
     public List<College> findByPage(Integer page, Integer collegesPerPage) {
         log.info("Finding {} colleges by page {}", collegesPerPage, page);
 
