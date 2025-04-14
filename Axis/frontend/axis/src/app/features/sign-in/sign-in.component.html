@@ -15,8 +15,7 @@
             required
             pattern="[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z0-9]+"
             placeholder="Enter your email"
-            class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-white placeholder:text-white
-                   focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm"
+            class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-[var(--mainText)] placeholder:text-[var(--mainText)] sm:text-sm"
           />
         </div>
         @if (emailField.dirty && emailField.invalid) {
@@ -38,8 +37,7 @@
             required
             minlength="8"
             placeholder="Enter your password"
-            class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-white placeholder:text-white
-                   focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm"
+            class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-[var(--mainText)] placeholder:text-[var(--mainText)] sm:text-sm"
           />
         </div>
         @if (passwordField.dirty && passwordField.invalid) {

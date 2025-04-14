@@ -6,6 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/documents")
@@ -42,29 +44,45 @@ public class DocumentController {
     }
 
 
-
-
-
-
-
-
-
-
     //    GET THE INFORMATION FROM THE LOCAL DATABASE
-    @GetMapping("/get/{document_id}")
+    @GetMapping("/getByID/{document_id}")
     public ResponseEntity<Document> getDocumentById(@PathVariable int document_id) {
         Document document = documentRepository.getByID(document_id);
         return ResponseEntity.ok(document);
     }
 
 
-    @GetMapping("/get/{student_email}")
-    public ResponseEntity<List<Document>> getDocumentByEmailAndCollegeID(@PathVariable String student_email) {
-        List<Document> documents = documentRepository.getByEmail(student_email);
-        return ResponseEntity.ok(documents);
+    @GetMapping("/getByEmail/{student_email}")
+    public ResponseEntity<List<Map<String, String>>> getDocumentByEmailAndCollegeID(@PathVariable String student_email) {
+        System.out.println("hitting the get doc enpoint");
+        List<Document> rawDocs = documentRepository.getByEmail(student_email);
+        List<Map<String, String>> docsWithUrls = rawDocs.stream().map(doc -> {
+            String fileUrl = s3Service.getFileUrl(doc.student_email(), doc.college_id(), doc.document_name());
+            return Map.of(
+                    "student_email", doc.student_email(),
+                    "college_id", String.valueOf(doc.college_id()),
+                    "filename", doc.document_name(),
+                    "fileUrl", fileUrl
+            );
+        }).toList();
+
+        return ResponseEntity.ok(docsWithUrls);
+
     }
 
-    @GetMapping("/get/{student_email}/{college_id}")
+    @GetMapping("/getGroupedByCollege/{student_email}")
+    public ResponseEntity<Map<String, List<Map<String, String>>>> getDocumentsGrouped(@PathVariable String student_email) {
+        List<Map<String, String>> documents = documentRepository.getDocumentsWithCollegeName(student_email);
+
+        Map<String, List<Map<String, String>>> grouped = documents.stream()
+                .collect(Collectors.groupingBy(doc -> doc.get("college_name")));
+
+        return ResponseEntity.ok(grouped);
+    }
+
+
+
+    @GetMapping("/getByEmailAndCollegeID/{student_email}/{college_id}")
     public ResponseEntity<List<Document>> getDocumentByEmailAndCollegeID(@PathVariable String student_email, @PathVariable int college_id) {
         List<Document> documents = documentRepository.getByEmailAndCollegeID(student_email, college_id);
         return ResponseEntity.ok(documents);

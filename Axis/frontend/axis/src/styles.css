@@ -1,19 +1,22 @@
 :root {
   --neutral: #000000;
-  --accent: #5f3f81;
   --secondary: #fff5e2;
   --llgrey: #F0F0F1;
   --ldgrey: #cccccc;
   --dlgrey: #8A8A8E;
   --ddgrey: #2C2C2C;
 
+  /*OVERALL*/
+  --accent: #5f3f81;
   --mainBg: #0a0a0a;
   --mainText: #e7e7e7;
   --secondaryText: #7a7a7a;
 
+  /*INPUTS*/
   --inputBox: #181818;
   --placeholderText: #4d4d4d;
 
+  /*BUTTONS*/
   --button: #42275b;
   --buttonHover: #5f3f81;
   --buttonDisabled: #313131;
@@ -21,7 +24,9 @@
   --buttonTextHover: #cccccc;
   --buttonText: #ffffff;
 
+  /*NAVBAR*/
   --navbarAccountButton: #131313;
+
   --cardBackground: #1f1f1f;
   --paginationActive: #545454;
   --pagination: #313131;
@@ -29,17 +34,25 @@
   --scholarshipStatus: #4b4b4b;
   --scholarshipDates: #4b4b4b;
   --resourceText: #e7e7e7;
+
+  /*ESSAY*/
+  --essayBg: #1f1f1f;
+  --essayText: #e7e7e7;
 }
 
 /* Light theme overrides */
 .light-theme {
+  /*OVERALL*/
+  --accent: #5f3f81;
   --mainBg: #ffffff;
   --mainText: #0a0a0a;
   --secondaryText: #5a5a5a;
 
+  /*INPUTS*/
   --inputBox: #efefef;
   --placeholderText: #808080;
 
+  /*BUTTONS*/
   --button: #d9d9d9;
   --buttonHover: #bbbbbb;
   --buttonDisabled: #e0e0e0;
@@ -47,13 +60,18 @@
   --buttonTextHover: #222222;
   --buttonText: #000000;
 
-  --navbarAccountButton: #f4f4f4;
-  --navbarAccountButtonText: #000000;
+  /*NAVBAR*/
+  --navbarAccountButton: #5f3f81;
+  --navbarAccountButtonText: #ffffff;
 
-  --cardBackground: #f7f7f7;
+  /*CARDS*/
+  --cardBackground: #ffffff;
   --paginationActive: #cccccc;
   --pagination: #eeeeee;
 
+  /*DISCOVER PAGE*/
+
+  /*RESOURCE PAGE*/
   --resourceBackground: #f9f9f9;
   --scholarshipStatus: #e4e4e4;
   --scholarshipDates: #e4e4e4;
@@ -182,8 +200,11 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  background-color: var(--inputBox) !important;
-  -webkit-text-fill-color: white !important;
+  box-shadow: 0 0 0 1000px var(--inputBox) inset !important;
+  -webkit-text-fill-color: var(--mainText) !important;
+  caret-color: var(--mainText);
+  border: 1px solid transparent;
   transition: background-color 5000s ease-in-out 0s;
 }
+
 

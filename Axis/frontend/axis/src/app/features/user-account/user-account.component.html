@@ -1,79 +1,54 @@
+<div class="px-[10%] py-36 font-satoshi text-white h-screen w-screen">
+  <div class="mb-12">
+    <p class="text-5xl font-bold mt-2 text-[var(--mainText)]">Welcome back, {{ account?.firstName }} 👋</p>
+  </div>
 
-
-<div (click)="outerDivClick()" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 "> 
-    <div (click)="innerDivClick($event)" class="fixed w-[55%] min-w-[400px] h-[90%] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white items-center justify-center z-50 rounded-lg shadow-lg">
-        <div class="flex flex-col m-10 gap-4">
-            <div class="text-4xl font-bold text-[var(--ddgrey)]">
-                My Account
-            </div>
-            <div class="flex justify-between items-center">
-                <div class="flex gap-2 items-center">
-                    <div class="px-2 py-2 bg-[var(--llgrey)] rounded-full aspect-square">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path> <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path> </svg> 
-                    </div>
-                    <div>Username</div>
-                </div>
-                
-                <div class="flex items-center whitespace-nowrap">
-                    <div class="text-[var(--dlgrey)] flex-shrink-0">First name:</div>
-                    <div class="ml-2 min-w-0 overflow-hidden text-ellipsis">{{userInfo.firstName}}</div>
-                </div>
-                
-                <div class="flex items-center whitespace-nowrap">
-                    <div class="text-[var(--dlgrey)] flex-shrink-0">Last name:</div>
-                    <div class="ml-2 min-w-0 overflow-hidden text-ellipsis">{{userInfo.lastName}}</div>
-                </div>
-            </div>
-            
-            <div class="flex flex-col justify-center gap-2">
-                <div class="text-2xl font-semibold">
-                    Contact Info
-                </div>
-                <div class="flex justify-between items-center">
-                    
-                    <div class="flex gap-2 flex-1 items-center whitespace-nowrap">
-                        <div class="text-[var(--dlgrey)] flex-shrink-0">Email:</div>
-                        <div class="ml-2 min-w-0 overflow-hidden text-ellipsis">{{userInfo.email}}</div>
-                    </div>
-                    
-                    <div class="flex gap-2 flex-1 items-center whitespace-nowrap">
-                        <div class="text-[var(--dlgrey)] flex-shrink-0">Phone Number:</div>
-                        <div class="ml-2 min-w-0 overflow-hidden text-ellipsis">{{userInfo.phoneNumber}}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col justify-center gap-2">
-                <div class="text-2xl font-semibold">
-                    Applicant Info
-                </div>
-                <div class="flex justify-between items-center">
-                    
-                    <div class="flex flex-1 gap-2 items-center whitespace-nowrap">
-                        <div class="text-[var(--dlgrey)] flex-shrink-0">GPA:</div>
-                        <div class="ml-2 min-w-0 overflow-hidden text-ellipsis">{{userInfo.GPA}}</div>
-                    </div>
-                    
-                    <div class="flex flex-1 gap-2 items-center whitespace-nowrap">
-                        <div class="text-[var(--dlgrey)] flex-shrink-0">SAT:</div>
-                        <div class="ml-2 min-w-0 overflow-hidden text-ellipsis">{{userInfo.satScore}}</div>
-                    </div>
-                </div>
-            </div>
-            <button class="bg-[var(--secondary)] self-start w-auto text-[var(--neutral)] px-4 py-2 text-md my-2 rounded-md ">
-                Edit Information
-            </button>
-            <div>
-                <div class="text-2xl font-semibold">
-                    Documents
-                </div>
-                <div class="flex flex-wrap justify-center gap-4 mx-2 pt-4">
-                    <div *ngFor="let doc of documents" class="items-center justify-center flex">
-                        <button class="text-sm px-5 py-2 bg-[var(--llgrey)] shadow rounded-full hover:shadow-md">
-                            {{doc}}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+    <div class="bg-[var(--inputBox)] rounded-2xl p-6 shadow">
+      <h2 class="text-xl font-semibold mb-4">Profile Information</h2>
+      <div class="space-y-2">
+        <p><span class="font-semibold text-[var(--dlgrey)]">First Name:</span> {{ account?.firstName }}</p>
+        <p><span class="font-semibold text-[var(--dlgrey)]">Last Name:</span> {{ account?.lastName }}</p>
+        <p><span class="font-semibold text-[var(--dlgrey)]">Email:</span> {{ account?.email }}</p>
+        <p><span class="font-semibold text-[var(--dlgrey)]">Phone:</span> {{ account?.phoneNumber || 'N/A' }}</p>
+      </div>
     </div>
+
+    <div class="bg-[var(--inputBox)] rounded-2xl p-6 shadow">
+      <h2 class="text-xl font-semibold mb-4">Applicant Details</h2>
+      <div class="space-y-2">
+        <p><span class="font-semibold text-[var(--dlgrey)]">GPA:</span> {{ account?.gpa }}</p>
+        <p><span class="font-semibold text-[var(--dlgrey)]">SAT Score:</span> {{ account?.satScore }}</p>
+        <p><span class="font-semibold text-[var(--dlgrey)]">ACT Score:</span> {{ account?.actScore }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-10 flex flex-row gap-3 justify-end">
+    <button class="px-6 py-2 bg-[var(--secondary)] text-[var(--neutral)] font-semibold rounded-md hover:shadow-lg transition">
+      Upload Document
+    </button>
+    <button class="px-6 py-2 bg-[var(--secondary)] text-[var(--neutral)] font-semibold rounded-md hover:shadow-lg transition">
+      Edit Information
+    </button>
+  </div>
+
+
+  <!-- Documents -->
+  <div *ngFor="let college of objectKeys(groupedDocuments)">
+    <div>
+
+    <h3 class="text-2xl font-bold mb-3 mt-5">{{ college }}</h3>
+    <div class="flex flex-wrap gap-4">
+      <app-document-card
+        *ngFor="let doc of groupedDocuments[college]"
+        [document]="doc">
+      </app-document-card>
+    </div>
+    </div>
+  </div>
+
+
+
+
 </div>

@@ -1,34 +1,53 @@
-import { NgFor } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../core/services/auth.service';
+import {DocumentService} from '../../core/services/document.service';
+import {DocumentCardComponent} from '../../shared/components/document-list-item/document-list-item.component';
+import { Document } from '../../core/services/document.service';
+
+
+interface Session {
+  email: string;
+  token: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber?: string;
+  gpa: string;
+  satScore: string;
+  actScore: string;
+}
 
 @Component({
   selector: 'app-user-account',
-  imports: [NgFor],
+  imports: [CommonModule, DocumentCardComponent],
   templateUrl: './user-account.component.html',
-  styleUrl: './user-account.component.css'
+  styleUrl: './user-account.component.css',
+  standalone: true
 })
-export class UserAccountComponent {
-  userInfo: any = {
-    firstName: "High",
-    lastName: "Schooler",
-    userName: "coolHighSchooler",
-    email: "coolpool@gmail.com",
-    phoneNumber: "4699276108",
-    satScore: 1540,
-    GPA: 4,
-    documents: [1,2,3,4]
+export class UserAccountComponent implements OnInit{
+  account: Session | null = null;
+  groupedDocuments: Record<string, Document[]> = {};
+  objectKeys = Object.keys;
+
+
+  constructor(
+    private documentService: DocumentService,
+    private authService: AuthService
+  ) {}
+
+
+
+  ngOnInit() {
+    this.account = this.authService.getSession();
+    const email = this.account?.email;
+    if (email) {
+      this.documentService.getGroupedDocumentsByCollege(email).subscribe({
+        next: grouped => this.groupedDocuments = grouped,
+        error: err => console.error('Failed to load grouped documents:', err)
+      });
+    }
   }
 
-  documents: any[] = ["Resume", "Transcript", "Transfer Credits", "AP Scores", "Recommendation Letter 1", "Recommendation Letter 2", "Personal Essay"]
-
-  @Output() closeMyAccountEvent = new EventEmitter<void>();
-
-  outerDivClick(): void {
-    this.closeMyAccountEvent.emit()
-  }
-
-  innerDivClick(event: MouseEvent) {
-    event.stopPropagation()
-  }
+  protected readonly sessionStorage = sessionStorage;
 }
 
