@@ -53,12 +53,19 @@ public class S3Service {
         return s3Client.getUrl(bucketName, fileKey).toExternalForm();
     }
 
-    // ✅ New: Download file text using components instead of URL
     public InputStream getFileInputStream(String studentEmail, int collegeID, String documentName) throws IOException {
         String fileKey = studentEmail + "/" + collegeID + "/" + documentName;
-        S3Object s3Object = s3Client.getObject(bucketName, fileKey);
-        return s3Object.getObjectContent();
+        try {
+            S3Object s3Object = s3Client.getObject(bucketName, fileKey);
+            System.out.println("Trying to load file: " + fileKey);
+            System.out.println("S3 Content-Type: " + s3Object.getObjectMetadata().getContentType());
+            return s3Object.getObjectContent();
+        } catch (Exception e) {
+            System.err.println("S3 File not found: " + fileKey);
+            throw e;
+        }
     }
+
 
 
 }

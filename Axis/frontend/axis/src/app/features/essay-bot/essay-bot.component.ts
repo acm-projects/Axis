@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import {Router} from '@angular/router';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 
 @Component({
   selector: 'app-essay-bot',
-  imports: [NgFor, NgIf, FormsModule],
+  imports: [NgFor, NgIf, FormsModule, EditorModule],
   templateUrl: './essay-bot.component.html',
   styleUrl: './essay-bot.component.css',
   standalone: true
@@ -21,6 +22,7 @@ export class EssayBotComponent implements OnInit{
 
   document: any;
   essayText: string = "";
+  essayTitle: string = "";
 
   constructor (private http: HttpClient,
                private zone: NgZone,
@@ -35,15 +37,16 @@ export class EssayBotComponent implements OnInit{
   ngOnInit() {
     if (this.document) {
       this.loadDocumentText();
+      this.essayTitle = this.document.filename;
     } else {
       console.error("Document not found in navigation state.");
     }
   }
 
   loadDocumentText() {
-    console.log("hit the load document method")
     const { student_email, college_id, filename } = this.document;
-    this.http.get('/api/documents/getFileText', {
+    console.log("hit the load document method" + " " + student_email + " " + college_id + " " + filename);
+    this.http.get('http://localhost:8080/api/documents/getFileText', {
       responseType: 'text',
       params: {
         student_email,

@@ -1,6 +1,6 @@
 <div class="flex flex-col px-20 py-2 gap-10 py-32 font-satoshi">
     <div class="flex justify-between mx-12">
-        <div class="text-4xl font-semibold text-[var(--mainText)]">Essay 1</div>
+        <div class="text-4xl font-semibold text-[var(--mainText)]">{{essayTitle}}</div>
         <div class="flex justify-center gap-4">
             <button class="flex justify-center items-center w-12 h-12 bg-[var(--mainBg)] rounded-full">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="32" height="32" stroke-width="1.5"> <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path> <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M14 4l0 4l-6 0l0 -4"></path> </svg>
@@ -17,9 +17,20 @@
         </div>
     </div>
     <div class="flex gap-8 mx-12">
-        <div class="w-[70%] bg-[var(--essayBg)] min-h-[1000px] rounded-md">
-          <button (click)="saveEditedText()" class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-md">Save Changes</button>
-          <textarea [(ngModel)]="essayText" class="w-full h-[1000px] p-4 bg-white text-black rounded-md"></textarea>
+        <div class="w-[70%] bg-[var(--essayBg)] min-h-[700px] rounded-md">
+<!--          <textarea [(ngModel)]="essayText" class="w-full h-full p-10 bg-[var(&#45;&#45;essayBg)] text-[var(&#45;&#45;mainText)] rounded-md"></textarea>-->
+          <editor
+                      [(ngModel)]="essayText"
+                      apiKey="no-api-key"
+                      [init]="{
+              height: 700,
+              menubar: false,
+              plugins: 'advlist autolink lists link charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste help wordcount',
+              toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+              content_style: 'body { font-family:Inter,sans-serif; font-size:16px }'
+            }"
+          ></editor>
+
         </div>
         <div class="flex w-[30%] flex-col justify-between bg-[var(--essayBg)] self-start h-[700px]">
             <div class="w-full py-3 px-8 text-2xl rounded-md mt-3 my-2">

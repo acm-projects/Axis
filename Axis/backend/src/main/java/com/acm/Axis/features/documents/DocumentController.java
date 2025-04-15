@@ -1,10 +1,15 @@
 package com.acm.Axis.features.documents;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,6 +25,7 @@ public class DocumentController {
         this.s3Service = s3Service;
         this.documentRepository = documentRepository;
     }
+
 
     @PostMapping("/uploadToS3")
     public ResponseEntity<String> uploadDocument(@RequestParam("file") MultipartFile file,
@@ -80,12 +86,31 @@ public class DocumentController {
         return ResponseEntity.ok(grouped);
     }
 
-
-
     @GetMapping("/getByEmailAndCollegeID/{student_email}/{college_id}")
     public ResponseEntity<List<Document>> getDocumentByEmailAndCollegeID(@PathVariable String student_email, @PathVariable int college_id) {
         List<Document> documents = documentRepository.getByEmailAndCollegeID(student_email, college_id);
         return ResponseEntity.ok(documents);
     }
+
+    @GetMapping("/getFileText")
+    public ResponseEntity<String> getFileText(@RequestParam String student_email,
+                                              @RequestParam int college_id,
+                                              @RequestParam String filename) {
+        try {
+            System.out.println("=== Hit /getFileText endpoint === params: " + student_email + ", " + college_id + ", " + filename );
+            InputStream inputStream = s3Service.getFileInputStream(student_email, college_id, filename);
+            try (PDDocument document = PDDocument.load(inputStream)) {
+                PDFTextStripper stripper = new PDFTextStripper();
+                String text = stripper.getText(document);
+                return ResponseEntity.ok(text);
+            }
+        } catch (Exception e) {
+            System.err.println("Error reading PDF: " + e.getMessage());
+            return ResponseEntity.status(404).body("Document not found or unreadable.");
+        }
+    }
+
+
+
 
 }

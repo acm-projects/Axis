@@ -19,9 +19,13 @@
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
     "@splinetool/runtime": "^1.9.82",
+    "@tinymce/tinymce-angular": "^8.0.1",
     "ngx-mask": "^19.0.6",
+    "ngx-quill": "^27.0.2",
     "pdf-lib": "^1.17.1",
+    "quill": "^2.0.3",
     "rxjs": "~7.8.0",
+    "tinymce": "^7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
