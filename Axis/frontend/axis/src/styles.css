@@ -38,6 +38,9 @@
   /*ESSAY*/
   --essayBg: #1f1f1f;
   --essayText: #e7e7e7;
+
+  /*UPLOAD DOCUMENT*/
+  --uploadBackground: #1f1f1f;
 }
 
 /* Light theme overrides */

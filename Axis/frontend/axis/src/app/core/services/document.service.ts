@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import {AuthService} from './auth.service';
 
 export interface Document {
+  document_id: number;
   student_email: string;
   college_id: number;
   filename: string;

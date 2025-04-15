@@ -48,7 +48,7 @@ export const routes: Routes = [
         component: DashboardComponent
     },
     {
-        path: "essay/:id",
-        component: EssayBotComponent
+      path: 'essays/:id',
+      component: EssayBotComponent
     }
 ];

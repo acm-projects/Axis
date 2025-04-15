@@ -4,6 +4,7 @@ import {AuthService} from '../../core/services/auth.service';
 import {DocumentService} from '../../core/services/document.service';
 import {DocumentCardComponent} from '../../shared/components/document-list-item/document-list-item.component';
 import { Document } from '../../core/services/document.service';
+import {DocumentUploadOverlayComponent} from '../add-document/add-document.component';
 
 
 interface Session {
@@ -19,7 +20,7 @@ interface Session {
 
 @Component({
   selector: 'app-user-account',
-  imports: [CommonModule, DocumentCardComponent],
+  imports: [CommonModule, DocumentCardComponent, DocumentUploadOverlayComponent],
   templateUrl: './user-account.component.html',
   styleUrl: './user-account.component.css',
   standalone: true
@@ -28,6 +29,7 @@ export class UserAccountComponent implements OnInit{
   account: Session | null = null;
   groupedDocuments: Record<string, Document[]> = {};
   objectKeys = Object.keys;
+  showUpload = false;
 
 
   constructor(
@@ -39,6 +41,12 @@ export class UserAccountComponent implements OnInit{
 
   ngOnInit() {
     this.account = this.authService.getSession();
+
+    this.loadDocuments();
+  }
+
+
+  loadDocuments() {
     const email = this.account?.email;
     if (email) {
       this.documentService.getGroupedDocumentsByCollege(email).subscribe({
