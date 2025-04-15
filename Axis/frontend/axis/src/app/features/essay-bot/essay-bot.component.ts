@@ -1,36 +1,98 @@
 import { NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, NgZone } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
+import {Router} from '@angular/router';
+import { PDFDocument, StandardFonts } from 'pdf-lib';
 
 
 @Component({
   selector: 'app-essay-bot',
   imports: [NgFor, NgIf, FormsModule],
   templateUrl: './essay-bot.component.html',
-  styleUrl: './essay-bot.component.css'
+  styleUrl: './essay-bot.component.css',
+  standalone: true
 })
-export class EssayBotComponent {
+export class EssayBotComponent implements OnInit{
   chatLog: string[];
   message: string;
   apiUrl = "http://localhost:8080/api/essay";
 
-  constructor (private http: HttpClient, private zone: NgZone) {
+  document: any;
+  essayText: string = "";
+
+  constructor (private http: HttpClient,
+               private zone: NgZone,
+               private router: Router) {
     this.chatLog = ["Hi, I am chat! How can I help?"]
     this.message=""
+    const nav = this.router.getCurrentNavigation();
+    this.document = nav?.extras.state?.['document'];
+
   }
-  
+
+  ngOnInit() {
+    if (this.document) {
+      this.loadDocumentText();
+    } else {
+      console.error("Document not found in navigation state.");
+    }
+  }
+
+  loadDocumentText() {
+    console.log("hit the load document method")
+    const { student_email, college_id, filename } = this.document;
+    this.http.get('/api/documents/getFileText', {
+      responseType: 'text',
+      params: {
+        student_email,
+        college_id: college_id.toString(),
+        filename
+      }
+    }).subscribe({
+      next: text => this.essayText = text,
+      error: err => {
+        console.error('Could not load essay:', err);
+        this.essayText = '[Failed to load document]';
+      }
+    });
+
+  }
+
+
+  async saveEditedText() {
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage();
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    page.drawText(this.essayText, { x: 50, y: 700, size: 12, font });
+
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const file = new File([blob], this.document.filename);
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("studentEmail", this.document.student_email);
+    formData.append("collegeID", this.document.college_id.toString());
+
+    this.http.post('/api/documents/uploadToS3', formData).subscribe({
+      next: () => alert('PDF updated!'),
+      error: err => console.error('Upload failed:', err)
+    });
+  }
+
+
 
   submitMessage() {
     if (this.message.trim()) {
       this.chatLog.push(this.message);
-      
+
       const sentMessage = this.message;
       this.message = "";
-      
+
       const loadingIndex = this.chatLog.push("") - 1;
-      
+
       this.passUserMessage(sentMessage).subscribe({
         next: (response) => {
           this.chatLog[loadingIndex] += response + " ";
@@ -41,7 +103,7 @@ export class EssayBotComponent {
       });
     }
   }
-  
+
   passUserMessage(message: string): Observable<string> {
     return new Observable<string>(observer => {
       const eventSource = new EventSource(`${this.apiUrl}?message=${encodeURIComponent(message)}`);
@@ -51,18 +113,18 @@ export class EssayBotComponent {
         this.zone.run(() => observer.error(error));
         eventSource.close();
       };
-    
+
       eventSource.onmessage = (event) => {
           this.zone.run(() => {
               observer.next(event.data);
           });
       };
-      
+
       return () => {
           console.log("Closing SSE connection...");
           eventSource.close();
       };
 
     });
-  } 
+  }
 }

@@ -1,6 +1,4 @@
-<!-- document-card.component.html -->
-<a [href]="document.fileUrl" target="_blank" class="text-sm text-[var(--secondary)]">
-
+<a [routerLink]="['/essay']" [state]="{ document: document }" class="text-sm text-[var(--secondary)]">
   <div class="bg-[var(--inputBox)] p-4 px-5 rounded-lg shadow w-full max-w-xs">
     <div class="flex justify-between items-center">
       <div class="font-semibold text-[var(--mainText)] truncate">
@@ -8,6 +6,4 @@
       </div>
     </div>
   </div>
-
 </a>
-
