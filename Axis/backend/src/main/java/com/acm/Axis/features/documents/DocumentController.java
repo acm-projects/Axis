@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -101,8 +102,12 @@ public class DocumentController {
             InputStream inputStream = s3Service.getFileInputStream(student_email, college_id, filename);
             try (PDDocument document = PDDocument.load(inputStream)) {
                 PDFTextStripper stripper = new PDFTextStripper();
-                String text = stripper.getText(document);
-                return ResponseEntity.ok(text);
+                String rawText = stripper.getText(document);
+                String htmlText = Arrays.stream(rawText.split("\\r?\\n"))
+                        .map(line -> "<p>" + line.trim() + "</p>")
+                        .collect(Collectors.joining());
+                return ResponseEntity.ok(htmlText);
+
             }
         } catch (Exception e) {
             System.err.println("Error reading PDF: " + e.getMessage());

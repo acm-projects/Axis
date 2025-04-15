@@ -21,7 +21,7 @@
 <!--          <textarea [(ngModel)]="essayText" class="w-full h-full p-10 bg-[var(&#45;&#45;essayBg)] text-[var(&#45;&#45;mainText)] rounded-md"></textarea>-->
           <editor
                       [(ngModel)]="essayText"
-                      apiKey="no-api-key"
+                      apiKey=environment.tinymceApiKey
                       [init]="{
               height: 700,
               menubar: false,

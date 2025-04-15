@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import {Router} from '@angular/router';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { environment} from '../../../environments/environment';
 
 
 @Component({
