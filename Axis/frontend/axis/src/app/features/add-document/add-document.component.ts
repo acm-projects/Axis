@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
@@ -10,17 +10,38 @@ import {FormsModule} from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
 })
-export class DocumentUploadOverlayComponent {
+export class DocumentUploadOverlayComponent implements OnInit {
   @Input() isVisible = false;
   @Output() closed = new EventEmitter<void>();
   @Output() uploaded = new EventEmitter<void>();
+  // selecting college part
+  listOfColleges: {collegeId: string; name: string}[]  = [];
+  filteredColleges: {collegeId: string; name: string}[]  = [];
+  searchTerm = '';
+  // // the college id is stored in a var below
 
+
+  // to be sent to post request
   selectedFile: File | null = null;
   studentEmail = '';
   collegeId = '';
   isLoading = false;
 
   constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.http.get<{collegeId: string; name: string}[]>("http://localhost:8080/api/colleges/getIdsAndNames").subscribe({
+      next: (res) => {
+        this.listOfColleges = res;
+      },
+      error: (err) => {
+        console.error("Error:", err); // ✅ Print full error
+      },
+      complete: () => {
+        console.log("Request completed");
+      }
+    });
+  }
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;

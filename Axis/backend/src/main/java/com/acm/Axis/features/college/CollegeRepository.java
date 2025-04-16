@@ -75,6 +75,15 @@ public class CollegeRepository {
                 .list();
     }
 
+    public List<CollegeDTO> getIdsAndNames() {
+        return jdbcClient.sql("SELECT college_id, name FROM colleges")
+                .query((rs, index) -> new CollegeDTO(
+                        rs.getString("college_id"),
+                        rs.getString("name")
+                ))
+                .list();
+    }
+
     public List<College> findByPage(Integer page, Integer collegesPerPage) {
         log.info("Finding {} colleges by page {}", collegesPerPage, page);
 

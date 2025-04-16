@@ -23,14 +23,20 @@
         required
         class="mb-4 w-full p-3 px-4 rounded text-[mainText] bg-[var(--inputBox)] focus:bg-[var(--inputBox)] focus:outline-none focus:ring-0 focus:border-transparent"
       />
-      <input
-        type="text"
+
+      <select
         [(ngModel)]="collegeId"
         name="collegeId"
-        placeholder="College ID"
         required
-        class="mb-4 w-full p-3 px-4 rounded text-[mainText] bg-[var(--inputBox)] focus:bg-[var(--inputBox)] focus:outline-none focus:ring-0 focus:border-transparent"
-      />
+        class="mb-4 w-full p-3 px-4 rounded text-[mainText] bg-[var(--inputBox)] focus:outline-none focus:ring-0 focus:border-transparent"
+      >
+        <option value="" disabled selected>Select a college</option>
+        <option *ngFor="let college of listOfColleges" [value]="college.collegeId">
+          {{ college.name }}
+        </option>
+      </select>
+
+
       <button
         type="submit"
         class="w-full bg-[var(--accent)] hover:bg-opacity-50 text-white py-2 rounded"
