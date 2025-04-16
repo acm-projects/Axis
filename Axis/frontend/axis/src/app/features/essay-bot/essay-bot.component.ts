@@ -50,7 +50,7 @@ export class EssayBotComponent implements OnInit{
       editor.on('init', () => {
         const style = document.createElement('style');
         style.innerHTML = `
-        .tox-editor-container, .tox-editor-header, .tox-toolbar, .ng-untouched, .tox, .tox-toolbar__group, .tox-tbtn, .tox-statusbar, .tox-statusbar__text-container {
+        .tox-editor-container, .tox-editor-header, .tox-toolbar, .ng-untouched, .tox, .tox-toolbar__group, .tox-tbtn, .tox-statusbar, .tox-statusbar__text-container, .tox-toolbar-overlord {
           background-color: #131313 !important;
         }
         .tox-statusbar__branding, .tox-statusbar__path-item {
