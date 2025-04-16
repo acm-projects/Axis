@@ -20,16 +20,11 @@
         <div class="w-[70%] bg-[var(--essayBg)] min-h-[700px] rounded-md">
 <!--          <textarea [(ngModel)]="essayText" class="w-full h-full p-10 bg-[var(&#45;&#45;essayBg)] text-[var(&#45;&#45;mainText)] rounded-md"></textarea>-->
           <editor
-                      [(ngModel)]="essayText"
-                      apiKey=environment.tinymceApiKey
-                      [init]="{
-              height: 700,
-              menubar: false,
-              plugins: 'advlist autolink lists link charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste help wordcount',
-              toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-              content_style: 'body { font-family:Inter,sans-serif; font-size:16px }'
-            }"
+            [(ngModel)]="essayText"
+            apiKey=environment.tinymceApiKey
+            [init]="editorConfig"
           ></editor>
+
 
         </div>
         <div class="flex w-[30%] flex-col justify-between bg-[var(--essayBg)] self-start h-[700px]">
