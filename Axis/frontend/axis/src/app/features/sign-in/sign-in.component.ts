@@ -38,13 +38,26 @@ export class SignInComponent implements OnInit {
       }
     ).subscribe({
       next: (response: any) => {
-        this.authService.saveSession({
-          email: this.email,
-          token: response.token
-        });
-        this.router.navigate(['/']); // Redirect to home page
+        console.log('Login response:', response);
+        if (response && response.account) {
+          this.authService.saveSession({
+            email: response.account.email,             // Ensure backend returns this field
+            token: response.token,
+            firstName: response.account.first_name,      // Convert snake_case to camelCase here
+            lastName: response.account.last_name,
+            phoneNumber: response.account.phone_number,
+            gpa: response.account.gpa,
+            satScore: response.account.sat_score,
+            actScore: response.account.act_score
+          });
+          this.router.navigate(['/']); // Redirect to home page
+        } else {
+          console.error('Login response did not contain account details.');
+          this.invalidCredentials = true;
+        }
       },
       error: error => {
+        console.error("Login failed:", error);
         this.invalidCredentials = true;
       }
     });

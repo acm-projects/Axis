@@ -1,5 +1,5 @@
 <nav class="bg-transparent absolute top-0 left-0 right-0 z-10">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-2 pt-1">
         <div class="relative flex h-20 items-center justify-between" (click)="updateAccountButtonText()">
             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div class="flex shrink-0 items-center">
@@ -25,6 +25,14 @@
                      class="rounded-md px-3 py-2 text-base font-medium text-[var(--mainText)]">
                     Resources
                   </a>
+
+                  <a [@linkHover]="hoverStateResources"
+                     (mouseenter)="hoverStateResources = 'yes'"
+                     (mouseleave)="hoverStateResources = 'no'"
+                     routerLink="essay/:1" routerLinkActive="active" [queryParams]="{page: 1}"
+                     class="rounded-md px-3 py-2 text-base font-medium text-[var(--mainText)]">
+                    Essay
+                  </a>
                 </div>
                 <div class="flex ml-4">
                   @if (userLoggedIn) {
@@ -35,7 +43,7 @@
                      (mouseenter)="hoverStateMyAccount = 'yes'"
                      (mouseleave)="hoverStateMyAccount = 'no'"
                      class="flex space-x-2 rounded-md bg-[var(--navbarAccountButton)] px-3 pl-4 py-2">
-                        <p class="text-base font-medium text-white"
+                        <p class="text-base font-medium text-[var(--navbarAccountButtonText)]"
                            aria-current="page">My Account</p>
                         <img class="size-3 my-auto"
                              src="assets/navbar-dropdown-down-arrow.png">
@@ -43,8 +51,9 @@
                       <div id="dropdown-menu"
                            class="absolute right-0 z-10 mt-2 w-auto origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5"
                            [ngClass]="{'hidden': !dropdownToggle}">
-                        <a href="#" class="block px-5 py-2 text-base text-gray-700 hover:bg-[var(--buttonHover)] hover:text-white">Profile</a>
+                        <a routerLink="account/:1" routerLinkActive="active" href="#" class="block px-5 py-2 text-base text-gray-700 hover:bg-[var(--buttonHover)] hover:text-white">Profile</a>
                         <a href="#" class="block px-5 py-2 text-base text-gray-700 hover:bg-[var(--buttonHover)] hover:text-white">Settings</a>
+                        <a routerLink="dashboard" routerLinkActive="active" class="block px-5 py-2 text-base text-gray-700 hover:bg-[var(--buttonHover)] hover:text-white">Dashboard</a>
                         <a routerLink="" routerLinkActive="active" (click)="logout()"
                            class="block px-5 py-2 text-base text-gray-700 hover:bg-[var(--buttonHover)] hover:text-white">Sign Out</a>
                       </div>
@@ -67,6 +76,12 @@
                          class="rounded-md bg-[var(--navbarAccountButton)] px-3 py-2 text-base font-medium text-white" aria-current="page">{{accountButtonText}}</a>
                   }
                 </div>
+              <label class="relative inline-flex items-center cursor-pointer ml-4">
+                <input type="checkbox" class="sr-only peer" [checked]="isLight" (change)="toggleTheme()">
+                <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:bg-[var(--accent)] transition-all duration-300"></div>
+                <div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-all duration-300 peer-checked:translate-x-full"></div>
+              </label>
+
             </div>
         </div>
     </div>

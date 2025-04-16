@@ -1,0 +1,50 @@
+<div *ngIf="isVisible"
+     class="font-satoshi absolute left-0 top-0 flex flex-row justify-center items-center w-screen h-screen bg-black bg-opacity-60 z-50"
+>
+  <div
+    class="flex flex-col w-[35%] h-max bg-[var(--uploadBackground)] rounded-lg shadow-xl p-10">
+
+    <div class="flex flex-row items-center bg-[var(--uploadBackground)]">
+
+      <button (click)='close()' class="text-2xl">✖</button>
+      <h2 class="text-3xl font-bold mb-4 text-center w-full">Upload Document</h2>
+
+
+    </div>
+    <form (ngSubmit)="upload()" #uploadForm="ngForm"
+          class="px-6 self-end h-full my-10 bg-[var(--uploadBackground)]">
+
+      <input type="file" (change)="onFileSelected($event)" required class="mb-4 w-full" />
+      <input
+        type="email"
+        [(ngModel)]="studentEmail"
+        name="email"
+        placeholder="Student Email"
+        required
+        class="mb-4 w-full p-3 px-4 rounded text-[mainText] bg-[var(--inputBox)] focus:bg-[var(--inputBox)] focus:outline-none focus:ring-0 focus:border-transparent"
+      />
+
+      <select
+        [(ngModel)]="collegeId"
+        name="collegeId"
+        required
+        class="mb-4 w-full p-3 px-4 rounded text-[mainText] bg-[var(--inputBox)] focus:outline-none focus:ring-0 focus:border-transparent"
+      >
+        <option value="" disabled selected>Select a college</option>
+        <option *ngFor="let college of listOfColleges" [value]="college.collegeId">
+          {{ college.name }}
+        </option>
+      </select>
+
+
+      <button
+        type="submit"
+        class="w-full bg-[var(--accent)] hover:bg-opacity-50 text-white py-2 rounded"
+        [disabled]="isLoading"
+      >
+        {{ isLoading ? 'Uploading...' : 'Upload' }}
+      </button>
+
+    </form>
+
+</div>

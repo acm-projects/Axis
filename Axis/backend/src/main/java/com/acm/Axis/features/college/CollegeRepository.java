@@ -53,7 +53,7 @@ public class CollegeRepository {
             application_link AS applicationLink,
             campus_life AS campusLife,
             majors_available AS majorsAvailable,
-            "desc" AS description
+            description
         FROM colleges
         """;
 
@@ -124,6 +124,15 @@ public class CollegeRepository {
         return jdbcClient.sql(SELECT_COLUMNS + " WHERE name ILIKE :keyword")
                 .param("keyword", "%" + keyword + "%")
                 .query(College.class)
+                .list();
+    }
+
+    public List<CollegeDTO> getIdsAndNames() {
+        return jdbcClient.sql("SELECT college_id, name FROM colleges")
+                .query((rs, index) -> new CollegeDTO(
+                        rs.getString("college_id"),
+                        rs.getString("name")
+                ))
                 .list();
     }
 

@@ -25,6 +25,21 @@ public class CollegeController {
         return collegeRepository.getAll();
     }
 
+    @GetMapping("/getIdsAndNames")
+    List<CollegeDTO> getIdsAndNames() {
+        return collegeRepository.getIdsAndNames();
+    }
+
+    @GetMapping("/searchByID/{college_id}")
+    College getById(@PathVariable Integer college_id) {
+        return collegeRepository.findById(college_id).orElse(null);
+    }
+
+    @GetMapping("/searchByName/{name}")
+    List<College> getByName(@PathVariable String name) {
+        return collegeRepository.findByName(name);
+    }
+
     @GetMapping("/searchByPage/{page}/{colleges_per_page}")
     List<College> getByPage(@PathVariable Integer page, @PathVariable Integer colleges_per_page) {
         return collegeRepository.findByPage(page, colleges_per_page);

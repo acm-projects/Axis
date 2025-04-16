@@ -5,6 +5,7 @@ backend/HELP.md
 !**/src/test/**/target/
 
 
+!frontend/axis/.env
 
 ### STS ###
 .apt_generated

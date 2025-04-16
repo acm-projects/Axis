@@ -34,7 +34,7 @@ public class StudentRepository {
                         rs.getDouble("gpa"),
                         rs.getInt("sat_score"),
                         rs.getInt("act_score"),
-                        rs.getString("password") // ✅ Ensure password is retrieved
+                        rs.getString("password")
                 ))
                 .optional();
     }

@@ -10,8 +10,8 @@
             <label for="firstName" class="block text-sm/6 font-medium text-[var(--mainText)]">First name</label>
             <div class="mt-2">
               <input type="text" name="firstName" id="firstName" #firstNameField="ngModel" [(ngModel)]="firstName" required pattern="[A-Za-z]+"
-                     class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-white
-                              placeholder:text-white focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
+                     class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-[var(--mainText)]
+                              placeholder:text-[var(--mainText)] focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
             </div>
             @if (firstNameField.dirty) {
               @if (firstName.length === 0) {
@@ -32,8 +32,8 @@
             <label for="lastName" class="block text-sm/6 font-medium text-[var(--mainText)]">Last name</label>
             <div class="mt-2">
               <input type="text" name="lastName" id="lastName" #lastNameField="ngModel" [(ngModel)]="lastName" required pattern="[A-Za-z]+"
-                     class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-white
-                              placeholder:text-white focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
+                     class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-[var(--mainText)]
+                              placeholder:text-[var(--mainText)] focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
             </div>
             @if (lastNameField.dirty) {
               @if (lastName.length === 0) {
@@ -57,8 +57,8 @@
             <label for="phoneNumber" class="block text-sm/6 font-medium text-[var(--mainText)]">Phone number</label>
             <div class="mt-2">
               <input type="tel" name="phoneNumber" id="phoneNumber" #phoneNumberField="ngModel" [(ngModel)]="phoneNumber" mask="(000) 000-0000"
-                     class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-white
-                              placeholder:text-white focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
+                     class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-[var(--mainText)]
+                              placeholder:text-[var(--mainText)] focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
             </div>
             <div *ngIf="phoneNumberField.invalid" class="mt-2">
               <strong class="text-red-500 text-sm text-center">Please enter a valid phone number.</strong>
@@ -68,8 +68,8 @@
             <label for="email" class="block text-sm/6 font-medium text-[var(--mainText)]">Email address</label>
             <div class="mt-2">
               <input type="text" name="email" id="email" #emailField="ngModel" [(ngModel)]="email" required pattern="[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z0-9]+"
-                     class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-white
-                              placeholder:text-white focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
+                     class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-[var(--mainText)]
+                              placeholder:text-[var(--mainText)] focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
             </div>
             @if (emailField.dirty) {
               @if (email.length === 0) {
@@ -103,8 +103,8 @@
             <div class="mt-2">
               <input type="password" name="password" id="password" #passwordField="ngModel" [(ngModel)]="password" required minlength="8" maxlength="20"
                      pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_])[^\s]+$"
-                     class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-white
-                              placeholder:text-white focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
+                     class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-[var(--mainText)]
+                              placeholder:text-[var(--mainText)] focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
             </div>
             @if (passwordField.dirty) {
               @if (password.length === 0) {
@@ -126,8 +126,8 @@
             <div class="mt-2">
               <input type="password" name="confirmPassword" id="confirmPassword" #confirmPasswordField="ngModel"
                      [(ngModel)]="confirmPassword" required minlength="8" maxlength="20"
-                     class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-white
-                              placeholder:text-white focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
+                     class="block w-full rounded-md bg-[var(--inputBox)] px-3 py-1.5 text-base text-[var(--mainText)]
+                              placeholder:text-[var(--mainText)] focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600 sm:text-sm" />
             </div>
             <div *ngIf="confirmPasswordField.dirty && password !== confirmPassword" class="mt-2">
               <strong class="text-red-500 text-sm text-center">Passwords do not match.</strong>

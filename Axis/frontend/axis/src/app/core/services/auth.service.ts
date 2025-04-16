@@ -1,38 +1,54 @@
+// src/app/core/services/auth.service.ts
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+interface Session {
+  email: string;
+  token: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber?: string;
+  gpa: string;
+  satScore: string;
+  actScore: string;
+}
+
 @Injectable({
-  providedIn: 'root', // Ensures the service is a singleton
+  providedIn: 'root'
 })
 export class AuthService {
-  private userKey: string = 'user'; // Key for storing user data in localStorage
-  
-  // BehaviorSubject to track auth state
+  private userKey = 'user';
+  // Use a BehaviorSubject to track authentication state if needed
   private authState = new BehaviorSubject<boolean>(this.checkSession());
   isLoggedIn = this.authState.asObservable();
 
   constructor() {}
 
-  // Check if user session exists
   private checkSession(): boolean {
     return !!localStorage.getItem(this.userKey);
   }
 
-  // Save user session (after login)
-  saveSession(user: { email: string; token: string }): void {
-    localStorage.setItem(this.userKey, JSON.stringify(user));
-    this.authState.next(true); // Notify subscribers
+  // Save the session data (token + account details) after login
+  saveSession(session: Session): void {
+    localStorage.setItem(this.userKey, JSON.stringify(session));
+    this.authState.next(true);
   }
 
-  // Get user session
-  getSession(): { email: string; token: string } | null {
+  // Retrieve the session data
+  getSession(): Session | null {
     const session = localStorage.getItem(this.userKey);
     return session ? JSON.parse(session) : null;
   }
 
-  // Log out user
   logout(): void {
     localStorage.removeItem(this.userKey);
-    this.authState.next(false); // Notify subscribers
+    this.authState.next(false);
+  }
+
+  // For convenience, a getter to retrieve the email/primary key
+  getUserEmail(): string | null {
+    const session = this.getSession();
+    return session?.email || null;
   }
 }

@@ -54,4 +54,6 @@ public class AuthService {
         return jwtUtils.generateToken(email);
     }
 
+
+
 }
