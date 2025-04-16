@@ -29,7 +29,7 @@ public class DocumentController {
             String fileName = file.getOriginalFilename();
 
             int collegeIdInt = Integer.parseInt(collegeID);
-            Document document = new Document(studentEmail, collegeIdInt, fileName);
+            Document document = new Document(-1, studentEmail, collegeIdInt, fileName);
 
             documentRepository.uploadDocument(document);
 
@@ -42,15 +42,15 @@ public class DocumentController {
     }
 
 
-//    //    GET THE INFORMATION FROM THE LOCAL DATABASE
-//    @GetMapping("/get/{document_id}")
-//    public ResponseEntity<Document> getDocumentById(@PathVariable int document_id) {
-//        Document document = documentRepository.getByID(document_id);
-//        return ResponseEntity.ok(document);
-//    }
+    //    GET THE INFORMATION FROM THE LOCAL DATABASE
+    @GetMapping("/get/{document_id}")
+    public ResponseEntity<Document> getDocumentById(@PathVariable int document_id) {
+        Document document = documentRepository.getByID(document_id);
+        return ResponseEntity.ok(document);
+    }
 
 
-    @GetMapping("/get/{student_email}")
+    @GetMapping("/getDocuments/{student_email}")
     public ResponseEntity<List<Document>> getDocumentByEmail(@PathVariable String student_email) {
         List<Document> documents = documentRepository.getByEmail(student_email);
         return ResponseEntity.ok(documents);

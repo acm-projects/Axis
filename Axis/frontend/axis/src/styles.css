@@ -2,6 +2,7 @@
 :root {
     --neutral: #000000;  /* Define the variable */
     --accent: #5f3f81;
+    --accentBright: #7C3AED;
     --secondary: #fff5e2;
     --llgrey: #F0F0F1;
     --ldgrey: #cccccc;

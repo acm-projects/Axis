@@ -5,10 +5,11 @@ import { AuthService } from '../../core/services/auth.service';
 import { Student, StudentInfo } from '../../core/models/student.model';
 import { FormsModule } from '@angular/forms';
 import { DocumentInfo } from '../../core/models/document.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-account',
-  imports: [NgFor, FormsModule, NgClass],
+  imports: [NgFor, FormsModule, NgClass, RouterLink],
   templateUrl: './user-account.component.html',
   styleUrl: './user-account.component.css'
 })
@@ -20,7 +21,8 @@ export class UserAccountComponent {
   saved: boolean = false
 
   baseUrl : string = "http://localhost:8080/api/students"
-  docUrl : string = "http://localhost:8080/api/documents/get"
+  docUrl : string = "http://localhost:8080/api/documents/getDocuments"
+  
   constructor (private http: HttpClient, private authService: AuthService) {}
 
   @Output() closeMyAccountEvent = new EventEmitter<void>();
@@ -49,13 +51,13 @@ export class UserAccountComponent {
 
   getStudentDocumentInfo() : void {
     //${this.authService.getSession()?.email}
+    //https://axisdocuments.s3.us-west-2.amazonaws.com/kevinphilip2004%40gmail.com/35/CS4141_Pre1_lxv220012.pdf
     this.http.get<DocumentInfo[]>(`${this.docUrl}/kevinphilip2004@gmail.com`).subscribe({
       next: (response: DocumentInfo[]) => {
        this.studentDocumentInfo = response
-       console.log(this.studentDocumentInfo)
       },
       error: (error) => {
-        console.log("Error retreving documents " + error)
+        console.error("Error retreving documents")
       }
     })
   }
@@ -72,7 +74,7 @@ export class UserAccountComponent {
           this.saved = true;
         },
         error: (error) => {
-          console.log("Error updating user data: " + error)
+          console.error("Error updating user data: " + error)
           this.getStudentInfo()
         }
       })

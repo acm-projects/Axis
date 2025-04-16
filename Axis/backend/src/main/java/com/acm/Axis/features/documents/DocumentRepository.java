@@ -20,10 +20,15 @@ public class DocumentRepository {
 
 
     public Document getByID(int document_id) {
-        return jdbcClient.sql("SELECT * FROM applications WHERE application_id = :id")
-                .param("id", document_id)
-                .query(Document.class)
-                .single();
+        try {
+            return jdbcClient.sql("SELECT * FROM documents WHERE document_id = :id")
+                    .param("id", document_id)
+                    .query(Document.class)
+                    .single();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
     }
 
     public List<Document> getByEmail(String email) {

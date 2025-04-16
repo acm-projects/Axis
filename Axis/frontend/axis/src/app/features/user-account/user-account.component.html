@@ -21,7 +21,7 @@
                   <div class="flex gap-2 items-center min-w-0 w-full">
                     
                     <div class="text-[var(--dlgrey)] whitespace-nowrap">First name:</div>
-                    <input type="text" class="min-w-0 w-full flex-shrink py-1 px-2 border rounded-md" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['first_name']"/>
+                    <input type="text" class="text-black min-w-0 w-full flex-shrink py-1 px-2 border rounded-md" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['first_name']"/>
 
                   </div>
                 </div>
@@ -29,7 +29,7 @@
                 <div class="flex flex-1 basis-0 min-w-0 justify-start">
                   <div class="flex gap-2 items-center">
                     <div class="text-[var(--dlgrey)] whitespace-nowrap">Last name:</div>
-                    <input type="text" class="min-w-0 w-full flex-shrink py-1 px-2 border rounded-md" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['last_name']"/>
+                    <input type="text" class="text-black min-w-0 w-full flex-shrink py-1 px-2 border rounded-md" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['last_name']"/>
                   </div>
                 </div>
             </div>
@@ -42,12 +42,12 @@
                     
                     <div class="flex gap-2 flex-1 items-center whitespace-nowrap">
                         <div class="text-[var(--dlgrey)] flex-shrink-0">Email:</div>
-                        <input class="min-w-0 w-full flex-shrink py-1 px-2 border rounded-md" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['email']"/>
+                        <input class="text-black min-w-0 w-full flex-shrink py-1 px-2 border rounded-md" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['email']"/>
                     </div>
                     
                     <div class="flex gap-2 flex-1 items-center whitespace-nowrap">
                         <div class="text-[var(--dlgrey)] flex-shrink-0">Phone Number:</div>
-                        <input class="min-w-0 w-full flex-shrink py-1 px-2 border rounded-md" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['phone_number']"/>
+                        <input class="text-black min-w-0 w-full flex-shrink py-1 px-2 border rounded-md" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['phone_number']"/>
                     </div>
                 </div>
             </div>
@@ -59,12 +59,12 @@
                     
                     <div class="flex flex-1 gap-2 items-center whitespace-nowrap">
                         <div class="text-[var(--dlgrey)] flex-shrink-0">GPA:</div>
-                        <input type="number" class="min-w-0 w-full flex-shrink py-1 px-2 border rounded-md w-[100px]" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['gpa']"/>
+                        <input type="number" class="text-black min-w-0 w-full flex-shrink py-1 px-2 border rounded-md w-[100px]" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['gpa']"/>
                     </div>
                     
                     <div class="flex flex-1 gap-2 items-center whitespace-nowrap">
                         <div class="text-[var(--dlgrey)] flex-shrink-0">SAT:</div>
-                        <input type="number" class="min-w-0 w-full flex-shrink py-1 px-2 border rounded-md w-[100px]" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['sat_score']"/>
+                        <input type="number" class="text-black min-w-0 w-full flex-shrink py-1 px-2 border rounded-md w-[100px]" [ngClass]="editing ? 'border-gray-300' : ''" [disabled]="!editing" [(ngModel)]="currentUser.studentInfo['sat_score']"/>
                     </div>
                 </div>
             </div>
@@ -82,9 +82,11 @@
                 </div>
                 <div class="flex flex-wrap justify-center gap-4 mx-2 pt-4">
                     <div *ngFor="let doc of studentDocumentInfo" class="items-center justify-center flex">
-                        <button class="text-sm px-5 py-2 bg-[var(--llgrey)] shadow rounded-full hover:shadow-md">
-                            {{doc.document_name}}
-                        </button>
+                        <a (click)="outerDivClick()" [routerLink]="['/essay', doc.document_id]">
+                            <button class="text-sm px-5 py-2 bg-[var(--llgrey)] shadow rounded-full hover:shadow-md">
+                                {{doc.document_name}} 
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
