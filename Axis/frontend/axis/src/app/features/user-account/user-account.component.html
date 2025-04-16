@@ -26,15 +26,16 @@
 
   <div class="mt-10 flex flex-row gap-3 justify-end">
     <button (click)="showUpload = true" class="px-6 py-2 bg-[var(--secondary)] text-[var(--neutral)] font-semibold rounded-md hover:shadow-lg transition">
-      Upload Document
+      Upload Documents
     </button>
     <button class="px-6 py-2 bg-[var(--secondary)] text-[var(--neutral)] font-semibold rounded-md hover:shadow-lg transition">
       Edit Information
     </button>
+
+
   </div>
 
   <app-upload-overlay [isVisible]="showUpload" (closed)="showUpload = false" (uploaded)="loadDocuments()"></app-upload-overlay>
-
 
 
   <!-- Documents -->
@@ -45,8 +46,7 @@
     <div class="flex flex-wrap gap-4">
       <app-document-card
         *ngFor="let doc of groupedDocuments[college]"
-        [document]="doc"
-      >
+        [document]="doc">
       </app-document-card>
     </div>
     </div>

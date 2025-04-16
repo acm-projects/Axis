@@ -1,16 +1,9 @@
-<!-- document-card.component.html -->
-
-  <iframe [src]="document.fileUrl | safe" width="100%" height="200px"></iframe>
+<a [routerLink]="['/essay']" [state]="{ document: document }" class="text-sm text-[var(--secondary)]">
   <div class="bg-[var(--inputBox)] p-4 px-5 rounded-lg shadow w-full max-w-xs">
-    <div class="flex flex-row justify-between items-center min-w-52">
-
-      <div class="font-semibold text-[var(--mainText)] truncate w-max pr-5">
+    <div class="flex justify-between items-center">
+      <div class="font-semibold text-[var(--mainText)] truncate">
         {{ document.filename }}
       </div>
-      <button (click)="goToEditor(document.fileUrl)" class="px-3 py-1 rounded bg-[var(--accent)] text-white">
-        Edit
-      </button>
     </div>
   </div>
-
-
+</a>

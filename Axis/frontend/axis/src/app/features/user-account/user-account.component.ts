@@ -31,7 +31,6 @@ export class UserAccountComponent implements OnInit{
   objectKeys = Object.keys;
   showUpload = false;
 
-
   constructor(
     private documentService: DocumentService,
     private authService: AuthService
