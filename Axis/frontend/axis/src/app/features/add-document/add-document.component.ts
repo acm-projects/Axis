@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-
+import {CollegeService} from '../../core/services/college.service';
 
 @Component({
   selector: 'app-upload-overlay',
@@ -20,6 +20,9 @@ export class DocumentUploadOverlayComponent implements OnInit {
   searchTerm = '';
   // // the college id is stored in a var below
 
+  // file naming
+  customFileName: string = '';
+  renameTimeout: any;
 
   // to be sent to post request
   selectedFile: File | null = null;
@@ -27,26 +30,52 @@ export class DocumentUploadOverlayComponent implements OnInit {
   collegeId = '';
   isLoading = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private collegeService: CollegeService) {}
 
   ngOnInit() {
-    this.http.get<{collegeId: string; name: string}[]>("http://localhost:8080/api/colleges/getIdsAndNames").subscribe({
+    this.collegeService.getColleges().subscribe({
       next: (res) => {
         this.listOfColleges = res;
       },
       error: (err) => {
-        console.error("Error:", err); // ✅ Print full error
+        console.error("Error:", err);
       },
       complete: () => {
-        console.log("Request completed");
+        console.log("Colleges loaded (cached if previously loaded)");
       }
     });
   }
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
-    this.selectedFile = input.files?.[0] || null;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files?.[0] || null;
+      this.customFileName = this.selectedFile?.name || '';
+    }
   }
+
+  onCustomFileNameChange(newName: string) {
+    this.customFileName = newName;
+
+    if (this.renameTimeout) {
+      clearTimeout(this.renameTimeout);
+    }
+
+    this.renameTimeout = setTimeout(() => {
+      if (this.selectedFile && this.customFileName.trim()) {
+        const renamed = this.renameFile(this.selectedFile, this.customFileName.trim());
+        this.selectedFile = renamed;
+        console.log('Renamed file to:', renamed);
+      }
+    }, 500); //debounce
+  }
+
+  renameFile(file: File, newName: string): File {
+    const extension = file.name.split('.').pop();
+    return new File([file], `${newName}.${extension}`, { type: file.type });
+  }
+
+
 
   close() {
     this.isVisible = false;
@@ -74,7 +103,7 @@ export class DocumentUploadOverlayComponent implements OnInit {
         this.close();
       },
       error: (err) => {
-        console.error("Upload error:", err); // ✅ Print full error
+        console.error("Upload error:", err);
         alert("Document upload failed!");
       },
       complete: () => {

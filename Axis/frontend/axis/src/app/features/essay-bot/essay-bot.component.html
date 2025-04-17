@@ -2,23 +2,28 @@
     <div class="flex justify-between mx-12">
         <div class="text-4xl font-semibold text-[var(--mainText)]">{{essayTitle}}</div>
         <div class="flex justify-center gap-4">
-            <button class="flex justify-center items-center w-12 h-12 bg-[var(--mainBg)] rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="32" height="32" stroke-width="1.5"> <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path> <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path> <path d="M14 4l0 4l-6 0l0 -4"></path> </svg>
-            </button>
-            <button class="flex justify-center items-center w-12 h-12 bg-[var(--mainBg)] rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M14 3v4a1 1 0 0 0 1 1h4"></path> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path> <path d="M12 17v-6"></path> <path d="M9.5 14.5l2.5 2.5l2.5 -2.5"></path> </svg>
-            </button>
-            <button class="flex justify-center items-center w-12 h-12 bg-[var(--mainBg)] rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M19 18a3.5 3.5 0 0 0 0 -7h-1a5 4.5 0 0 0 -11 -2a4.6 4.4 0 0 0 -2.1 8.4"></path> <path d="M12 13l0 9"></path> <path d="M9 19l3 3l3 -3"></path> </svg>
-            </button>
-            <button class="flex justify-center items-center w-12 h-12 bg-[var(--mainBg)] rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M12 5l0 14"></path> <path d="M5 12l14 0"></path> </svg>
-            </button>
+          <button class="flex justify-center items-center w-12 h-12 bg-[var(--mainBg)] rounded-full hover:bg-[var(--accentBg)] transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+              <polyline points="17 21 17 13 7 13 7 21"/>
+              <polyline points="7 3 7 8 15 8"/>
+            </svg>
+          </button>
+          <button
+            (click)="downloadEssay()"
+            class="flex justify-center items-center w-12 h-12 bg-[var(--mainBg)] rounded-full hover:bg-[var(--accentBg)] transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+          </button>
         </div>
     </div>
     <div class="flex gap-8 mx-12">
         <div class="w-[70%] bg-[var(--essayBg)] min-h-[700px] rounded-md">
-<!--          <textarea [(ngModel)]="essayText" class="w-full h-full p-10 bg-[var(&#45;&#45;essayBg)] text-[var(&#45;&#45;mainText)] rounded-md"></textarea>-->
+
+
           <editor
             [(ngModel)]="essayText"
             apiKey=environment.tinymceApiKey

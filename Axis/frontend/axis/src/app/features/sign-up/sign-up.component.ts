@@ -66,7 +66,7 @@ export class SignUpComponent {
               actScore: response.account.act_score
             });
             // Navigate to the home page (or account page) after successful login
-            this.router.navigate(['/']);
+            this.router.navigate(['/account']);
           },
           error: err => {
             console.error("🚫 Login failed after registration", err);

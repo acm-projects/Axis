@@ -40,7 +40,7 @@ export const routes: Routes = [
         component: CollegeInfoComponent
     },
     {
-        path: "account/:id",
+        path: "account",
         component: UserAccountComponent
     },
     {

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import {Router} from '@angular/router';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { environment} from '../../../environments/environment';
+import html2pdf from 'html2pdf.js';
 
 
 @Component({
@@ -111,6 +111,36 @@ export class EssayBotComponent implements OnInit{
     });
 
   }
+
+  downloadEssay() {
+    const wrapper = document.createElement('div');
+
+    wrapper.innerHTML = `
+      <div style="
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        font-size: 12pt;
+        color: #000;
+        max-width: 800px;
+        padding: 20px;
+      ">
+        ${this.essayText}
+      </div>
+    `;
+
+    const opt = {
+      margin: 0.5,
+      filename: this.document.filename || 'download.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().from(wrapper).set(opt).save();
+  }
+
+
+
 
 
   async saveEditedText() {

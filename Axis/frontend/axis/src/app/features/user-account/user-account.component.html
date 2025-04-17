@@ -1,4 +1,4 @@
-<div class="px-[10%] py-36 font-satoshi text-white h-screen w-screen">
+<div class="px-[10%] py-36 font-satoshi text-white min-h-screen w-screen">
   <div class="mb-12">
     <p class="text-5xl font-bold mt-2 text-[var(--mainText)]">Welcome back, {{ account?.firstName }} 👋</p>
   </div>
@@ -39,18 +39,22 @@
 
 
   <!-- Documents -->
-  <div *ngFor="let college of objectKeys(groupedDocuments)">
-    <div>
 
-    <h3 class="text-2xl font-bold mb-3 mt-5">{{ college }}</h3>
-    <div class="flex flex-wrap gap-4">
-      <app-document-card
-        *ngFor="let doc of groupedDocuments[college]"
-        [document]="doc">
-      </app-document-card>
-    </div>
+  <h2 class="text-2xl  font-bold mb-4">Your Documents</h2>
+  <div class="grid grid-cols-2 pb-40">
+    <div *ngFor="let college of objectKeys(groupedDocuments)">
+      <div>
+        <h3 class="text-xl mb-3 mt-5">{{ college }}</h3>
+        <div class="flex flex-wrap gap-4 mb-4">
+          <app-document-card
+            *ngFor="let doc of groupedDocuments[college]"
+            [document]="doc">
+          </app-document-card>
+        </div>
+      </div>
     </div>
   </div>
+
 
 
 

@@ -1,4 +1,4 @@
-<div class="h-screen w-screen font-satoshi">
+<div class="min-h-screen w-screen font-satoshi">
 
   <div class="flex flex-col items-center py-12 px-[20%] pt-[13%] rounded-xl h-full">
     <button
@@ -16,7 +16,7 @@
           {{ isOpen ? "Open" : "Closed" }}
         </div>
 
-        <div class="flex flex-row self-center gap-4">
+        <div class="flex flex-row self-center gap-4 text-[var(--mainText)]">
           <div class="flex-col text-center bg-[var(--scholarshipDates)] rounded-lg p-3">
             <div>{{this.formattedOpenDate?.month}}</div>
             <div class="text-xl font-bold">{{this.formattedOpenDate?.day}}</div>
@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <div class="font-bold">
+        <div class="font-bold text-[var(--mainText)]">
           {{scholarship?.location}}
         </div>
 
@@ -41,7 +41,7 @@
         </a>
 
       </div>
-      <div class="flex flex-col gap-2 bg-[var(--resourceBackground)] rounded-xl h-max p-8 flex-[80%]">
+      <div class="flex flex-col gap-2 bg-[var(--resourceBackground)] rounded-xl h-max p-8 flex-[80%] text-[var(--mainText)]">
         <div class="text-3xl font-bold">
           {{scholarship?.name}}
 
@@ -55,7 +55,7 @@
         </div>
 
 
-        <div class="flex flex-row w-full h-max gap-3 py-5">
+        <div class="flex flex-row w-full h-max gap-3 py-5 text-white">
           <div *ngIf="scholarship?.is_essay_required === 't'" class="p-3 px-4 bg-[var(--accent)] rounded-lg">Essay Required</div>
           <div *ngIf="scholarship?.is_merit_based === 't'" class="p-3 px-4 bg-[var(--accent)] rounded-lg">Merit Based</div>
           <div *ngIf="scholarship?.is_need_based === 't'" class="p-3 px-4 bg-[var(--accent)] rounded-lg">Need Based</div>
