@@ -39,10 +39,10 @@ public class CollegeController {
         return collegeRepository.findByName(name);
     }
 
-    @GetMapping("/searchByLocation/{location}")
-    List<College> getByLocation(@PathVariable String location) {
-        return collegeRepository.findByLocation(location);
-    }
+//    @GetMapping("/searchByLocation/{location}")
+//    List<College> getByLocation(@PathVariable String location) {
+//        return collegeRepository.findByLocation(location);
+//    }
 
     @GetMapping("/searchByPage/{page}/{colleges_per_page}")
     List<College> getByPage(@PathVariable Integer page, @PathVariable Integer colleges_per_page) {
