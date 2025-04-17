@@ -21,12 +21,22 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/assets"
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce",
+                "output": "/tinymce/"
+              }
             ],
+
             "styles": [
+              "node_modules/quill/dist/quill.snow.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/env.js"
+            ]
           },
           "configurations": {
             "production": {

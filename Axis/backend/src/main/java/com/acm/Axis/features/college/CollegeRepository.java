@@ -51,7 +51,7 @@ public class CollegeRepository {
             application_link AS applicationLink,
             campus_life AS campusLife,
             majors_available AS majorsAvailable,
-            "desc" AS description
+            description
         FROM colleges
         """;
 
@@ -75,11 +75,12 @@ public class CollegeRepository {
                 .list();
     }
 
-    public List<College> findByLocation(String location) {
-        log.info("Finding college by location {}", location);
-        return jdbcClient.sql(SELECT_COLUMNS + " WHERE location LIKE :location")
-                .param("location", "%" + location + "%")
-                .query(College.class)
+    public List<CollegeDTO> getIdsAndNames() {
+        return jdbcClient.sql("SELECT college_id, name FROM colleges")
+                .query((rs, index) -> new CollegeDTO(
+                        rs.getString("college_id"),
+                        rs.getString("name")
+                ))
                 .list();
     }
 

@@ -1,6 +1,8 @@
+// src/app/features/sign-up/sign-up.component.ts
+
 import { Component } from '@angular/core';
 import { FormsModule } from "@angular/forms";
-import { NgxMaskDirective } from 'ngx-mask'
+import { NgxMaskDirective } from 'ngx-mask';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../core/services/auth.service';
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
   selector: 'app-sign-up',
   imports: [FormsModule, NgxMaskDirective, CommonModule],
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css',
+  styleUrls: ['./sign-up.component.css'],  // changed from styleUrl to styleUrls and as an array
   standalone: true
 })
 export class SignUpComponent {
@@ -23,7 +25,11 @@ export class SignUpComponent {
 
   invalidDetails: boolean;
 
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.firstName = '';
     this.lastName = '';
     this.phoneNumber = '';
@@ -33,7 +39,8 @@ export class SignUpComponent {
     this.invalidDetails = false;
   }
 
-  signUp() : void {
+  signUp(): void {
+    // First, register the user:
     this.http.post('http://localhost:8080/api/auth/register', {
       first_name: this.firstName,
       last_name: this.lastName,
@@ -46,12 +53,20 @@ export class SignUpComponent {
           email: this.email,
           password: this.password
         }).subscribe({
-          next: (loginResponse: any) => {
+          next: (response: any) => {
+            // Save the session from the login response
             this.authService.saveSession({
-              email: this.email,
-              token: loginResponse.token
+              email: response.account.email,
+              token: response.token,
+              firstName: response.account.first_name, // converting snake_case to camelCase
+              lastName: response.account.last_name,
+              phoneNumber: response.account.phone_number,
+              gpa: response.account.gpa,
+              satScore: response.account.sat_score,
+              actScore: response.account.act_score
             });
-            this.router.navigate(['/']); // ✅ Redirect after login
+            // Navigate to the home page (or account page) after successful login
+            this.router.navigate(['/account']);
           },
           error: err => {
             console.error("🚫 Login failed after registration", err);

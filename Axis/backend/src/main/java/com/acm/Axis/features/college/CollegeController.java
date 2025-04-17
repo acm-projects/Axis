@@ -24,6 +24,11 @@ public class CollegeController {
         return collegeRepository.getAll();
     }
 
+    @GetMapping("/getIdsAndNames")
+    List<CollegeDTO> getIdsAndNames() {
+        return collegeRepository.getIdsAndNames();
+    }
+
     @GetMapping("/searchByID/{college_id}")
     College getById(@PathVariable Integer college_id) {
         return collegeRepository.findById(college_id).orElse(null);
