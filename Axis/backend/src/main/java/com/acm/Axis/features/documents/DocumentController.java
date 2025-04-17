@@ -24,6 +24,7 @@ public class DocumentController {
                                                  @RequestParam("studentEmail") String studentEmail,
                                                  @RequestParam("collegeID") String collegeID) {
         try {
+            System.out.println("Uploading file: " + file.getOriginalFilename());
             String fileUrl = s3Service.uploadFile(file, studentEmail, collegeID);
 
             String fileName = file.getOriginalFilename();
@@ -36,6 +37,26 @@ public class DocumentController {
             return ResponseEntity.ok(fileUrl);
         } catch (IOException e) {
             return ResponseEntity.status(500).body("Upload failed: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Unexpected error: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/uploadAndGetId")
+    public ResponseEntity<String> uploadDocumentAndGetId(@RequestParam("file") MultipartFile file,
+                                                 @RequestParam("studentEmail") String studentEmail,
+                                                 @RequestParam("collegeID") String collegeID) {
+        try {
+            s3Service.uploadFile(file, studentEmail, collegeID);
+
+            String fileName = file.getOriginalFilename();
+
+            int collegeIdInt = Integer.parseInt(collegeID);
+            Document document = new Document(-1, studentEmail, collegeIdInt, fileName);
+            System.out.println(fileName);
+            long documentId = documentRepository.uploadDocumentAndGetId(document);
+            System.out.println(documentId);
+            return ResponseEntity.ok(String.valueOf(documentId));
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Unexpected error: " + e.getMessage());
         }

@@ -3,6 +3,7 @@ package com.acm.Axis.features.documents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
@@ -51,5 +52,19 @@ public class DocumentRepository {
                 .update();
         Assert.state(created == 1, "Failed to insert student");
     }
+
+    public long uploadDocumentAndGetId(Document document) {
+
+        Long documentId = jdbcClient.sql(
+                        "INSERT INTO documents(student_email, college_id, document_name) VALUES (?, ?, ?) RETURNING document_id"
+                )
+                .params(List.of(document.student_email(), document.college_id(), document.document_name()))
+                .query(Long.class)
+                .single();
+        System.out.println(documentId);
+        Assert.notNull(documentId, "Failed to retrieve document_id");
+        return documentId;
+    }
+
 
 }

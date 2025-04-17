@@ -50,5 +50,9 @@ export const routes: Routes = [
     {
         path: "essay/:id",
         component: EssayBotComponent
+    },
+    {
+        path: "essay",
+        component: EssayBotComponent
     }
 ];

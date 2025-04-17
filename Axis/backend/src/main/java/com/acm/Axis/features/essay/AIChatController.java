@@ -36,56 +36,23 @@ public class AIChatController {
                 .content();
     }
 
-    @PostMapping("/postEssay")
-    public String getEssayFeedback(@RequestParam String studentEmail,
-                                   @RequestParam int collegeId,
-                                   @RequestParam String documentName) {
-
-        try {
-            // Retrieve the PDF file from S3
-            InputStream s3FileStream = s3Service.getFileInputStream(studentEmail, collegeId, documentName);
-
-            // Use PDFBox to load the document and extract text
-            PDDocument pdfDocument = PDDocument.load(s3FileStream);
-            PDFTextStripper pdfStripper = new PDFTextStripper();
-            String essayText = pdfStripper.getText(pdfDocument);
-            pdfDocument.close();
-
-            // Build the prompt text including the extracted essay content
-            // String promptText = "Help me make this better: " + essayText;
-            String promptText = "Summarize this text in 1 sentence: " + essayText;
-
-            // Send the prompt text to the chat API
-            String content = chatClient.prompt()
-                    .user(promptText)
-                    .call()
-                    .content();
-
-            return content;
-        } catch (IOException e) {
-            return "Failed to process essay: " + e.getMessage();
-        }
-    }
-
     @GetMapping("/getFlux")
     public Flux<ServerSentEvent<String>> getEssayFeedback(@RequestParam int document_id,
                                          @RequestParam String message,
                                          @RequestParam String context) {
         try {
+            System.out.println("Before stream");
             Document currentDoc = documentRepository.getByID(document_id);
-            System.out.println(currentDoc.student_email());
-            System.out.println(currentDoc.document_name());
-            System.out.println(context);
             // Retrieve the PDF file from S3
             InputStream s3FileStream = s3Service.getFileInputStream(currentDoc.student_email()
                     , currentDoc.college_id(), currentDoc.document_name());
-
+            System.out.println("During stream");
             // Use PDFBox to load the document and extract text
             PDDocument pdfDocument = PDDocument.load(s3FileStream);
             PDFTextStripper pdfStripper = new PDFTextStripper();
             String essayText = pdfStripper.getText(pdfDocument);
             pdfDocument.close();
-
+            System.out.println("About to stream");
             // Send the prompt text to the chat API
             return chatClient.prompt()
                     .system(spec -> spec
