@@ -13,8 +13,8 @@
   --secondaryText: #7a7a7a;
 
   /*INPUTS*/
-  --inputBox: #181818;
-  --placeholderText: #4d4d4d;
+  --inputBox: #282828;
+  --placeholderText: #888888;
 
   /*BUTTONS*/
   --button: #42275b;
@@ -27,7 +27,7 @@
   /*NAVBAR*/
   --navbarAccountButton: #131313;
 
-  --cardBackground: #1f1f1f;
+  --cardBackground: #2a2a2a;
   --paginationActive: #545454;
   --pagination: #313131;
   --resourceBackground: #1f1f1f;

@@ -21,6 +21,7 @@ export class EssayBotComponent implements OnInit{
   message: string;
   apiUrl = "http://localhost:8080/api/essay";
 
+
   document: any;
   essayText: string = "";
   essayTitle: string = "";
@@ -197,14 +198,14 @@ export class EssayBotComponent implements OnInit{
       };
 
       eventSource.onmessage = (event) => {
-          this.zone.run(() => {
-              observer.next(event.data);
-          });
+        this.zone.run(() => {
+          observer.next(event.data);
+        });
       };
 
       return () => {
-          console.log("Closing SSE connection...");
-          eventSource.close();
+        console.log("Closing SSE connection...");
+        eventSource.close();
       };
 
     });

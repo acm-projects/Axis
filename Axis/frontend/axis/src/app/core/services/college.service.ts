@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, shareReplay } from 'rxjs';
+import {College} from '../models/college.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,4 +20,10 @@ export class CollegeService {
 
     return this.cachedColleges$;
   }
+
+  getCollegeById(id: number): Observable<any> {
+    return this.http.get(`http://localhost:8080/api/colleges/searchByID/${id}`);
+  }
+
+
 }

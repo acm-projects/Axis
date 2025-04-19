@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
-import { Router } from '@angular/router';
+import {Router, RouterLink, RouterModule} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SharedDataService } from '../../core/services/shared-data.service';
 
 @Component({
   selector: 'app-sign-in',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink, RouterModule],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css',
   standalone: true

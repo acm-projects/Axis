@@ -1,6 +1,6 @@
 <nav class="bg-transparent absolute top-0 left-0 right-0 z-10">
     <div class="mx-auto max-w-7xl px-2 pt-1">
-        <div class="relative flex h-20 items-center justify-between" (click)="updateAccountButtonText()">
+        <div class="relative flex h-20 items-center justify-between">
             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div class="flex shrink-0 items-center">
                     <a routerLink="" routerLinkActive="active">
@@ -52,22 +52,17 @@
                       </div>
                     </div>
                   }
-                  @else if (accountButtonText === 'Sign In') {
+                  @else
+                  {
                       <a
                       [@linkHover]="hoverStateMyAccount"
                      (mouseenter)="hoverStateMyAccount = 'yes'"
                      (mouseleave)="hoverStateMyAccount = 'no'"
-                      routerLink="sign-in" routerLinkActive="active" (click)="accountButtonText='Sign Up'"
-                         class="rounded-md bg-[var(--navbarAccountButton)] px-3 py-2 text-base font-medium text-white" aria-current="page">{{accountButtonText}}</a>
-                  }
-                  @else {
-                      <a
-                      [@linkHover]="hoverStateMyAccount"
-                     (mouseenter)="hoverStateMyAccount = 'yes'"
-                     (mouseleave)="hoverStateMyAccount = 'no'"
-                      routerLink="sign-up" routerLinkActive="active" (click)="accountButtonText='Sign In'"
-                         class="rounded-md bg-[var(--navbarAccountButton)] px-3 py-2 text-base font-medium text-white" aria-current="page">{{accountButtonText}}</a>
-                  }
+                      routerLink="sign-in" routerLinkActive="active"
+                         class="rounded-md bg-[var(--navbarAccountButton)] px-3 py-2 text-base font-medium text-white" aria-current="page">Sign In</a>
+
+
+}
                 </div>
               <label class="relative inline-flex items-center cursor-pointer ml-4">
                 <input type="checkbox" class="sr-only peer" [checked]="isLight" (change)="toggleTheme()">
