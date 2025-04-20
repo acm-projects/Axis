@@ -1,6 +1,10 @@
-<div class="flex flex-col px-20 py-2 gap-10 py-32 font-satoshi pb-48 ">
+<div class="flex flex-col px-20 py-2 gap-10 py-32 font-satoshi pb-48 bg-[var(--mainBg)]">
     <div class="flex justify-between mx-12">
-        <div class="text-4xl font-semibold text-[var(--mainText)]">{{essayTitle}}</div>
+        <div>
+          <div class="text-5xl font-semibold text-[var(--mainText)]">This is the Main Title</div>
+          <div class="p-2 pt-3 text-xl text-[var(--secondaryText)]">{{essayTitle}}</div>
+        </div>
+
         <div class="flex justify-center gap-4">
           <button class="flex justify-center items-center w-12 h-12 bg-[var(--mainBg)] rounded-full hover:bg-[var(--accentBg)] transition">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -20,6 +24,7 @@
           </button>
         </div>
     </div>
+
     <div class="flex gap-8 mx-12">
         <div class="w-[70%] bg-[var(--essayBg)] min-h-[700px] rounded-3xl ">
           <editor

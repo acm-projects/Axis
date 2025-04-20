@@ -22,7 +22,6 @@ export class EssayBotComponent implements OnInit{
   ];
   message: string = "";
   apiUrl = "http://localhost:8080/api/essay";
-
   document: any;
   essayText: string = "";
   essayTitle: string = "";
@@ -57,7 +56,7 @@ export class EssayBotComponent implements OnInit{
         .tox-editor-container, .tox-editor-header, .tox-toolbar, .ng-untouched, .tox, .tox-toolbar__group, .tox-tbtn, .tox-statusbar, .tox-statusbar__text-container, .tox-toolbar-overlord, .tox-toolbar__primary {
           background-color: #131313 !important;
         }
-        .tox-statusbar__branding, .tox-statusbar__path-item {
+        .tox-statusbar__branding, .tox-statusbar {
           display: none !important;
         }
         .tox-editor-container, .tox {
@@ -177,9 +176,9 @@ export class EssayBotComponent implements OnInit{
       this.chatLog.push({ role: "user", content: this.message });
       this.message = "";
 
-      const loadingIndex = this.chatLog.push({ 
-        role: "assistant", 
-        content: "" 
+      const loadingIndex = this.chatLog.push({
+        role: "assistant",
+        content: ""
       }) - 1;
 
       this.passUserMessage(sentMessage, context).subscribe({
@@ -194,32 +193,32 @@ export class EssayBotComponent implements OnInit{
         error: (error) => {
           console.error('Error:', error);
         },
-      });      
+      });
     }
   }
 
   passUserMessage(message: string, context: {role: "user"|"assistant", content: string}[]): Observable<string> {
     return new Observable<string>(observer => {
       const jsonContext = JSON.stringify(context);
-      
+
       const url = new URL(`${this.apiUrl}/getFlux`);
       url.searchParams.set('essayText', this.essayText);
       url.searchParams.set('message', message);
       url.searchParams.set('context', jsonContext);
-  
+
       const eventSource = new EventSource(encodeURI(url.toString()));
-  
+
       eventSource.onmessage = (event) => {
         this.zone.run(() => {
           if (event.data === "END") {
-            observer.complete(); 
+            observer.complete();
             eventSource.close();
           } else {
             observer.next(event.data);
           }
         });
       };
-  
+
       eventSource.addEventListener('end', () => {
         this.zone.run(() => {
           observer.complete();
@@ -227,13 +226,13 @@ export class EssayBotComponent implements OnInit{
         });
       });
 
-      
+
       eventSource.onerror = (error) => {
         console.error('SSE error:', error);
         this.zone.run(() => observer.error(error));
         eventSource.close();
       };
-  
+
       return () => {
         eventSource.close();
       };
