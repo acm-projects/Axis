@@ -12,6 +12,9 @@ import {BookmarksService} from '../../../core/services/bookmarks.service';
   templateUrl: './asset-card.component.html',
   styleUrl: './asset-card.component.css',
   standalone: true,
+  host: {
+    '[@fadeInStagger]': 'true'
+  },
   animations: [
     trigger('cardHover', [
       state('yes', style({
@@ -37,7 +40,13 @@ import {BookmarksService} from '../../../core/services/bookmarks.service';
           timing: '0.25s'
         }
       })
-    ])
+    ]),
+    trigger('fadeInStagger', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('700ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ]),
   ]
 })
 export class AssetCardComponent {

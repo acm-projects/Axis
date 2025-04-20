@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ResourceHeaderComponent } from '../../shared/components/resource-header/resource-header.component';
 import { FilterComponent } from '../../shared/components/filter/filter.component';
-import {NgClass, NgFor} from '@angular/common';
+import {NgClass, NgFor, NgIf} from '@angular/common';
 import {Scholarship} from '../../core/models/scholarship.model';
 import {HttpClient} from '@angular/common/http';
 import {SharedDataService} from '../../core/services/shared-data.service';
@@ -11,13 +11,23 @@ import {AssetCardComponent} from '../../shared/components/asset-card/asset-card.
 import {AuthService} from '../../core/services/auth.service';
 import {BookmarksService} from '../../core/services/bookmarks.service';
 import {Bookmark} from '../../core/models/bookmark.model';
+import {animateChild, query, stagger, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-resources-page',
-  imports: [ResourceHeaderComponent, FilterComponent, NgFor, AssetCardComponent, RouterLink, RouterLinkActive, NgClass],
+  imports: [ResourceHeaderComponent, FilterComponent, NgFor, AssetCardComponent, RouterLink, RouterLinkActive, NgClass, NgIf],
   templateUrl: './resources-page.component.html',
   styleUrl: './resources-page.component.css',
-  standalone: true
+  standalone: true,
+  animations: [
+    trigger('listStagger', [
+      transition(':enter', [
+        query('@fadeInStagger', [
+          stagger(55, animateChild())
+        ], { optional: true })
+      ])
+    ])
+  ]
 })
 export class ResourcesPageComponent {
   page: number;
@@ -28,6 +38,7 @@ export class ResourcesPageComponent {
   baseURL: string = 'http://localhost:8080/api/scholarships';
   email: string | null;
   bookmarks: any = [];
+  isLoaded = false;
 
   constructor(
     private http: HttpClient,
@@ -50,20 +61,21 @@ export class ResourcesPageComponent {
   }
 
   loadPage(page: number): void {
+    this.isLoaded = false;
     this.http.get<Scholarship[]>(`${this.baseURL}/searchByPage/${page}/${this.scholarshipsPerPage}`).subscribe({
       next: (response: any) => {
         this.scholarships = response;
-        // for (let scholarship of this.scholarships) {
-        //   this.sharedDataService.saveScholarship(scholarship);
-        // }
         this.applyBookmarks();
         this.updatePageButtons(page);
+        setTimeout(() => this.isLoaded = true);
       },
       error: error => {
         console.log('Failed to retrieve colleges');
+        this.isLoaded = true;
       }
     });
   }
+
 
   updatePageButtons(page: number): void {
     this.pageButtons[0] = Math.ceil(page / 3) * 3 - 2;

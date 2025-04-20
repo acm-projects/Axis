@@ -34,7 +34,9 @@
       </svg>
     </div>
 
-    <div class="grid grid-cols-3 gap-4">
+    <div *ngIf="isLoaded"
+         [@listStagger]="true"
+         class="grid grid-cols-3 gap-4">
       <app-resource-header
         class="w-full min-w-0"
         *ngFor="let scholarship of scholarships"

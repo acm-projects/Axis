@@ -13,6 +13,9 @@ import {CollegeService} from '../../core/services/college.service';
 import {ScholarshipsService} from '../../core/services/scholarships.service';
 import {College} from '../../core/models/college.model';
 import {Scholarship} from '../../core/models/scholarship.model';
+import {animateChild, query, stagger, transition, trigger} from '@angular/animations';
+import { forkJoin, of } from 'rxjs';
+
 
 interface Session {
   email: string;
@@ -30,7 +33,16 @@ interface Session {
   imports: [CommonModule, DocumentCardComponent, DocumentUploadOverlayComponent, ResourceHeaderComponent, AssetCardComponent],
   templateUrl: './user-account.component.html',
   styleUrl: './user-account.component.css',
-  standalone: true
+  standalone: true,
+  animations: [
+    trigger('listStagger', [
+      transition(':enter', [
+        query('@fadeInStagger', [
+          stagger(55, animateChild())
+        ], { optional: true })
+      ])
+    ])
+  ]
 })
 export class UserAccountComponent implements OnInit{
   account: Session | null = null;
@@ -40,6 +52,8 @@ export class UserAccountComponent implements OnInit{
   showUpload = false;
   collegesBookmarked: College[] = [];
   scholarshipsBookmarked: Scholarship[] = [];
+  collegesLoaded = false;
+  scholarashipsLoaded = false;
 
 
   constructor(
@@ -72,37 +86,33 @@ export class UserAccountComponent implements OnInit{
 
   loadBookmarks() {
     const email = this.account?.email;
-    if (email) {
-      this.collegesBookmarked = [];
-      this.scholarshipsBookmarked = [];
-      this.bookmarkService.getBookmarks(email).subscribe({
-        next: bookmarks => {
-          const collegeIds = bookmarks
-            .filter(b => b.bookmark_type === 'college')
-            .map(b => b.id);
-          const scholarshipIds = bookmarks
-            .filter(b => b.bookmark_type === 'scholarship')
-            .map(b => b.id);
+    if (!email) return;
 
-          collegeIds.forEach(id =>
-            this.collegeService.getCollegeById(id).subscribe(college => {
-                college.isBookmarked = true;
-                this.collegesBookmarked.push(college);
-              }
-            )
-          );
+    this.collegesBookmarked = [];
+    this.scholarshipsBookmarked = [];
 
-          scholarshipIds.forEach(id =>
-            this.scholarshipService.getScholarshipById(id).subscribe(scholarship => {
-                scholarship.isBookmarked = true;
-                this.scholarshipsBookmarked.push(scholarship)
-              }
-            )
-          );
-        },
-        error: err => console.error('Failed to load bookmarks:', err)
-      });
-    }
+    this.bookmarkService.getBookmarks(email).subscribe({
+      next: bookmarks => {
+        const collegeIds = bookmarks.filter(b => b.bookmark_type === 'college').map(b => b.id);
+        const scholarshipIds = bookmarks.filter(b => b.bookmark_type === 'scholarship').map(b => b.id);
+
+        const collegeRequests = collegeIds.map(id => this.collegeService.getCollegeById(id));
+        const scholarshipRequests = scholarshipIds.map(id => this.scholarshipService.getScholarshipById(id));
+
+        // Parallel college requests
+        forkJoin<College[]>(collegeRequests.length ? collegeRequests : [of(null)]).subscribe(collegeResults => {
+          this.collegesBookmarked = collegeResults.filter(Boolean).map(c => ({ ...c, isBookmarked: true }));
+          this.collegesLoaded = true;
+        });
+
+        // Parallel scholarship requests
+        forkJoin<Scholarship[]>(scholarshipRequests.length ? scholarshipRequests : [of(null)]).subscribe(scholarshipResults => {
+          this.scholarshipsBookmarked = scholarshipResults.filter(Boolean).map(s => ({ ...s, isBookmarked: true }));
+          this.scholarashipsLoaded = true;
+        });
+      },
+      error: err => console.error('Failed to load bookmarks:', err)
+    });
   }
 
 

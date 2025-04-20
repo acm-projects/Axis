@@ -3,6 +3,7 @@
   <div [@cardHover]="hoverState"
        (mouseenter)="hoverState = 'yes'"
        (mouseleave)="hoverState = 'no'"
+       [@fadeInStagger]
     class="rounded-md flex flex-row justify-start bg-[var(--cardBackground)]  min-h-24 font-satoshi">
 
 
@@ -27,7 +28,9 @@
               <p class="leading-5 font-bold text-lg text-[var(--mainText)]">{{name}}</p>
               <div class="mt-1 text-sm text-[var(--mainText)]">{{info}}</div>
           </div>
-          <div class="relative right-0 bottom-0">
+          <div
+            class="relative right-0 bottom-0"
+          >
               <button (click)="bookmarkCollege(this.id, $event)" class="absolute bottom-0 right-0">
                   <svg
                   *ngIf="isBookmarked"

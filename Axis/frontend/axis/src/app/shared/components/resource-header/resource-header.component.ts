@@ -11,6 +11,9 @@ import {AuthService} from '../../../core/services/auth.service';
   templateUrl: './resource-header.component.html',
   styleUrl: './resource-header.component.css',
   standalone: true,
+  host: {
+    '[@fadeInStagger]': 'true'
+  },
   animations: [
     trigger('cardHover', [
       state('yes', style({
@@ -36,6 +39,12 @@ import {AuthService} from '../../../core/services/auth.service';
           timing: '0.25s'
         }
       })
+    ]),
+    trigger('fadeInStagger', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('700ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
     ]),
 ]
 })

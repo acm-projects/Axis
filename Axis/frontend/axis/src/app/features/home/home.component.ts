@@ -9,12 +9,15 @@ import {
   transition,
   animate
 } from '@angular/animations';
+import {SplineViewerComponent} from '../../shared/spline-viewer/spline-viewer.component';
+
+
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, FormsModule],
+  imports: [RouterLink, RouterLinkActive, FormsModule, SplineViewerComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   animations: [
@@ -63,6 +66,7 @@ export class HomeComponent implements AfterViewInit, OnInit{
       this.titleVisible = true;
     });
   }
+
 
 
 
