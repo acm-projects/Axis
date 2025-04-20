@@ -17,14 +17,17 @@ import html2pdf from 'html2pdf.js';
   standalone: true
 })
 export class EssayBotComponent implements OnInit{
-  chatLog: string[];
-  message: string;
+  chatLog: { role: "user" | "assistant", content: string }[] = [
+    { role: "assistant", content: "Hi, I am chat! How can I help?" }
+  ];
+  message: string = "";
   apiUrl = "http://localhost:8080/api/essay";
-
 
   document: any;
   essayText: string = "";
   essayTitle: string = "";
+  student_email: string = "";
+  college_id: number = -1;
 
   editorConfig = {
     height: 700,
@@ -77,8 +80,6 @@ export class EssayBotComponent implements OnInit{
   constructor (private http: HttpClient,
                private zone: NgZone,
                private router: Router) {
-    this.chatLog = ["Hi, I am chat! How can I help?"]
-    this.message=""
     const nav = this.router.getCurrentNavigation();
     this.document = nav?.extras.state?.['document'];
 
@@ -95,6 +96,8 @@ export class EssayBotComponent implements OnInit{
 
   loadDocumentText() {
     const { student_email, college_id, filename } = this.document;
+    this.student_email = student_email;
+    this.college_id = college_id;
     console.log("hit the load document method" + " " + student_email + " " + college_id + " " + filename);
     this.http.get('http://localhost:8080/api/documents/getFileText', {
       responseType: 'text',
@@ -169,45 +172,71 @@ export class EssayBotComponent implements OnInit{
 
   submitMessage() {
     if (this.message.trim()) {
-      this.chatLog.push(this.message);
-
+      const context = this.chatLog;
       const sentMessage = this.message;
+      this.chatLog.push({ role: "user", content: this.message });
       this.message = "";
 
-      const loadingIndex = this.chatLog.push("") - 1;
+      const loadingIndex = this.chatLog.push({ 
+        role: "assistant", 
+        content: "" 
+      }) - 1;
 
-      this.passUserMessage(sentMessage).subscribe({
+      this.passUserMessage(sentMessage, context).subscribe({
         next: (response) => {
-          this.chatLog[loadingIndex] += response + " ";
+          const currentContent = this.chatLog[loadingIndex].content;
+          const trimmedResponse = response.trim();
+          if (currentContent && !currentContent.endsWith(" ") && !trimmedResponse.startsWith(" ")) {
+            this.chatLog[loadingIndex].content += " ";
+          }
+          this.chatLog[loadingIndex].content += trimmedResponse;
         },
         error: (error) => {
           console.error('Error:', error);
         },
-      });
+      });      
     }
   }
 
-  passUserMessage(message: string): Observable<string> {
+  passUserMessage(message: string, context: {role: "user"|"assistant", content: string}[]): Observable<string> {
     return new Observable<string>(observer => {
-      const eventSource = new EventSource(`${this.apiUrl}?message=${encodeURIComponent(message)}`);
+      const jsonContext = JSON.stringify(context);
+      
+      const url = new URL(`${this.apiUrl}/getFlux`);
+      url.searchParams.set('essayText', this.essayText);
+      url.searchParams.set('message', message);
+      url.searchParams.set('context', jsonContext);
+  
+      const eventSource = new EventSource(encodeURI(url.toString()));
+  
+      eventSource.onmessage = (event) => {
+        this.zone.run(() => {
+          if (event.data === "END") {
+            observer.complete(); 
+            eventSource.close();
+          } else {
+            observer.next(event.data);
+          }
+        });
+      };
+  
+      eventSource.addEventListener('end', () => {
+        this.zone.run(() => {
+          observer.complete();
+          eventSource.close();
+        });
+      });
 
+      
       eventSource.onerror = (error) => {
         console.error('SSE error:', error);
         this.zone.run(() => observer.error(error));
         eventSource.close();
       };
-
-      eventSource.onmessage = (event) => {
-        this.zone.run(() => {
-          observer.next(event.data);
-        });
-      };
-
+  
       return () => {
-        console.log("Closing SSE connection...");
         eventSource.close();
       };
-
     });
   }
 }
