@@ -1,20 +1,33 @@
 import { Component } from '@angular/core';
 import { ResourceHeaderComponent } from '../../shared/components/resource-header/resource-header.component';
 import { FilterComponent } from '../../shared/components/filter/filter.component';
-import {NgClass, NgFor} from '@angular/common';
+import {NgClass, NgFor, NgIf} from '@angular/common';
 import {Scholarship} from '../../core/models/scholarship.model';
 import {HttpClient} from '@angular/common/http';
 import {SharedDataService} from '../../core/services/shared-data.service';
 import {ActivatedRoute, RouterLink, RouterLinkActive} from '@angular/router';
 import {College} from '../../core/models/college.model';
 import {AssetCardComponent} from '../../shared/components/asset-card/asset-card.component';
+import {AuthService} from '../../core/services/auth.service';
+import {BookmarksService} from '../../core/services/bookmarks.service';
+import {Bookmark} from '../../core/models/bookmark.model';
+import {animateChild, query, stagger, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-resources-page',
-  imports: [ResourceHeaderComponent, FilterComponent, NgFor, AssetCardComponent, RouterLink, RouterLinkActive, NgClass],
+  imports: [ResourceHeaderComponent, FilterComponent, NgFor, AssetCardComponent, RouterLink, RouterLinkActive, NgClass, NgIf],
   templateUrl: './resources-page.component.html',
   styleUrl: './resources-page.component.css',
-  standalone: true
+  standalone: true,
+  animations: [
+    trigger('listStagger', [
+      transition(':enter', [
+        query('@fadeInStagger', [
+          stagger(55, animateChild())
+        ], { optional: true })
+      ])
+    ])
+  ]
 })
 export class ResourcesPageComponent {
   page: number;
@@ -23,11 +36,21 @@ export class ResourcesPageComponent {
   scholarshipsPerPage: number;
   scholarships: Scholarship[] = [];
   baseURL: string = 'http://localhost:8080/api/scholarships';
+  email: string | null;
+  bookmarks: any = [];
+  isLoaded = false;
 
-  constructor(private http: HttpClient, private sharedDataService: SharedDataService, private route: ActivatedRoute) {
+  constructor(
+    private http: HttpClient,
+    private sharedDataService: SharedDataService,
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private bookmarkService: BookmarksService
+  ) {
     this.page = parseInt(<string>this.route.snapshot.queryParamMap.get('page'));
     this.scholarshipsPerPage = 12;
     this.loadPage(this.page);   // Load first page
+    this.email = this.authService.getUserEmail();
 
     // Store last page
     this.http.get<number>(`${this.baseURL}/total`).subscribe(
@@ -38,19 +61,21 @@ export class ResourcesPageComponent {
   }
 
   loadPage(page: number): void {
-    this.http.get<Scholarship>(`${this.baseURL}/searchByPage/${page}/${this.scholarshipsPerPage}`).subscribe({
+    this.isLoaded = false;
+    this.http.get<Scholarship[]>(`${this.baseURL}/searchByPage/${page}/${this.scholarshipsPerPage}`).subscribe({
       next: (response: any) => {
         this.scholarships = response;
-        for (let scholarship of this.scholarships) {
-          this.sharedDataService.saveScholarship(scholarship);
-        }
+        this.applyBookmarks();
         this.updatePageButtons(page);
+        setTimeout(() => this.isLoaded = true);
       },
       error: error => {
         console.log('Failed to retrieve colleges');
+        this.isLoaded = true;
       }
     });
   }
+
 
   updatePageButtons(page: number): void {
     this.pageButtons[0] = Math.ceil(page / 3) * 3 - 2;
@@ -64,5 +89,19 @@ export class ResourcesPageComponent {
   //   //const searchValue = document.getElementById('searchInput').value;
   //   //console.log('Search submitted:', searchValue);
   // }
+
+
+  private applyBookmarks() {
+    if (!this.email) return;
+    this.bookmarkService.getScholarshipBookmarks(this.email)
+      .subscribe((raw: Bookmark[]) => {
+        const ids = new Set(raw.map(b => b.id));
+        this.scholarships.forEach(c =>
+          c.isBookmarked = ids.has(c.id)
+        );
+      });
+  }
+
+
 
 }

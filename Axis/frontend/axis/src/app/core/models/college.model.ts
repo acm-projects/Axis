@@ -27,4 +27,5 @@ export interface College {
     campusLife: string;
     majorsAvailable: string;
     description: string;
+    isBookmarked: boolean;
 }

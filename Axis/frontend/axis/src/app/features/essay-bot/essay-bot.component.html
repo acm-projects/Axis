@@ -1,4 +1,4 @@
-<div class="flex flex-col px-20 py-2 gap-10 py-32 font-satoshi pb-48">
+<div class="flex flex-col px-20 py-2 gap-10 py-32 font-satoshi pb-48 ">
     <div class="flex justify-between mx-12">
         <div class="text-4xl font-semibold text-[var(--mainText)]">{{essayTitle}}</div>
         <div class="flex justify-center gap-4">
@@ -21,14 +21,15 @@
         </div>
     </div>
     <div class="flex gap-8 mx-12">
-        <div class="w-[70%] bg-[var(--essayBg)] min-h-[700px] rounded-md">
+        <div class="w-[70%] bg-[var(--essayBg)] min-h-[700px] rounded-3xl ">
           <editor
             [(ngModel)]="essayText"
             apiKey=environment.tinymceApiKey
             [init]="editorConfig"
+            class="rounded-3xl"
           ></editor>
         </div>
-        <div class="flex w-[30%] flex-col justify-between bg-[var(--essayBg)] self-start h-[700px]">
+        <div class="flex w-[30%] flex-col justify-between bg-[var(--essayBg)] self-start h-[700px] rounded-xl">
             <div class="w-full py-3 px-8 text-2xl rounded-md mt-3 my-2">
                 Essay Bot
             </div>
@@ -38,7 +39,7 @@
                   @if(log.role=="user") {
                       <div class="justify-self-end w-fit bg-[--buttonDisabled] shadow-md shadow-[--accent] px-3 py-1 m-1 ml-4 rounded-md">{{log.content}}</div>
                   } @else {
-                      <div class="w-fit bg-[--buttonDisabled] shadow-md shadow-[--accentBright] px-3 py-1 m-1 mr-4 rounded-md">{{log.content}}</div>  
+                      <div class="w-fit bg-[--buttonDisabled] shadow-md shadow-[--accentBright] px-3 py-1 m-1 mr-4 rounded-md">{{log.content}}</div>
                   }
               </div>
             </div>

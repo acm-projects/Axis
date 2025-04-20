@@ -12,5 +12,6 @@ export interface Scholarship {
   is_merit_based: string,
   website: string,
   requirements: string,
-  location: string
+  location: string,
+  isBookmarked: boolean
 }

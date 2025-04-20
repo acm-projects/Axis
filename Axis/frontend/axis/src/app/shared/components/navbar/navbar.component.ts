@@ -42,7 +42,6 @@ import {ThemeService} from '../../../theme.service';
   ]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  accountButtonText: string = 'Sign In';
   dropdownToggle: boolean = false;
   hoverStateDiscover: string = 'no';
   hoverStateResources: string = 'no';
@@ -64,29 +63,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
       // State changes every time user logs in or out
       loggedIn => {
         this.userLoggedIn = loggedIn;
-        this.accountButtonText = 'Sign In';
       }
     );
 
-    // Subscribe to page changes
-    this.pageSubscription = this.sharedDataService.currentPage.subscribe(
-      page => {
-        // Update accountButtonText if user navigates to sign-in page
-        if (page === 'sign-in') {
-          this.accountButtonText = 'Sign Up';
-        }
-      }
-    );
+
 
     this.themeService.isLight$.subscribe(value => this.isLight = value);
   }
 
-  updateAccountButtonText(): void {
-    // Reset accountButtonText if user navigates away from sign-in page
-    if (!this.router.url.includes('sign-in')) {
-      this.accountButtonText = 'Sign In';
-    }
-  }
+
 
   logout(): void {
     this.authService.logout();

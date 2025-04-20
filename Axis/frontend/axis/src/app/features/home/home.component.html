@@ -1,8 +1,20 @@
 <div class="flex flex-col w-full">
 
+<!--  <video-->
+<!--    autoplay-->
+<!--    loop-->
+<!--    muted-->
+<!--    playsinline-->
+<!--    class="w-screen h-screen z-[0] opacity-50 absolute top-0 left-0"-->
+<!--  >-->
+<!--    <source src="assets/home.mp4" type="video/mp4" />-->
+<!--    Your browser does not support the video tag.-->
+<!--  </video>-->
 
-  <div class="my-24 mb-80">
-    <div class="relative h-screen px-64 pt-36">
+  <app-spline-viewer></app-spline-viewer>
+
+  <div class="">
+    <div class="relative h-screen px-64 pt-60">
 
       <div class="text-center text-[var(--mainText)] text-mainHeading font-bold font-satoshi leading-tight mb-6"
            [@fadeIn]="titleVisible ? 'visible' : 'hidden'">
@@ -32,8 +44,6 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18a7.5 7.5 0 006.15-3.35z" />
         </svg>
       </div>
-
-
     </div>
 
     <div class="text-[var(--mainText)] relative h-max grid grid-cols-2 items-center px-24">

@@ -1,4 +1,4 @@
-<div class="px-[10%] py-36 font-satoshi text-white min-h-screen w-screen">
+<div class="px-[10%] py-36 font-satoshi text-[var(--mainText)] min-h-screen w-screen">
   <div class="mb-12">
     <p class="text-5xl font-bold mt-2 text-[var(--mainText)]">Welcome back, {{ account?.firstName }} 👋</p>
   </div>
@@ -38,10 +38,8 @@
   <app-upload-overlay [isVisible]="showUpload" (closed)="showUpload = false" (uploaded)="loadDocuments()"></app-upload-overlay>
 
 
-  <!-- Documents -->
-
   <h2 class="text-2xl  font-bold mb-4">Your Documents</h2>
-  <div class="grid grid-cols-2 pb-40">
+  <div class="grid grid-cols-2 pb-20">
     <div *ngFor="let college of objectKeys(groupedDocuments)">
       <div>
         <h3 class="text-xl mb-3 mt-5">{{ college }}</h3>
@@ -54,6 +52,65 @@
       </div>
     </div>
   </div>
+
+
+  <h2 class="text-2xl font-bold mb-4">My Bookmarks</h2>
+  <div class="grid grid-cols-2 gap-10 mb-40">
+    <!-- Colleges -->
+    <div>
+      <h3 class="text-xl font-semibold mb-2">Bookmarked Colleges</h3>
+      <div
+        *ngIf="collegesLoaded">
+        <div
+          *ngIf="collegesBookmarked.length; else noColleges"
+          class="grid grid-cols-2 gap-2"
+          [@listStagger]="collegesBookmarked.length"
+        >
+          <app-asset-card
+            *ngFor="let college of collegesBookmarked"
+            [name]="college.name"
+            [info]="college.location"
+            [id]="college.college_id"
+            [imgLink]="college.logo_src"
+            [isBookmarked] = "college.isBookmarked"
+          ></app-asset-card>
+        </div>
+      </div>
+      <ng-template #noColleges><p>No bookmarked colleges yet.</p></ng-template>
+    </div>
+
+    <!-- Scholarships -->
+    <div
+      *ngIf="scholarashipsLoaded"
+    >
+      <h3 class="text-xl font-semibold mb-2">Bookmarked Scholarships</h3>
+      <div
+        *ngIf="collegesLoaded"
+        [@listStagger]="true"
+      >
+        <div
+          *ngIf="scholarshipsBookmarked.length; else noScholarships"
+          class="grid grid-cols-2 gap-2"
+          [@listStagger]="scholarshipsBookmarked.length"
+        >
+          <app-resource-header
+            *ngFor="let scholarship of scholarshipsBookmarked"
+            [name]="scholarship.name"
+            [org]="scholarship.organization"
+            [content]="scholarship.description"
+            [info]="scholarship.location"
+            [id]="scholarship.id"
+            [imgLink]="scholarship.logo_src"
+            [isBookmarked] = "scholarship.isBookmarked"
+          ></app-resource-header>
+        </div>
+      </div>
+
+      <ng-template #noScholarships><p>No bookmarked scholarships yet.</p></ng-template>
+    </div>
+  </div>
+
+
 
 
 
