@@ -7,6 +7,9 @@ import {Router} from '@angular/router';
 import { PDFDocument, StandardFonts } from 'pdf-lib';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import html2pdf from 'html2pdf.js';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
+
 
 
 @Component({
@@ -17,8 +20,8 @@ import html2pdf from 'html2pdf.js';
   standalone: true
 })
 export class EssayBotComponent implements OnInit{
-  chatLog: { role: "user" | "assistant", content: string }[] = [
-    { role: "assistant", content: "Hi, I am chat! How can I help?" }
+  chatLog: { role: 'user' | 'assistant'; content: string | SafeHtml }[] = [
+    { role: 'assistant', content: 'Hi, I am chat! How can I help?' }
   ];
   message: string = "";
   apiUrl = "http://localhost:8080/api/essay";
@@ -35,16 +38,16 @@ export class EssayBotComponent implements OnInit{
     content_css: 'dark',
     content_style: `
     body {
-      background-color: #1f1f1f;
-      color: #fff;
-      font-family: Satoshi, sans-serif;
-      line-height: 0.74;
+      background: transparent !important;
+      font-family: 'Satoshi', sans-serif;
       font-size: 16px;
-      padding-top: 0.5px;
-      padding-left: 12px;
-    },
+      padding: 16px;
+      padding-top: 64px;
+      border: none;
+      text-shadow: 1px 1px 3px rgba(0, 0,0, 0.5);
+    }
     p {
-      color: #131313;
+      margin: 0 0 10px;
     }
   `,
     toolbar:
@@ -53,22 +56,70 @@ export class EssayBotComponent implements OnInit{
       editor.on('init', () => {
         const style = document.createElement('style');
         style.innerHTML = `
-        .tox-editor-container, .tox-editor-header, .tox-toolbar, .ng-untouched, .tox, .tox-toolbar__group, .tox-tbtn, .tox-statusbar, .tox-statusbar__text-container, .tox-toolbar-overlord, .tox-toolbar__primary {
-          background-color: #131313 !important;
-        }
-        .tox-statusbar__branding, .tox-statusbar {
-          display: none !important;
-        }
-        .tox-editor-container, .tox {
-          border: none !important;
-        }
-        .tox .tox-toolbar__primary {
-          color: white !important;
-        }
-        .tox .tox-button svg {
-          fill: white !important;
-        }
-      `;
+      .tox-editor-container {
+        border: none !important;
+        background-color: transparent !important;
+      }
+
+      .tox-editor-header {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        background-color: rgba(30, 30, 30, 0.8) !important;
+        backdrop-filter: blur(8px);
+        border: none;
+      }
+
+      .tox-sidebar-wrap,
+      .tox-edit-area,
+      .tox-edit-area__iframe {
+        background: transparent !important;
+        border: none !important;
+      }
+
+      .tox-statusbar,
+      .tox-bottom-anchorbar,
+      .tox-anchorbar,
+      .tox-throbber,
+      .tox-view-wrap {
+        display: none !important;
+
+      }
+
+      .tox tox-tinymce tox-edit-focus,
+      .tox tox-tinymce tox-platform-touch,
+      .ng-untouched ng-valid ng-dirty {
+        border: none !important;
+        border-radius: 0px !important;
+      }
+
+      .tox-tinymce {
+        border: none !important;
+        border-radius: 0px !important;
+      }
+
+      .tox-editor-header {
+        border-radius: 15px;
+
+      }
+
+
+      .tox .tox-toolbar, .tox .tox-toolbar__overflow, .tox .tox-toolbar__primary, .tox, .tox-tbtn, .tox .tox-toolbar-overlord {
+        background-color: rgba(0,0,0,0) !important;
+
+      }
+
+      .tox:not(.tox-tinymce-inline) .tox-editor-header {
+        border-bottom: none;
+      }
+
+      .tox .tox-edit-area::before {
+        border: none !important;
+      }
+
+    `;
         document.head.appendChild(style);
       });
     }
@@ -78,7 +129,9 @@ export class EssayBotComponent implements OnInit{
 
   constructor (private http: HttpClient,
                private zone: NgZone,
-               private router: Router) {
+               private router: Router,
+               private sanitizer: DomSanitizer
+  ) {
     const nav = this.router.getCurrentNavigation();
     this.document = nav?.extras.state?.['document'];
 
@@ -87,7 +140,6 @@ export class EssayBotComponent implements OnInit{
   ngOnInit() {
     if (this.document) {
       this.loadDocumentText();
-      this.essayTitle = this.document.filename;
     } else {
       console.error("Document not found in navigation state.");
     }
@@ -97,7 +149,7 @@ export class EssayBotComponent implements OnInit{
     const { student_email, college_id, filename } = this.document;
     this.student_email = student_email;
     this.college_id = college_id;
-    console.log("hit the load document method" + " " + student_email + " " + college_id + " " + filename);
+
     this.http.get('http://localhost:8080/api/documents/getFileText', {
       responseType: 'text',
       params: {
@@ -106,7 +158,10 @@ export class EssayBotComponent implements OnInit{
         filename
       }
     }).subscribe({
-      next: text => this.essayText = text,
+      next: text => {
+        this.essayText = text;
+        this.getTitleFromEssay(this.essayText);
+      },
       error: err => {
         console.error('Could not load essay:', err);
         this.essayText = '[Failed to load document]';
@@ -114,6 +169,28 @@ export class EssayBotComponent implements OnInit{
     });
 
   }
+  getTitleFromEssay(essay: string) {
+    const prompt = `Based on the following essay, give me a short and concise and suitable title that is max a couple of words and return nothing but the title. Here is the essay:\n${essay}`;
+
+    this.http.post('http://localhost:8080/api/essay/postMessage', null, {
+      params: {
+        message: prompt
+      },
+      responseType: 'text'
+    }).subscribe({
+      next: response => {
+        this.essayTitle = response.trim();
+      },
+      error: err => {
+        console.error('Failed to get AI-generated title:', err);
+        this.essayTitle = this.document.filename; // fallback
+      }
+    });
+  }
+
+
+
+
 
   downloadEssay() {
     const wrapper = document.createElement('div');
@@ -142,10 +219,6 @@ export class EssayBotComponent implements OnInit{
     html2pdf().from(wrapper).set(opt).save();
   }
 
-
-
-
-
   async saveEditedText() {
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage();
@@ -167,35 +240,88 @@ export class EssayBotComponent implements OnInit{
     });
   }
 
-
-
   submitMessage() {
-    if (this.message.trim()) {
-      const context = this.chatLog;
-      const sentMessage = this.message;
-      this.chatLog.push({ role: "user", content: this.message });
-      this.message = "";
-
-      const loadingIndex = this.chatLog.push({
-        role: "assistant",
-        content: ""
-      }) - 1;
-
-      this.passUserMessage(sentMessage, context).subscribe({
-        next: (response) => {
-          const currentContent = this.chatLog[loadingIndex].content;
-          const trimmedResponse = response.trim();
-          if (currentContent && !currentContent.endsWith(" ") && !trimmedResponse.startsWith(" ")) {
-            this.chatLog[loadingIndex].content += " ";
-          }
-          this.chatLog[loadingIndex].content += trimmedResponse;
-        },
-        error: (error) => {
-          console.error('Error:', error);
-        },
-      });
+    // 1) nothing to send?
+    if (!this.message.trim()) {
+      return;
     }
+
+    // 2) capture the exact text & context
+    const sentMessage = this.message;
+    // if you don’t want subsequent SSE chunks to mutate your context,
+    // take a shallow copy here:
+    const context = this.chatLog.map(log => ({
+      role: log.role,
+      content: (log.content as unknown as string)
+    }));
+
+    // 3) render the user’s message immediately
+    this.chatLog.push({
+      role: 'user',
+      content: sentMessage
+    });
+
+    // 4) clear the input
+    this.message = '';
+
+    // 5) reserve a slot for the assistant’s streaming reply
+    const loadingIndex = this.chatLog.push({
+      role: 'assistant',
+      content: ''
+    }) - 1;
+
+    // 6) open the SSE stream
+    this.passUserMessage(sentMessage, context).subscribe({
+      next: chunk => {
+        this.zone.run(() => {
+          let current = this.chatLog[loadingIndex].content as string;
+          const lastChar  = current.slice(-1);
+          const firstChar = chunk.charAt(0);
+
+          // 1) If we’re in the middle of an HTML tag, just glue it on
+          if (lastChar === '<' || chunk.startsWith('>') || chunk.startsWith('h3>')) {
+            // handles that stray "3>" fragment as well
+            this.chatLog[loadingIndex].content = current + chunk;
+            return;
+          }
+
+          // 2) If the incoming chunk *starts* a tag, don’t insert a space
+          if (chunk.startsWith('<')) {
+            this.chatLog[loadingIndex].content = current + chunk;
+            return;
+          }
+
+          // 3) Otherwise, only inject a space when it really looks like a new word:
+          //    • chunk already begins with whitespace, or
+          //    • the chunk starts with an uppercase letter (likely a new sentence/word), or
+          //    • you just ended with punctuation (.?!)
+          const isPunctuationBoundary = /[.?!]$/.test(lastChar);
+          const startsWithSpace       = /^\s/.test(chunk);
+          const startsWithUpper       = /^[A-Z]/.test(chunk);
+
+          if (startsWithSpace || startsWithUpper || isPunctuationBoundary) {
+            this.chatLog[loadingIndex].content = current + chunk;
+          } else {
+            // mid‑sentence lowercase word boundary → inject one space
+            this.chatLog[loadingIndex].content = current + ' ' + chunk;
+          }
+        });
+      },
+      error: err => {
+        console.error('SSE error:', err);
+      },
+      complete: () => {
+        // sanitize the full HTML blob once at the end
+        this.zone.run(() => {
+          const raw = this.chatLog[loadingIndex].content as string;
+          this.chatLog[loadingIndex].content = this.sanitizer
+            .bypassSecurityTrustHtml(raw);
+        });
+      }
+    });
   }
+
+
 
   passUserMessage(message: string, context: {role: "user"|"assistant", content: string}[]): Observable<string> {
     return new Observable<string>(observer => {
