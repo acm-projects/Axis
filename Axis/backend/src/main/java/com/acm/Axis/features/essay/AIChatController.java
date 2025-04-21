@@ -75,7 +75,33 @@ public class AIChatController {
             // Send the prompt text to the chat API
             return chatClient.prompt()
                     .system(spec -> spec
-                            .text("Look at this document {document}. Answer in the style of a {role}. Additional context: {context}")
+                            .text("""
+You are a college admissions advisor. Respond in clean, well-structured HTML. Use <ul> for bullet points and <h3> for section headings. Add spacing and paragraphs for clarity.
+
+Structure:
+<h3><strong>Strengths</strong></h3>
+<ul class="pl-3">
+  <li>Clearly list strengths.</li>
+</ul>
+
+<h3><strong>Areas for Improvement</strong></h3>
+<ul class="pl-3">
+  <li>Clearly list improvements.</li>
+</ul>
+
+<h3><strong>Overall Assessment</strong></h3>
+<p class="pl-3">Write a short summary.</p>
+
+At the end, also include:
+<p class="pt-3"><strong>Overall Grade out of 100:</strong> [GRADE]</p>
+
+Essay:
+{document}
+
+Context:
+{context}
+""")
+
                             .param("role", "advisor for highschool students applying for colleges")
                             .param("context", context)
                             .param("document", essayText)
@@ -83,9 +109,9 @@ public class AIChatController {
                     .user(message)
                     .stream()
                     .content()
-                    .map(data -> ServerSentEvent.builder(data).build()) // Wrap data in SSE events
+                    .map(data -> ServerSentEvent.builder(data).build())
                     .concatWith(Flux.just(
-                            ServerSentEvent.builder("[END]").event("end").build() // Final event
+                            ServerSentEvent.builder("[END]").event("end").build()
                     ));
         } catch (Exception e) {
             return Flux.just(
