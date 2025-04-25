@@ -5,12 +5,13 @@ import {NgClass, NgFor, NgIf} from '@angular/common';
 import {Scholarship} from '../../core/models/scholarship.model';
 import {HttpClient} from '@angular/common/http';
 import {SharedDataService} from '../../core/services/shared-data.service';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, RouterLink, RouterLinkActive} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from '../../core/services/auth.service';
 import {BookmarksService} from '../../core/services/bookmarks.service';
 import {Bookmark} from '../../core/models/bookmark.model';
 import {animateChild, query, stagger, transition, trigger} from '@angular/animations';
+import {AssetCardComponent} from '../../shared/components/asset-card/asset-card.component';
 
 
 @Component({
