@@ -45,15 +45,13 @@ export class DiscoverPageComponent {
   bookmarks: any = [];
   isLoaded = false;
 
-
-
   constructor(
     private http: HttpClient,
     private sharedDataService: SharedDataService,
     private route: ActivatedRoute,
     private bookmarkService: BookmarksService,
     private authService: AuthService
-) {
+  ) {
     this.page = parseInt(<string>this.route.snapshot.queryParamMap.get('page'));
     this.collegesPerPage = 12;
     this.loadPage(this.page);

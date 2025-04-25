@@ -273,49 +273,20 @@ export class EssayBotComponent implements OnInit{
     // 6) open the SSE stream
     this.passUserMessage(sentMessage, context).subscribe({
       next: chunk => {
+        // simply append each SSE chunk as it arrives
         this.zone.run(() => {
-          let current = this.chatLog[loadingIndex].content as string;
-          const lastChar  = current.slice(-1);
-          const firstChar = chunk.charAt(0);
-
-          // 1) If we’re in the middle of an HTML tag, just glue it on
-          if (lastChar === '<' || chunk.startsWith('>') || chunk.startsWith('h3>')) {
-            // handles that stray "3>" fragment as well
-            this.chatLog[loadingIndex].content = current + chunk;
-            return;
-          }
-
-          // 2) If the incoming chunk *starts* a tag, don’t insert a space
-          if (chunk.startsWith('<')) {
-            this.chatLog[loadingIndex].content = current + chunk;
-            return;
-          }
-
-          // 3) Otherwise, only inject a space when it really looks like a new word:
-          //    • chunk already begins with whitespace, or
-          //    • the chunk starts with an uppercase letter (likely a new sentence/word), or
-          //    • you just ended with punctuation (.?!)
-          const isPunctuationBoundary = /[.?!]$/.test(lastChar);
-          const startsWithSpace       = /^\s/.test(chunk);
-          const startsWithUpper       = /^[A-Z]/.test(chunk);
-
-          if (startsWithSpace || startsWithUpper || isPunctuationBoundary) {
-            this.chatLog[loadingIndex].content = current + chunk;
-          } else {
-            // mid‑sentence lowercase word boundary → inject one space
-            this.chatLog[loadingIndex].content = current + ' ' + chunk;
-          }
+          this.chatLog[loadingIndex].content += chunk;
         });
       },
       error: err => {
         console.error('SSE error:', err);
       },
       complete: () => {
-        // sanitize the full HTML blob once at the end
+        // once the stream ends, sanitize and render the full HTML
         this.zone.run(() => {
           const raw = this.chatLog[loadingIndex].content as string;
-          this.chatLog[loadingIndex].content = this.sanitizer
-            .bypassSecurityTrustHtml(raw);
+          this.chatLog[loadingIndex].content =
+            this.sanitizer.bypassSecurityTrustHtml(raw);
         });
       }
     });

@@ -1,8 +1,26 @@
-<div [@routeFadeAnimation]="getAnimationData()"
-     [class.light-theme]="isLight" class="bg-[var(--mainBg)] h-full w-full">
+<div class="fixed top-0 left-0 w-full h-full z-[-1]">
+  <video
+    autoplay
+    loop
+    muted
+    playsinline
+    class="w-full h-full object-cover opacity-[10%]"
+  >
+    <source src="assets/background1.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
 
+<div
+  [@routeFadeAnimation]="getAnimationData()"
+  [class.light-theme]="isLight"
+  class="relative z-10 w-full h-full"
+>
   <app-navbar (openMyAccountEvent)="openMyAccount()"></app-navbar>
   <router-outlet></router-outlet>
-  <app-user-account *ngIf="showMyAccountPage" (closeMyAccountEvent)="closeMyAccount()"></app-user-account>
+  <app-user-account
+    *ngIf="showMyAccountPage"
+    (closeMyAccountEvent)="closeMyAccount()"
+  ></app-user-account>
   <app-footer></app-footer>
 </div>

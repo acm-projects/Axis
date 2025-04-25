@@ -14,10 +14,11 @@ import {
   query,
   group
 } from '@angular/animations';
+import {SplineViewerComponent} from './shared/spline-viewer/spline-viewer.component';
 
 @Component({
   selector: 'app-root',
-  imports: [NavbarComponent, FooterComponent, RouterOutlet, UserAccountComponent, NgIf],
+  imports: [NavbarComponent, FooterComponent, RouterOutlet, UserAccountComponent, NgIf, SplineViewerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   standalone: true,

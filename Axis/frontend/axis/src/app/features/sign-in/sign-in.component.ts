@@ -48,7 +48,7 @@ export class SignInComponent implements OnInit {
             satScore: response.account.sat_score,
             actScore: response.account.act_score
           });
-          this.router.navigate(['/account']);
+          this.router.navigate(['']);
         } else {
           console.error('Login response did not contain account details.');
           this.invalidCredentials = true;

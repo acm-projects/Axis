@@ -76,24 +76,20 @@ public class AIChatController {
             return chatClient.prompt()
                     .system(spec -> spec
                             .text("""
-You are a college admissions advisor. Respond in clean, well-structured HTML. Use <ul> for bullet points and <h3> for section headings. Add spacing and paragraphs for clarity.
+You are a college admissions advisor. Respond as concisely as possible trying to stay under 200 words, but if need be you can go over that.
 
-Structure:
-<h3><strong>Strengths</strong></h3>
-<ul class="pl-3">
-  <li>Clearly list strengths.</li>
-</ul>
+I want your response to be formatted with multiple headings and body text only; for each heading and body, i want it in the following format:
 
-<h3><strong>Areas for Improvement</strong></h3>
-<ul class="pl-3">
-  <li>Clearly list improvements.</li>
-</ul>
+\n<div>
+<h1 class='text-md font-bold pb-1'></h1>
+<p class='text-md'></p>
+</div>
 
-<h3><strong>Overall Assessment</strong></h3>
-<p class="pl-3">Write a short summary.</p>
+so the resulting html should look like a couple of these above
 
-At the end, also include:
-<p class="pt-3"><strong>Overall Grade out of 100:</strong> [GRADE]</p>
+
+I want your response to be formatted as follows:
+The response should only consist of headings and body text so that the template above is easy to follow.
 
 Essay:
 {document}

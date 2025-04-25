@@ -44,6 +44,14 @@
   --uploadBackground: #1f1f1f;
 }
 
+app-essay-bot h1 {
+  font-weight: 700;
+  /* if you need the same sizing/padding as text-md & pb-1: */
+  font-size: 1rem;    /* adjust to match your design */
+  padding-bottom: 0.25rem;
+}
+
+
 /* Light theme overrides */
 .light-theme {
   /*OVERALL*/

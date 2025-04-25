@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CollegeService} from '../../core/services/college.service';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-upload-overlay',
@@ -30,7 +31,7 @@ export class DocumentUploadOverlayComponent implements OnInit {
   collegeId = '';
   isLoading = false;
 
-  constructor(private http: HttpClient, private collegeService: CollegeService) {}
+  constructor(private http: HttpClient, private collegeService: CollegeService, private authService: AuthService) {}
 
   ngOnInit() {
     this.collegeService.getColleges().subscribe({
@@ -44,6 +45,7 @@ export class DocumentUploadOverlayComponent implements OnInit {
         console.log("Colleges loaded (cached if previously loaded)");
       }
     });
+    this.studentEmail = this.authService.getUserEmail() || '';
   }
 
   onFileSelected(event: Event) {
@@ -71,9 +73,11 @@ export class DocumentUploadOverlayComponent implements OnInit {
   }
 
   renameFile(file: File, newName: string): File {
-    const extension = file.name.split('.').pop();
-    return new File([file], `${newName}.${extension}`, { type: file.type });
+    const originalExtension = file.name.split('.').pop();
+    const nameWithoutExtension = newName.replace(/\.[^/.]+$/, '');
+    return new File([file], `${nameWithoutExtension}.${originalExtension}`, { type: file.type });
   }
+
 
 
 

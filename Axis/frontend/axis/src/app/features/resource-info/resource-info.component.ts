@@ -39,57 +39,56 @@ export class ResourceInfoComponent implements OnInit {
     private sharedDataService: SharedDataService,
     private route: ActivatedRoute,
     private location: Location
-  ) {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    if (idParam) {
-      const id = parseInt(idParam);
-      const storedScholarship = this.sharedDataService.getScholarship(id);
-      if (storedScholarship) {
-        this.scholarship = storedScholarship;
-      } else {
-        this.http.get<Scholarship>(
-          `http://localhost:8080/api/scholarships/searchByID/${id}`
-        ).subscribe({
-          next: (response: Scholarship) => {
-            this.scholarship = response;
-            this.sharedDataService.saveScholarship(response);
-          },
-          error: error => {
-            console.error('Failed to retrieve scholarship', error);
-          }
-        });
+  ) {}
+
+    ngOnInit(): void {
+      const idParam = this.route.snapshot.paramMap.get('id');
+      if (idParam) {
+        const id = parseInt(idParam);
+        const storedScholarship = this.sharedDataService.getScholarship(id);
+        if (storedScholarship) {
+          this.scholarship = storedScholarship;
+          this.formatDatesAndStatus();
+        } else {
+          this.http.get<Scholarship>(
+            `http://localhost:8080/api/scholarships/searchByID/${id}`
+          ).subscribe({
+            next: (response: Scholarship) => {
+              this.scholarship = response;
+              this.sharedDataService.saveScholarship(response);
+              this.formatDatesAndStatus();
+            },
+            error: error => {
+              console.error('Failed to retrieve scholarship', error);
+            }
+          });
+        }
       }
     }
-  }
 
-  ngOnInit(): void {
-    if (this.scholarship?.openDate && this.scholarship?.closeDate) {
+  private formatDatesAndStatus(): void {
+      if (this.scholarship?.openDate && this.scholarship?.closeDate) {
       const now = new Date();
       const open = new Date(this.scholarship.openDate);
       const close = new Date(this.scholarship.closeDate);
       this.isOpen = now >= open && now <= close;
-    }
 
-    if (this.scholarship?.openDate) {
-      const date = new Date(this.scholarship.openDate);
       this.formattedOpenDate = {
-        day: date.getDate().toString(),
-        month: this.abbreviatedMonths[date.toLocaleString('default', { month: 'long' })],
-        year: date.getFullYear().toString(),
+        day: open.getDate().toString(),
+        month: this.abbreviatedMonths[open.toLocaleString('default', { month: 'long' })],
+        year: open.getFullYear().toString(),
       };
-    }
 
-    if (this.scholarship?.closeDate) {
-      const date = new Date(this.scholarship.closeDate);
       this.formattedCloseDate = {
-        day: date.getDate().toString(),
-        month: this.abbreviatedMonths[date.toLocaleString('default', { month: 'long' })],
-        year: date.getFullYear().toString(),
+        day: close.getDate().toString(),
+        month: this.abbreviatedMonths[close.toLocaleString('default', { month: 'long' })],
+        year: close.getFullYear().toString(),
       };
     }
   }
 
-  goBack(): void {
+
+    goBack(): void {
     this.location.back();
   }
 }
