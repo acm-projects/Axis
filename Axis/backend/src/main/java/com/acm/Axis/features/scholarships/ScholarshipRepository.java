@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ScholarshipRepository {
@@ -43,6 +44,57 @@ public class ScholarshipRepository {
                 .param("id", id)
                 .query(scholarshipRowMapper)
                 .single();
+    }
+
+    public List<Scholarship> findByFilters(Map<String, String> filters, Integer page, Integer scholarshipsPerPage) {
+        if (filters.isEmpty()) {
+            return getByName("");
+        }
+
+        log.info("Finding college by filters {}", filters);
+        String query = "SELECT * FROM scholarships WHERE ";
+        for (Map.Entry<String, String> filter : filters.entrySet()) {
+            String[] values = filter.getValue().split(",");
+            switch (filter.getKey()) {
+                case "keyword": {
+                    query += "(";
+                    for (String value : values) {
+                        query += "name ILIKE '%" + value + "%' OR ";
+                    }
+                    query = query.substring(0, query.length() - 4) + ") AND ";
+                    break;
+                }
+                case "location":
+                {
+                    query += "(";
+                    for (String value : values) {
+                        query += "location ILIKE '%" + value + "%' OR ";
+                    }
+                    query = query.substring(0, query.length() - 4) + ") AND ";
+                    break;
+                }
+                case "status":
+                {
+                    if (values.length == 1) {
+                        query += "(CURRENT_DATE";
+                        if (values[0].equals("closed")) {
+                            query += " NOT";
+                        }
+                        query += " BETWEEN open_date AND close_date) AND ";
+                    }
+                    break;
+                }
+                case "amountRange":
+                {
+                    query += "(CAST(amount AS FLOAT) BETWEEN "
+                            + (Double.parseDouble(values[0]) * 1000) + " AND " + (Double.parseDouble(values[1]) * 1000) + ") AND ";
+                    break;
+                }
+            }
+        }
+        query = query.substring(0, query.length() - 5) + " ORDER BY id LIMIT " + scholarshipsPerPage
+                + " OFFSET " + ((page - 1) * scholarshipsPerPage);
+        return jdbcClient.sql(query).query(scholarshipRowMapper).list();
     }
 
     public List<Scholarship> getByName(String name) {

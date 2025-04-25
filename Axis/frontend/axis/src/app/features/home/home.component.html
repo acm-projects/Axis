@@ -16,11 +16,11 @@
   <div class="">
     <div class="relative h-screen px-64 pt-60">
 
-      <div class="text-center text-[var(--mainText)] text-mainHeading font-bold font-satoshi leading-tight mb-6"
+      <div class="text-center text-[var(--mainText)] text-mainHeading font-bold font-satoshi leading-tight mb-10"
            [@fadeIn]="titleVisible ? 'visible' : 'hidden'">
         {{mainTitle}}
       </div>
-      <div class="text-center text-[var(--secondaryText)] text-subHeading mb-24"
+      <div class="text-center text-[var(--secondaryText)] text-subHeading mb-16"
            [@fadeIn]="{ value: titleVisible ? 'visible' : 'hidden', params: { timing: '1s', delay: '0.25s' } }"
       >
         {{subTitle}}

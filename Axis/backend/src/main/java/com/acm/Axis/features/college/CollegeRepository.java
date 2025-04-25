@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 
 @Repository
@@ -59,6 +61,18 @@ public class CollegeRepository {
         return jdbcClient.sql(SELECT_COLUMNS).query(College.class).list();
     }
 
+    public List<College> findByPage(Integer page, Integer collegesPerPage) {
+        log.info("Finding {} colleges by page {}", collegesPerPage, page);
+
+        int offset = (page - 1) * collegesPerPage;
+
+        return jdbcClient.sql(SELECT_COLUMNS + " LIMIT :limit OFFSET :offset")
+                .param("limit", collegesPerPage)
+                .param("offset", offset)
+                .query(College.class)
+                .list();
+    }
+
     public Optional<College> findById(Integer id) {
         log.info("Finding college by ID {}", id);
         return jdbcClient.sql(SELECT_COLUMNS + " WHERE college_id = :id")
@@ -67,10 +81,56 @@ public class CollegeRepository {
                 .optional();
     }
 
-    public List<College> findByName(String name) {
-        log.info("Finding college by name {}", name);
-        return jdbcClient.sql(SELECT_COLUMNS + " WHERE name LIKE :name")
-                .param("name", "%" + name + "%")
+    public List<College> findByFilters(Map<String, String> filters, Integer page, Integer collegesPerPage) {
+        if (filters.isEmpty()) {
+            return getAll();
+        }
+
+        log.info("Finding college by filters {}", filters);
+        String query = SELECT_COLUMNS + " WHERE ";
+        for (Entry<String, String> filter : filters.entrySet()) {
+            String[] values = filter.getValue().split(",");
+            switch (filter.getKey()) {
+                case "keyword": {
+                    query += "(";
+                    for (String value : values) {
+                        query += "name ILIKE '%" + value + "%' OR ";
+                    }
+                    query = query.substring(0, query.length() - 4) + ") AND ";
+                    break;
+                }
+                case "location":
+                {
+                    query += "(";
+                    for (String value : values) {
+                        query += "location ILIKE '%" + value + "%' OR ";
+                    }
+                    query = query.substring(0, query.length() - 4) + ") AND ";
+                    break;
+                }
+                case "acceptanceRateRange":
+                {
+                    query += "(CAST(acceptance_rate AS FLOAT) BETWEEN "
+                            + Double.parseDouble(values[0]) + " AND " + Double.parseDouble(values[1]) + ") AND ";
+                    break;
+                }
+                case "tuitionRange":
+                {
+                    query += "(CAST(avg_tuition_annually AS FLOAT) BETWEEN "
+                            + (Double.parseDouble(values[0]) * 1000) + " AND " + (Double.parseDouble(values[1]) * 1000) + ") AND ";
+                    break;
+                }
+            }
+        }
+        query = query.substring(0, query.length() - 5) + " ORDER BY college_id LIMIT " + collegesPerPage
+            + " OFFSET " + ((page - 1) * collegesPerPage);
+        return jdbcClient.sql(query).query(College.class).list();
+    }
+
+    public List<College> findByKeyword(String keyword) {
+        log.info("Finding college by name {}", keyword);
+        return jdbcClient.sql(SELECT_COLUMNS + " WHERE name ILIKE :keyword")
+                .param("keyword", "%" + keyword + "%")
                 .query(College.class)
                 .list();
     }
@@ -84,18 +144,23 @@ public class CollegeRepository {
                 .list();
     }
 
-    public List<College> findByPage(Integer page, Integer collegesPerPage) {
-        log.info("Finding {} colleges by page {}", collegesPerPage, page);
-
-        int offset = (page - 1) * collegesPerPage;
-
-        return jdbcClient.sql(SELECT_COLUMNS + " LIMIT :limit OFFSET :offset")
-                .param("limit", collegesPerPage)
-                .param("offset", offset)
+    public List<College> findByLocation(String location) {
+        log.info("Finding college by location {}", location);
+        return jdbcClient.sql(SELECT_COLUMNS + " WHERE location LIKE :location")
+                .param("location", "%" + location + "%")
                 .query(College.class)
                 .list();
     }
 
+    public List<College> findByTuitionRange(Integer minTuition, Integer maxTuition) {
+        log.info("Finding colleges with tuition between {} and {}", minTuition, maxTuition);
+
+        return jdbcClient.sql(SELECT_COLUMNS + " WHERE CAST(avg_tuition_annually AS INTEGER) BETWEEN :minTuition AND :maxTuition")
+                .param("minTuition", minTuition)
+                .param("maxTuition", maxTuition)
+                .query(College.class)
+                .list();
+    }
 
     public void insertCollege(College college) {
         String sql = """

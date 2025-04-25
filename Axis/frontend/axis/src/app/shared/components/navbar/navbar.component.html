@@ -31,21 +31,21 @@
                 </div>
                 <div class="flex ml-4">
                   @if (userLoggedIn) {
-                    <div
+                  <div
 
-                    class="relative ml-3" (click)="dropdownToggle = !dropdownToggle">
-                      <button [@linkHover]="hoverStateMyAccount"
-                     (mouseenter)="hoverStateMyAccount = 'yes'"
-                     (mouseleave)="hoverStateMyAccount = 'no'"
-                     class="flex space-x-2 rounded-md bg-[var(--navbarAccountButton)] px-3 pl-4 py-2">
-                        <p class="text-base font-medium text-[var(--navbarAccountButtonText)]"
-                           aria-current="page">My Account</p>
-                        <img class="size-3 my-auto"
-                             src="assets/navbar-dropdown-down-arrow.png">
-                      </button>
-                      <div id="dropdown-menu"
-                           class="absolute right-0 z-10 mt-2 w-auto origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5"
-                           [ngClass]="{'hidden': !dropdownToggle}">
+                  class="relative ml-3" (click)="dropdownToggle = !dropdownToggle">
+                    <button [@linkHover]="hoverStateMyAccount"
+                   (mouseenter)="hoverStateMyAccount = 'yes'"
+                   (mouseleave)="hoverStateMyAccount = 'no'"
+                   class="flex space-x-2 rounded-md bg-[var(--navbarAccountButton)] px-3 pl-4 py-2">
+                      <p class="text-base font-medium text-[var(--navbarAccountButtonText)]"
+                         aria-current="page">My Account</p>
+                      <img class="size-3 my-auto"
+                           src="assets/navbar-dropdown-down-arrow.png">
+                    </button>
+                    <div id="dropdown-menu"
+                         class="absolute right-0 z-10 mt-2 w-auto origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5"
+                         [ngClass]="{'hidden': !dropdownToggle}">
                         <a routerLink="account" routerLinkActive="active" href="#" class="block px-5 py-2 text-base text-gray-700 hover:bg-[var(--buttonHover)] hover:text-white">Profile</a>
                         <a href="#" class="block px-5 py-2 text-base text-gray-700 hover:bg-[var(--buttonHover)] hover:text-white">Settings</a>
                         <a routerLink="dashboard" routerLinkActive="active" class="block px-5 py-2 text-base text-gray-700 hover:bg-[var(--buttonHover)] hover:text-white">Dashboard</a>
@@ -56,15 +56,15 @@
                   }
                   @else
                   {
-                      <a
-                      [@linkHover]="hoverStateMyAccount"
-                     (mouseenter)="hoverStateMyAccount = 'yes'"
-                     (mouseleave)="hoverStateMyAccount = 'no'"
-                      routerLink="sign-in" routerLinkActive="active"
-                         class="rounded-md bg-[var(--navbarAccountButton)] px-3 py-2 text-base font-medium text-white" aria-current="page">Sign In</a>
+                  <a
+                  [@linkHover]="hoverStateMyAccount"
+                 (mouseenter)="hoverStateMyAccount = 'yes'"
+                 (mouseleave)="hoverStateMyAccount = 'no'"
+                  routerLink="sign-in" routerLinkActive="active"
+                     class="rounded-md bg-[var(--navbarAccountButton)] px-3 py-2 text-base font-medium text-white" aria-current="page">Sign In</a>
 
 
-}
+                  }
                 </div>
               <label class="relative inline-flex items-center cursor-pointer ml-4">
                 <input type="checkbox" class="sr-only peer" [checked]="isLight" (change)="toggleTheme()">

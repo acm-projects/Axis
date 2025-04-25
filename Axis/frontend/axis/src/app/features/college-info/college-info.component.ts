@@ -43,4 +43,6 @@ export class CollegeInfoComponent {
   goBack(): void {
     this.location.back();
   }
+
+  protected readonly Number = Number;
 }
