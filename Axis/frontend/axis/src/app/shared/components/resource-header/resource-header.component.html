@@ -11,7 +11,7 @@
       <div class="flex flex-col flex-1/2">
         <p class="leading-5 font-bold text-lg text-[var(--mainText)]"
            >{{name}}</p>
-        <div class="mt-1 text-sm text-[var(--mainText)] ">{{info}}</div>
+        <div class="mt-1 text-sm text-[var(--mainText)] ">{{info.includes(',') ? 'Multiple countries' : info}}</div>
         <div class="text-xs text-[var(--secondaryText)] ">{{org}}</div>
       </div>
 

@@ -26,10 +26,10 @@
                     Resources
                   </a>
 
-                  <a [@linkHover]="hoverStateResources"
-                     (mouseenter)="hoverStateResources = 'yes'"
-                     (mouseleave)="hoverStateResources = 'no'"
-                     routerLink="essay/:1" routerLinkActive="active" [queryParams]="{page: 1}"
+                  <a [@linkHover]="hoverStateEssay"
+                     (mouseenter)="hoverStateEssay = 'yes'"
+                     (mouseleave)="hoverStateEssay = 'no'"
+                     routerLink="essay" routerLinkActive="active" [queryParams]="{page: 1}"
                      class="rounded-md px-3 py-2 text-base font-medium text-[var(--mainText)]">
                     Essay
                   </a>

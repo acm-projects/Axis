@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/scholarships")
@@ -44,5 +45,11 @@ public class ScholarshipController {
     @GetMapping("/searchByPage/{page}/{scholarships_per_page}")
     public ResponseEntity<List<Scholarship>> getByPage(@PathVariable Integer page, @PathVariable Integer scholarships_per_page) {
         return ResponseEntity.ok(scholarshipRepository.findByPage(page, scholarships_per_page));
+    }
+
+    @GetMapping("/searchByFilters/{page}/{scholarships_per_page}")
+    List<Scholarship> getByFilters(@RequestParam Map<String, String> filters,
+                               @PathVariable Integer page, @PathVariable Integer scholarships_per_page) {
+        return scholarshipRepository.findByFilters(filters, page, scholarships_per_page);
     }
 }

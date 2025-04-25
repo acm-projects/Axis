@@ -37,7 +37,7 @@ public class CollegeController {
 
     @GetMapping("/searchByName/{name}")
     List<College> getByName(@PathVariable String name) {
-        return collegeRepository.findByName(name);
+        return collegeRepository.findByKeyword(name);
     }
 
     @GetMapping("/searchByPage/{page}/{colleges_per_page}")
@@ -45,16 +45,10 @@ public class CollegeController {
         return collegeRepository.findByPage(page, colleges_per_page);
     }
 
-    @GetMapping("/searchByID/{college_id}")
-    College getById(@PathVariable Integer college_id) {
-        return collegeRepository.findById(college_id).orElse(null);
-    }
-
-    @GetMapping("/searchByFilters")
-    List<College> getByFilters(@RequestParam Map<String, String> filters) {
-        System.out.println(filters.entrySet());
-        collegeRepository.findByFilters(filters);
-        return null;
+    @GetMapping("/searchByFilters/{page}/{colleges_per_page}")
+    List<College> getByFilters(@RequestParam Map<String, String> filters,
+                               @PathVariable Integer page, @PathVariable Integer colleges_per_page) {
+        return collegeRepository.findByFilters(filters, page, colleges_per_page);
     }
 
 //    @GetMapping("/searchByKeyword/{keyword}")

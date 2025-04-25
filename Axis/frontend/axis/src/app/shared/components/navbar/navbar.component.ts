@@ -46,6 +46,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   dropdownToggle: boolean = false;
   hoverStateDiscover: string = 'no';
   hoverStateResources: string = 'no';
+  hoverStateEssay: string = 'no';
   hoverStateMyAccount: string = 'no';
   isLight = false;
 

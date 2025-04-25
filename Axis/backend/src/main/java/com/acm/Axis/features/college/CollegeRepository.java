@@ -81,7 +81,7 @@ public class CollegeRepository {
                 .optional();
     }
 
-    public List<College> findByFilters(Map<String, String> filters) {
+    public List<College> findByFilters(Map<String, String> filters, Integer page, Integer collegesPerPage) {
         if (filters.isEmpty()) {
             return getAll();
         }
@@ -108,15 +108,23 @@ public class CollegeRepository {
                     query = query.substring(0, query.length() - 4) + ") AND ";
                     break;
                 }
+                case "acceptanceRateRange":
+                {
+                    query += "(CAST(acceptance_rate AS FLOAT) BETWEEN "
+                            + Double.parseDouble(values[0]) + " AND " + Double.parseDouble(values[1]) + ") AND ";
+                    break;
+                }
                 case "tuitionRange":
                 {
-                    query += "(CAST(avg_tuition_annually AS INTEGER) BETWEEN "
-                            + Integer.parseInt(values[0]) + " AND " + Integer.parseInt(values[1]) + ") AND ";
+                    query += "(CAST(avg_tuition_annually AS FLOAT) BETWEEN "
+                            + (Double.parseDouble(values[0]) * 1000) + " AND " + (Double.parseDouble(values[1]) * 1000) + ") AND ";
                     break;
                 }
             }
         }
-        return jdbcClient.sql(query.substring(0, query.length() - 5)).query(College.class).list();
+        query = query.substring(0, query.length() - 5) + " ORDER BY college_id LIMIT " + collegesPerPage
+            + " OFFSET " + ((page - 1) * collegesPerPage);
+        return jdbcClient.sql(query).query(College.class).list();
     }
 
     public List<College> findByKeyword(String keyword) {
