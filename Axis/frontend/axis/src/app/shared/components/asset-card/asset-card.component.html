@@ -9,7 +9,7 @@
 
       <ng-container *ngIf="!isFallbackCollegeLogo(imgLink); else box">
 
-        <div class="rounded-l-md flex items-center justify-center h-[100px] min-w-[150px] bg-white">
+        <div class="rounded-l-md flex items-center justify-center h-[100px] min-w-[150px] bg-white overflow-hidden">
         <img class=" size-28 object-contain rounded-l-md" [src]="imgLink" [alt]="name" />
         </div>
       </ng-container>

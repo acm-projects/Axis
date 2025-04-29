@@ -6,11 +6,11 @@ import { NgxMaskDirective } from 'ngx-mask';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../core/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [FormsModule, NgxMaskDirective, CommonModule],
+  imports: [FormsModule, NgxMaskDirective, CommonModule, RouterModule],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css'],  // changed from styleUrl to styleUrls and as an array
   standalone: true

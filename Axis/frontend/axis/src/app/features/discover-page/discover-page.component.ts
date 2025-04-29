@@ -56,6 +56,8 @@ export class DiscoverPageComponent {
   email: string | null;
   bookmarks: any = [];
   isLoaded = false;
+  ivyLeagueIds: number[] = [2789, 42, 346, 3384, 3446, 1474, 417, 3861, 3322, 944, 2226, 3228, 584 , 472, 691, 569];
+  isInitialLoad: boolean = true;
 
   constructor(
     private http: HttpClient,
@@ -66,7 +68,12 @@ export class DiscoverPageComponent {
   ) {
     this.page = parseInt(<string>this.route.snapshot.queryParamMap.get('page'));
     this.collegesPerPage = 12;
-    this.loadPage(this.page);
+    if (this.page === 1) {
+      this.loadIvyLeagueColleges();
+    } else {
+      this.loadPage(this.page);
+      this.isInitialLoad = false;
+    }
     this.email = this.authService.getUserEmail()
 
 
@@ -79,7 +86,29 @@ export class DiscoverPageComponent {
     );
   }
 
+  loadIvyLeagueColleges(): void {
+    const requests = this.ivyLeagueIds.map(id =>
+      this.http.get<College>(`${this.baseURL}/searchByID/${id}`)
+    );
+
+    Promise.all(requests.map(req => req.toPromise()))
+      .then(results => {
+        this.colleges = results.filter((college): college is College => college !== undefined);
+        for (let college of this.colleges) {
+          this.sharedDataService.saveCollege(college);
+        }
+        this.applyBookmarks();
+        setTimeout(() => this.isLoaded = true);
+      })
+      .catch(error => {
+        console.log('Failed to retrieve Ivy League colleges:', error);
+        this.isLoaded = true;
+      });
+  }
+
+
   loadPage(page: number): void {
+    this.isInitialLoad = false
     let url: string = `${this.baseURL}/searchByPage/${page}/${this.collegesPerPage}`;
     let filterParams: string[] = [];
     if (this.searchInput.length > 0)
