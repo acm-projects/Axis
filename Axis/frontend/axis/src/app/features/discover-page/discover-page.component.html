@@ -2,15 +2,14 @@
 
   <div class="flex flex-col justify-start gap-8">
     <div class="text-4xl font-bold mr-[40px]">Discover</div>
-    <div class="">
-        <app-filter [name]="'Location'" [type]="'dropdown'" [dropdownValues]="locations" (filteredValues)="locationFilters = $event"></app-filter>
-        <app-filter [name]="'Acceptance rate'" [type]="'range'" [rangeSymbol]="'%'" (filteredValues)="acceptanceRateFilter = $event"></app-filter>
-        <app-filter [name]="'Annual tuition'" [type]="'range'" [rangeSymbol]="'K'" (filteredValues)="annualTuitionFilter = $event"></app-filter>
-        <div class="flex justify-end mt-2">
-          <button (click)="loadPage(page)"
-            class=" px-4 py-1 bg-[var(--secondary)] text-[var(--neutral)] rounded-full">Search</button>
-        </div>
-
+    <div>
+        <app-filter [name]="'Location'" [type]="'dropdown'" [dropdownValues]="locations" (filteredValues)="locationFilters = $event; loadPage(1)"></app-filter>
+        <app-filter [name]="'Acceptance rate'" [type]="'range'" [rangeSymbol]="'%'" (filteredValues)="acceptanceRateFilter = $event; loadPage(1)"></app-filter>
+        <app-filter [name]="'Annual tuition'" [type]="'range'" [rangeSymbol]="'K'" (filteredValues)="annualTuitionFilter = $event; loadPage(1)"></app-filter>
+    </div>
+    <div>
+      <button (click)="resetFilters(); loadPage(1)"
+              class=" px-4 py-1 bg-[var(--secondary)] text-[var(--neutral)] rounded-full">Clear Filters</button>
     </div>
   </div>
 
@@ -18,20 +17,8 @@
 
   <div class=" flex flex-col flex-grow gap-8 ">
     <div class="flex items-center bg-[var(--inputBox)] rounded-lg px-5 py-2 w-full mx-auto shadow-lg">
-      <input type="text" placeholder="Search for a college" [(ngModel)]="searchInput"
+      <input type="text" placeholder="Search for a college" [(ngModel)]="searchInput" (input)="loadPage(1)"
       class="bg-transparent text-white placeholder-[var(--placeholderText)] outline-none flex-grow"/>
-      <button (click)="loadPage(page)">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-5 h-5 text-[var(--placeholderText)] hover:stroke-white"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18a7.5 7.5 0 006.15-3.35z" />
-        </svg>
-      </button>
     </div>
     <div class="">
       <div

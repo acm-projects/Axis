@@ -32,6 +32,7 @@ export class FilterComponent {
 
   removeQuery(index: number):void {
     this.filteredDropdownValues.splice(index, 1)
+    this.update();
   }
 
   addFilteredDropdownValue(value: string): void {

@@ -130,13 +130,6 @@ export class ResourcesPageComponent {
     this.page = page;
   }
 
-  // handleSearch(event:any) {
-  //   event.preventDefault(); // Prevents page reload
-  //   //const searchValue = document.getElementById('searchInput').value;
-  //   //console.log('Search submitted:', searchValue);
-  // }
-
-
   private applyBookmarks() {
     if (!this.email) return;
     this.bookmarkService.getScholarshipBookmarks(this.email)
@@ -148,6 +141,12 @@ export class ResourcesPageComponent {
       });
   }
 
+  resetFilters(): void {
+    this.locationFilters = [];
+    this.amountFilter.min = 0;
+    this.amountFilter.max = 0;
+    this.checkboxFilters = [];
+  }
 
 
 }

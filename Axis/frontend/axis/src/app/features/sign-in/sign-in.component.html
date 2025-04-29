@@ -1,7 +1,7 @@
 <div class="z-20 flex min-h-screen flex-col justify-center max-w-2xl mx-auto lg:px-8 bg-transparent pb-10">
   <h2 class="mt-8 text-center text-5xl font-bold tracking-tight text-[var(--mainText)] font-satoshi">Sign In</h2>
 
-  <div class="mt-10 mx-auto w-full max-w-2xl">
+  <div class="mt-10 mx-auto w-full max-w-sm">
     <form class="space-y-6 mb-4" #signInForm="ngForm" (ngSubmit)="signIn()">
       <div>
         <label for="email" class="block text-sm/6 font-medium text-[var(--mainText)]">Email address</label>
@@ -47,7 +47,7 @@
         }
       </div>
 
-      <div class="mx-auto mb-6 mt-16">
+      <div class="w-1/2 mx-auto mb-6 mt-16">
         <button
           type="submit"
           [disabled]="signInForm.invalid"
@@ -70,7 +70,7 @@
     <a routerLink="/sign-up" routerLinkActive="active"
        >
       <p class="mb-8 text-center text-base text-[var(--accent)] hover:underline">
-        Don't have an account??
+        Don't have an account?
       </p>
     </a>
   </div>

@@ -91,4 +91,6 @@ export class ResourceInfoComponent implements OnInit {
     goBack(): void {
     this.location.back();
   }
+
+  protected readonly Number = Number;
 }

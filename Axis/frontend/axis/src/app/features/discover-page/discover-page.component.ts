@@ -17,7 +17,6 @@ import {
   stagger, animateChild
 } from '@angular/animations';
 
-
 @Component({
   selector: 'app-discover-page',
   imports: [FilterComponent, NgFor, NgIf, AssetCardComponent, NgClass, RouterLink, RouterLinkActive, FormsModule],
@@ -131,6 +130,14 @@ export class DiscoverPageComponent {
           c.isBookmarked = ids.has(c.college_id)
         );
       });
+  }
+
+  resetFilters(): void {
+    this.locationFilters = [];
+    this.acceptanceRateFilter.min = 0;
+    this.acceptanceRateFilter.max = 0;
+    this.annualTuitionFilter.min = 0;
+    this.annualTuitionFilter.max = 0;
   }
 
   updatePageButtons(page: number): void {

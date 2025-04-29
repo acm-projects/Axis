@@ -1,16 +1,10 @@
 
-    <div class="flex flex-col gap-2 w-48 mb-6" [ngClass]="expanded ? 'text-[var(--secondaryText)]' : 'text-[var(--mainText)]'">
+      <div class="flex flex-col gap-2 w-48 mb-6" [ngClass]="expanded ? 'text-[var(--secondaryText)]' : 'text-[var(--mainText)]'">
         <div class="hover:text-[var(--buttonTextHover)] flex justify-between cursor-pointer">
             <div class="text-lg" (click)="expanded = !expanded">
                 {{name}}
             </div>
             <div class="mt-0.5">
-            <button (click)="reset()">
-              <svg *ngIf="expanded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
             <button (click)="expanded = !expanded">
               <svg *ngIf="expanded" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -26,7 +20,7 @@
         <div *ngIf="expanded" class="flex flex-col justify-between gap-2 mt-2">
             @if (type == "dropdown") {
                 <div class="flex gap-1 bg-[var(--llgrey)] p-1 pr-3 rounded-lg w-full mr-16">
-                    <input type="text"  [placeholder]="name" [(ngModel)]="searchInput"
+                    <input type="text" [placeholder]="name" [(ngModel)]="searchInput" (focus)="dropdownToggle = true"
                            class="bg-transparent border-0 outline-none px-3 no-clear w-full text-md text-[var(--ddgrey)]">
                     <button (click)="dropdownToggle = !dropdownToggle">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" stroke-width="2"> <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path> <path d="M21 21l-6 -6"></path> </svg>
