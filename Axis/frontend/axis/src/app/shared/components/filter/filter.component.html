@@ -27,7 +27,8 @@
                     </button>
                 </div>
                 <div id="dropdown-menu"
-                     class="right-0 rounded-md bg-white shadow-lg ring-1 ring-black/5" [ngClass]="{'mt-2 py-1': dropdownToggle}">
+                     class="right-0 rounded-md bg-white shadow-lg ring-1 ring-black/5 max-h-32 overflow-y-auto"
+                     [ngClass]="{'mt-2 py-1 mb-2': dropdownToggle}">
                   <button *ngFor="let option of dropdownValues | search: searchInput" (click)="addFilteredDropdownValue(option)" [ngClass]="{'hidden': !dropdownToggle}"
                           class="w-full block p-1 px-4 text-base text-gray-700 hover:bg-[var(--buttonHover)] hover:text-white">{{option}}</button>
                 </div>
