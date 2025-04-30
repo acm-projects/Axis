@@ -58,7 +58,7 @@ public class CollegeRepository {
         """;
 
     public List<College> getAll() {
-        return jdbcClient.sql(SELECT_COLUMNS).query(College.class).list();
+        return jdbcClient.sql(SELECT_COLUMNS + " ORDER BY college_id").query(College.class).list();
     }
 
     public List<College> findByPage(Integer page, Integer collegesPerPage) {
@@ -66,7 +66,7 @@ public class CollegeRepository {
 
         int offset = (page - 1) * collegesPerPage;
 
-        return jdbcClient.sql(SELECT_COLUMNS + " LIMIT :limit OFFSET :offset")
+        return jdbcClient.sql(SELECT_COLUMNS + " ORDER BY college_id LIMIT :limit OFFSET :offset")
                 .param("limit", collegesPerPage)
                 .param("offset", offset)
                 .query(College.class)
