@@ -21,8 +21,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class EssayBotComponent implements OnInit{
   chatLog: { role: 'user' | 'assistant'; content: string | SafeHtml }[] = [
-    { role: 'assistant', content: 'Hi, I am chat! How can I help?' }
+    { role: 'assistant', content: 'Hi, I\'m BRYCE! How can I help?' }
   ];
+
   message: string = "";
   apiUrl = "http://localhost:8080/api/essay";
   document: any;
@@ -30,6 +31,9 @@ export class EssayBotComponent implements OnInit{
   essayTitle: string = "";
   student_email: string = "";
   college_id: number = -1;
+  loadingDotsInterval: any = null;
+  isTitleLoading: boolean = true;
+
 
   editorConfig = {
     height: 700,
@@ -180,13 +184,16 @@ export class EssayBotComponent implements OnInit{
     }).subscribe({
       next: response => {
         this.essayTitle = response.trim();
+        this.isTitleLoading = false; // ✅ Stop loading animation
       },
       error: err => {
         console.error('Failed to get AI-generated title:', err);
-        this.essayTitle = this.document.filename; // fallback
+        this.essayTitle = this.document.filename; // fallback title
+        this.isTitleLoading = false; // ✅ Still stop loading animation
       }
     });
   }
+
 
 
 
@@ -241,56 +248,50 @@ export class EssayBotComponent implements OnInit{
   }
 
   submitMessage() {
-    // 1) nothing to send?
-    if (!this.message.trim()) {
-      return;
-    }
+    if (!this.message.trim()) return;
 
-    // 2) capture the exact text & context
     const sentMessage = this.message;
-    // if you don’t want subsequent SSE chunks to mutate your context,
-    // take a shallow copy here:
     const context = this.chatLog.map(log => ({
       role: log.role,
-      content: (log.content as unknown as string)
+      content: (log.content as string)
     }));
 
-    // 3) render the user’s message immediately
-    this.chatLog.push({
-      role: 'user',
-      content: sentMessage
-    });
-
-    // 4) clear the input
+    this.chatLog.push({ role: 'user', content: sentMessage });
     this.message = '';
 
-    // 5) reserve a slot for the assistant’s streaming reply
-    const loadingIndex = this.chatLog.push({
-      role: 'assistant',
-      content: ''
-    }) - 1;
+    // Start loading dots
+    const loadingIndex = this.chatLog.push({ role: 'assistant', content: 'Thinking' }) - 1;
+    let dotCount = 0;
 
-    // 6) open the SSE stream
+    this.loadingDotsInterval = setInterval(() => {
+      dotCount = (dotCount + 1) % 4;
+      const dots = '.'.repeat(dotCount);
+      this.zone.run(() => {
+        this.chatLog[loadingIndex].content = `Thinking${dots}`;
+      });
+    }, 400);
+
+    // Start streaming AI response
     this.passUserMessage(sentMessage, context).subscribe({
       next: chunk => {
-        // simply append each SSE chunk as it arrives
         this.zone.run(() => {
+          if (this.loadingDotsInterval) {
+            clearInterval(this.loadingDotsInterval);
+            this.loadingDotsInterval = null;
+            this.chatLog[loadingIndex].content = ''; // reset to empty
+          }
           this.chatLog[loadingIndex].content += chunk;
         });
       },
-      error: err => {
-        console.error('SSE error:', err);
-      },
+      error: err => console.error('SSE error:', err),
       complete: () => {
-        // once the stream ends, sanitize and render the full HTML
-        this.zone.run(() => {
-          const raw = this.chatLog[loadingIndex].content as string;
-          this.chatLog[loadingIndex].content =
-            this.sanitizer.bypassSecurityTrustHtml(raw);
-        });
+        const raw = this.chatLog[loadingIndex].content as string;
+        this.chatLog[loadingIndex].content = this.sanitizer.bypassSecurityTrustHtml(raw);
       }
     });
   }
+
+
 
 
 
